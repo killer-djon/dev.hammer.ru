@@ -5,7 +5,9 @@ class Controller_Backend extends Controller
 	
 	public function action_index()
 	{
-		
+		$view  = View::factory('backend/main');
+		exit($this->response
+			->body($view));
 	}
 	
 }

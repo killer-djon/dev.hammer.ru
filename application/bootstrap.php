@@ -133,7 +133,6 @@ Kohana::modules(array(
 	'search-details'=> MODPATH.'search-details', // this package represents new search engine
 	'html-parser'	=> MODPATH.'html-parser',
 	'breadcrumbs'	=> MODPATH.'kohana-breadcrumbs', // breadcrumbs for pages
-
 	));
 
 /**

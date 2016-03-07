@@ -1,3 +1,6 @@
 [submodule "backend"]
 	path = backend
 	url = https://github.com/killer-djon/hammer-portal.git
+[submodule "modules/phpexcel"]
+	path = modules/phpexcel
+	url = git://github.com/yuankai/kohana-phpexcel.git
