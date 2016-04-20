@@ -81,6 +81,7 @@ class Controller_Products extends Controller_Main {
 			
 			$this->template->content->current = $product->getCurrent();
 			$this->template->content->parts = $offsets;
+			$this->template->content->cross_products = $product->getCrossProductsData();
 		}else
 		{
 			$this->template->title = 'Детали двигателя';

@@ -103,37 +103,38 @@ class MongoModel extends ODM
 		if( !count( $_schema ) )
 		{
 			$this->_schema = false;
+			
 		}
-		
-		if( is_array($this->_schema) && count($this->_schema) )
+		else if( is_array($this->_schema) && count($this->_schema) )
 		{
 			$schema = array_merge($this->_schema, $_schema);
+			
+			$schema = $_schema;
+			
+			foreach( $schema as $key => $item )
+			{
+				
+				$type = gettype($item);
+	
+				if( array_key_exists($type, $this->_type) )
+				{
+					$this->_schema[$key] = $this->_type[gettype($item)];
+				}
+				
+				if( $type == 'array' || $type == 'object' )
+				{
+					$this->_schema[$key] = array(
+						'_keys'	=> 'string'
+					);
+				}
+				
+				if( is_null($type) || stripos('null', $type) !== false )
+				{
+					$this->_schema[$key] = 'string';
+				}
+			}
 		}
 		
-		$schema = $_schema;
-		
-		foreach( $schema as $key => $item )
-		{
-			
-			$type = gettype($item);
-
-			if( array_key_exists($type, $this->_type) )
-			{
-				$this->_schema[$key] = $this->_type[gettype($item)];
-			}
-			
-			if( $type == 'array' || $type == 'object' )
-			{
-				$this->_schema[$key] = array(
-					'_keys'	=> 'string'
-				);
-			}
-			
-			if( is_null($type) || stripos('null', $type) !== false )
-			{
-				$this->_schema[$key] = 'string';
-			}
-		}
 	}
 	
 	public function selectDB($dbname = '')

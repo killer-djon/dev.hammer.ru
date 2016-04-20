@@ -104,6 +104,7 @@ if (isset($_SERVER['KOHANA_ENV']))
  */
 Kohana::init(array(
 	'base_url'   => '/',
+	'caching'	=> true
 ));
 
 /**
@@ -121,7 +122,7 @@ Kohana::$config->attach(new Config_File);
  */
 Kohana::modules(array(
 	// 'auth'       => MODPATH.'auth',       // Basic authentication
-	// 'cache'      => MODPATH.'cache',      // Caching with multiple backends
+	'cache'      => MODPATH.'cache',      // Caching with multiple backends
 	// 'codebench'  => MODPATH.'codebench',  // Benchmarking tool
 	// 'database'   => MODPATH.'database',   // Database access
 	// 'image'      => MODPATH.'image',      // Image manipulation
@@ -129,12 +130,15 @@ Kohana::modules(array(
 	// 'orm'        => MODPATH.'orm',        // Object Relationship Mapping
 	// 'unittest'   => MODPATH.'unittest',   // Unit testing
 	// 'userguide'  => MODPATH.'userguide',  // User guide and API documentation
+    'breadcrumbs'   => MODPATH.'kohana-breadcrumbs', // breadcrumbs for poages
 	'mongodb-odm'	=> MODPATH.'mongodb-odm', // MongoDB driver with ODM structure
 	'search-details'=> MODPATH.'search-details', // this package represents new search engine
 	'html-parser'	=> MODPATH.'html-parser',
 	'breadcrumbs'	=> MODPATH.'kohana-breadcrumbs', // breadcrumbs for pages
+	'cache-redis'	=> MODPATH.'kohana-cache-redis', // redis module for caching
 	));
 
+Cache::$default = 'redis';
 /**
  * Cookie Salt
  * @see  http://kohanaframework.org/3.3/guide/kohana/cookies
@@ -144,52 +148,52 @@ Kohana::modules(array(
  */
 Cookie::$salt = md5('nyFFqv2015');
 
-Route::set('category', 'categories(/<path>)',
-		  array(
-		    'path' => '[-=&A-Za-zа-яА-Я0-9~%.:_ \(\)\/\[\];?]+',
-		  ))
-		  ->defaults(array(
-		    'controller' => 'categories',
-		    'action' => 'index',
-		  ));
-		  
-Route::set('product', 'products(/<path>)',
-		  array(
-		    'path' => '[-=&A-Za-zа-яА-Я0-9~%.:_ \(\)\/\[\];?]+',
-		  ))
-		  ->defaults(array(
-		    'controller' => 'products',
-		    'action' => 'index',
-		  ));		  
-		  
-		  
-Route::set('redirect_category', '<path>.html',
-		  array(
-		    'path' => '([a-zA-Z_]+).([\d]+)',
-		  ))
-		  ->defaults(array(
-		    'controller' => 'categories',
-		    'action' => 'singleCategory',
-		  ));	
-//catalog_motor_1444
+if ( ! Route::cache())
+{
+	Route::set('category', 'categories(/<path>)',
+			  array(
+			    'path' => '[-=&A-Za-zа-яА-Я0-9~%.:_ \(\)\/\[\];?]+',
+			  ))
+			  ->defaults(array(
+			    'controller' => 'categories',
+			    'action' => 'index',
+			  ));
+			  
+	Route::set('product', 'products(/<path>)',
+			  array(
+			    'path' => '[-=&A-Za-zа-яА-Я0-9~%.:_ \(\)\/\[\];?]+',
+			  ))
+			  ->defaults(array(
+			    'controller' => 'products',
+			    'action' => 'index',
+			  ));		  
+			  
+			  
+	Route::set('redirect_category', '<path>.html',
+			  array(
+			    'path' => '([a-zA-Z_]+).([\d]+)',
+			  ))
+			  ->defaults(array(
+			    'controller' => 'categories',
+			    'action' => 'singleCategory',
+			  ));	
+		
+	/**
+	 * Set the routes. Each route must have a minimum of a name, a URI and a set of
+	 * defaults for the URI.
+	 */
 	
-/**
- * Set the routes. Each route must have a minimum of a name, a URI and a set of
- * defaults for the URI.
- */
-/*
-Route::set('default', '(<controller>(/<action>(/<id>)))')
-	->defaults(array(
-		'controller' => 'main',
-		'action'     => 'index',
-	));
-*/	
-	
-Route::set('static', '(<static>)',
-	array(
-		'static'	=> '[-=&A-Za-zа-яА-Я0-9~%.:_ \(\)\/\[\];?]+'
-	))
-	->defaults(array(
-		'controller' => 'statics',
-		'action'     => 'index',
-	));
+	Route::set('static', '(<static>)',
+		array(
+			'static'	=> '[-=&A-Za-zа-яА-Я0-9~%.:_ \(\)\/\[\];?]+'
+		))
+		->defaults(array(
+			'controller' => 'statics',
+			'action'     => 'index',
+		));
+		
+	if (Kohana::$caching === TRUE)
+    {
+        Route::cache(TRUE);
+    }
+}

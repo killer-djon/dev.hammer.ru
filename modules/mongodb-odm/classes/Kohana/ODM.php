@@ -939,7 +939,6 @@ class Kohana_ODM extends Model {
 				{
 					$this->_enforce_type($field, $_value);
 				}
-
 				$query[$field]['$in'] = $value;
 			break;
 			case '=':

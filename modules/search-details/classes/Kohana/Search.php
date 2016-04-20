@@ -36,6 +36,15 @@ abstract class Kohana_Search implements \ArrayAccess
 	protected $_data = array();
 	
 	
+	/*
+	 * Check if data is refreshed after call method
+	 * refreshData
+	 *
+	 * @var boolean	
+	 */
+	protected $_isRefreshing = false;
+	
+	
 	abstract function searchData($name);
 	
 	abstract function findData($name);
@@ -232,6 +241,64 @@ abstract class Kohana_Search implements \ArrayAccess
 		return $this->_data;
 	}
 	
+	
+	
+	/*
+	 * Get all our cross products
+	 *
+	 * This method must return all cross
+	 * products after we call search or load 
+	 * another product data from system
+	 *
+	 * @return array Return array of finded data	
+	 */
+	public function collectCrossProducts($column_name = 'article')
+	{
+		$responseData = [];
+		
+		if( $this->offsetSize() > 0 )
+		{
+			$keys = [];
+			
+			$keys = array_map(function($element) use($column_name)
+			{
+				return $element[$column_name];
+			}, $this->getOffsets());
+			
+			$model = MongoModel::factory('CrossProducts');
+			$model->selectDB();	
+			
+			$rows = $model
+				->where('cross_article', 'in', array_unique($keys))
+				->sort('article')
+				->find_all();
+			$data = [];
+			if( is_array($rows) && count($rows) )	
+			{
+				foreach($rows as $key => $item)
+				{
+					$data[ $item['identifier'] ] = $item;
+				}
+			}
+			
+			$responseData = array_values($data);
+		}
+		
+		return $responseData;
+	}
+	
+	
+	/*
+	 * Refresh data by key
+	 *
+	 * This method will refresh  multidimensional array
+	 * by input key, becouse we can return from db/search
+	 * array with multiple identical data
+	 *
+	 * @param string $keyArr string of the key to put in new array
+	 *
+	 * @return self	
+	 */
 	public function refreshData($keyArr = null)
 	{
 		if( $this->offsetSize() > 0 )	
@@ -253,12 +320,22 @@ abstract class Kohana_Search implements \ArrayAccess
 					$this->offsetSet( $i, $item );
 					$i++;
 				}
+				
+				if( $this->offsetSize() > 0 )
+				{
+					$this->_isRefreshing = true;
+				}
 			}
 		}
 		
 		return $this;
 	}
 	
+	
+	public function isRefreshing()
+	{
+		return (bool)$this->_isRefreshing;
+	}
 	
 	
 	public function setLastStep($values = array())

@@ -2,7 +2,9 @@
 
 class Controller_Categories extends Controller_Main 
 {
-	
+
+	public $template = 'templates/second/main';
+
 	protected $_types = array(
 		0	=> 'view',
 		1	=> 'generic',
@@ -18,10 +20,20 @@ class Controller_Categories extends Controller_Main
 		'parts'		=> 'Двигатель'	
 	);
 
+    public function after()
+    {
+        $this->template->header = View::factory('templates/second/header');
+        $this->template->footer = View::factory('templates/second/footer');
 
-	public function action_index()
+        parent::after();
+
+    }
+
+    public function action_index()
 	{
-		$path = $this->request->param('path');
+        $this->setScript('assets/js/second.js', 'footer');
+
+        $path = $this->request->param('path');
 		
 		if( !empty($path) )
 		{
@@ -97,61 +109,78 @@ class Controller_Categories extends Controller_Main
 		{
 			$product->getProducts($categoryName, $partsName);
 		}
-		
+
+        $current = $product->getCurrent();
+
+        $this->template->content = View::factory('templates/second/parts_content');
+        $this->template->content->category_view = View::factory('categories/parts');
+        $this->template->content->breadcrumbs = View::factory('templates/breadcrumbs');
+
+        Breadcrumbs::set([
+            URL::base() => 'Главная',
+            '/categories' => 'Каталог',
+            "/categories/view/{$current['auto']}" => $current['auto'],
+            "/categories/generic/{$current['auto']}/{$current['parentName']}" => $current['parentName'],
+            "/categories/{$current['auto']}/{$current['name']}" => $current['name'],
+        ]);
+
+        $this->template->content->title = 'Детали двигателя: '.$current['name'];
 		if( $product->offsetSize() > 0 )
 		{
 			$productsArr = $product->getOffsets();
 			$offsets = Arr::build_tree($productsArr, 'groupName');
-			
-			$this->template->title = 'Детали двигателя';
-			$this->template->content = View::factory('categories/parts');
-			
-			$this->template->content->current = $product->getCurrent();
-			$this->template->content->parts = $offsets;
+
+			//$this->template->title = 'Детали двигателя';
+
+
+			//$this->template->content = View::factory('categories/parts');
+
+            $this->template->content->category_view->current = $current;
+            $this->template->content->category_view->parts = $offsets;
+            $this->template->content->category_view->cross_products = $product->getCrossProductsData();
 		}else
 		{
-			$this->template->title = 'Детали двигателя';
-			$this->template->content = View::factory('categories/parts');
-			
-			$this->template->content->current = $product->getCurrent();
-			$this->template->content->parts = 'По вашему запросу ничего не найдено, попробуйте ввести еще раз';
-			
+            $this->template->content->category_view->title = 'Детали двигателя';
+			//$this->template->content = View::factory('categories/parts');
+
+            $this->template->content->category_view->current = $current;
+            $this->template->content->category_view->parts = 'По вашему запросу ничего не найдено, попробуйте ввести еще раз';
 		}
 	}
-	
+
 	public function action_singleCategory()
 	{
 		// Request::detect_uri() - Полученная ссылка на каталог
 		$category = Category::getInstance();
 		$category->getSingleCategory( Request::detect_uri() );
 	}
-	
-	
+
+
 	public function searchCategory($name = NULL)
 	{
 		$category = Category::getInstance();
-		
+
 		$model = MongoModel::factory('SearchIndex');
 		$model->selectDB();
-		
+
 		$searchRow = $model
 			->where('collection', '=', 'categories')
 			->where('field', '=', 'name')
 			->where('value', '=', $name)
 			->find();
-		
+
 		if( $searchRow->loaded() )
 		{
 			$category->findData($name);
-			
+
 		}else
 		{
 			$category->searchData($name);
 		}
-		
+
 		if( $category->offsetSize() > 0 )
 		{
-			
+
 			$this->template->title = 'Поиск по коду двигателя';
 			$this->template->content = View::factory('search/category');
 			$this->template->content->parts = $category->getOffsets();
@@ -162,31 +191,49 @@ class Controller_Categories extends Controller_Main
 			$this->template->content->empty_categories = 'По вашему запросу ничего не найдено, попробуйте ввести еще раз';
 			$this->template->content->parts = array();
 		}
-		
+
 	}
-	
-	
+
+
 	public function render_category($type = 'view', $name = NULL)
 	{
-		
+
 		$category = Category::getInstance();
-		$category->getCategories($type, $name); // get default view categories - first levent	
-		
-		$this->template->title = 'Модель';
-		
+		$category->getCategories($type, $name); // get default view categories - first levent
+
+        $this->template->content = View::factory('templates/second/content');
+        $this->template->content->title = 'Каталог производителей';
+        $this->template->content->breadcrumbs = View::factory('templates/breadcrumbs');
+
+        $current = $category->getCurrent();
 		if( $type == 'view' )
 		{
-			$this->template->content = View::factory('categories/category_view');	
+            Breadcrumbs::set(array(URL::base() => 'Главная'));
+            $this->template->content->category_view = View::factory('categories/category_view');
 		}else if( $type == 'generic' )
 		{
-			$this->template->content = View::factory('categories/category_generic');
+            Breadcrumbs::set([
+                URL::base() => 'Главная',
+                '/categories' => 'Каталог',
+                "/categories/view/{$current['name']}"  => $current['name'],
+            ]);
+            $this->template->content->title = 'Производитель '.$current['name'];
+			$this->template->content->category_view = View::factory('categories/category_generic');
 		}else if( $type == 'engine' )
 		{
-			$this->template->content = View::factory('categories/category_engine');
+            Breadcrumbs::set([
+                URL::base() => 'Главная',
+                '/categories' => 'Каталог',
+                "/categories/view/{$current['parentName']}"  => "{$current['parentName']}",
+                "/categories/generic/{$current['parentName']}/{$current['name']}"   => $current['name']
+            ]);
+
+            $this->template->content->title = 'Модель '.$current['name'];
+			$this->template->content->category_view = View::factory('categories/category_engine');
 		}
-		
-		$this->template->content->current = $category->getCurrent();
-		$this->template->content->categories = $category->getOffsets();
+
+        $this->template->content->category_view->current = $current;
+        $this->template->content->category_view->categories = $category->getOffsets();
 	}
 	
 	public function filter_categories($type = 'view', $name = NULL)

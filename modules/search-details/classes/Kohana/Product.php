@@ -14,6 +14,14 @@ class Kohana_Product extends Kohana_Search
 	private static $_instance = NULL;
 	
 	
+	/*
+	 * Our cross products data
+	 *
+	 * @var array	
+	 */
+	protected $_cross_products = [];
+	
+	
 	
 	public static function getInstance()
 	{
@@ -23,6 +31,12 @@ class Kohana_Product extends Kohana_Search
 		}
 		
 		return self::$_instance;
+	}
+	
+	
+	public function getCrossProductsData()
+	{
+		return $this->_cross_products;
 	}
 	
 	
@@ -67,6 +81,9 @@ class Kohana_Product extends Kohana_Search
 				{
 					$this->offsetSet($key, $item);
 				}
+				
+				$this->refreshData('link');
+				$this->_cross_products = $this->collectCrossProducts('article');
 			}
 		}
 		
@@ -152,6 +169,7 @@ class Kohana_Product extends Kohana_Search
 					}
 					
 					$this->refreshData('link');
+					$this->_cross_products = $this->collectCrossProducts('article');
 				}
 			}
 		}
@@ -223,6 +241,7 @@ class Kohana_Product extends Kohana_Search
 			}	
 			
 			$this->refreshData('article');
+			$this->_cross_products = $this->collectCrossProducts('article');
 		}
 		
 		return $this;
@@ -400,6 +419,7 @@ class Kohana_Product extends Kohana_Search
 				}
 				
 				$this->refreshData('link');
+				$this->_cross_products = $this->collectCrossProducts('article');
 			}
 			
 		}
