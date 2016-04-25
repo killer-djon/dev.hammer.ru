@@ -52,22 +52,28 @@ jQuery(document).ready(function() {
               });
           }
      
-     
+     var windowScrollPosTop = jQuery(window).scrollTop();
+     doScrollContent(windowScrollPosTop);
      //this code is for animation nav
      jQuery(window).scroll(function() {
-        var windowScrollPosTop = jQuery(window).scrollTop();
-
-        if(windowScrollPosTop >= 150) {
-          jQuery(".top-header").css({"background": "#18171D",});
-          jQuery(".top-header img.logo").css({"margin-top": "-30px", "margin-bottom": "15px"});
-          jQuery(".nav-bar").css({"margin-top": "6px",});
-        }
-        else{
-          jQuery(".top-header").css({"background": "transparent",});
-           jQuery(".top-header img.logo").css({"margin-top": "-30px", "margin-bottom": "25px"});
-           jQuery(".nav-bar").css({"margin-top": "28px"});
-          
-        }
+	 	
+        	doScrollContent(jQuery(window).scrollTop());
      });
+     
+     
+     function doScrollContent(scrollTop)
+     {
+	     if(scrollTop >= 150) {
+	          jQuery(".top-header").css({"background": "#18171D",});
+	          jQuery(".top-header img.logo").css({"margin-top": "-30px", "margin-bottom": "15px"});
+	          jQuery(".nav-bar").css({"margin-top": "6px",});
+	        }
+	        else{
+	          jQuery(".top-header").css({"background": "transparent",});
+	           jQuery(".top-header img.logo").css({"margin-top": "-30px", "margin-bottom": "25px"});
+	           //jQuery(".nav-bar").css({"margin-top": "28px"});
+	          
+	        }
+     }
 	
 });

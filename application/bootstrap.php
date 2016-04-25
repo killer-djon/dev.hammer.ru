@@ -138,6 +138,7 @@ Kohana::modules(array(
 	'cache-redis'	=> MODPATH.'kohana-cache-redis', // redis module for caching
 	));
 
+
 Cache::$default = 'redis';
 /**
  * Cookie Salt
@@ -176,8 +177,14 @@ if ( ! Route::cache())
 			  ->defaults(array(
 			    'controller' => 'categories',
 			    'action' => 'singleCategory',
-			  ));	
-		
+			  ));
+
+    Route::set('tests', 'tests')
+        ->defaults([
+            'controller'    => 'tests',
+            'action'    => 'index'
+        ]);
+
 	/**
 	 * Set the routes. Each route must have a minimum of a name, a URI and a set of
 	 * defaults for the URI.

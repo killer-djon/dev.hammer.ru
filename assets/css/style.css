@@ -25,6 +25,14 @@ h2{
 	margin-top: 0;
 }
 
+.btn-group-horizontal{
+	margin-bottom: 2.5em;
+}
+
+.btn-group-horizontal > a{
+	line-height: 35px !important;
+}
+
 /*header area*/
 .top-header{
 	background:transparent;
@@ -63,7 +71,7 @@ h2{
 .top-header .logo-link, .top-header-second .logo-link{
 	color: #fff;
     display: block;
-    font-size: 32px;
+    font-size: 1.5em;
     text-shadow: 2px 3px #999;
 }
 .top-header img.logo{
@@ -74,10 +82,10 @@ h2{
 	-o-transition: all .7s ease 0s;
 	-ms-transition: all .7s ease 0s;
 }
-.navbar-default {
+.navbar-primary {
   background-color: transparent;
   border-color: transparent;
-  margin-bottom: 0;
+  margin-bottom: 10px !important;
 }
 .nav-bar{
 	margin-top: 28px;
@@ -105,7 +113,7 @@ ul.nav{
 	margin: 0;
 	padding: 0;
 }
-.navbar-default .navbar-nav>li>a {
+.navbar-primary .navbar-nav>li>a {
  	font-size: 16px;
 	color: #fff;
 	text-transform: capitalize;
@@ -118,16 +126,26 @@ ul.nav{
 	margin:0 15px;
 	font-weight: 600;
 }
-.navbar-default .navbar-nav>li>a:hover{
+.navbar-primary .navbar-nav>li>a:hover{
 	color: #fff;
 	border-bottom: 2px solid #008ed6;
 }
-.navbar-default .navbar-nav>li>a.active{
+
+.navbar-primary .nav > li > a:hover,
+.navbar-primary .nav > li > a:focus{
+	
+	background-color: transparent !important;
+}
+.navbar-primary .navbar-nav>li>a.active{
 	color: #fff;
 	border-bottom: 2px solid #008ed6;
 }
-.navbar-default .navbar-toggle {
-  border-color: #fff;
+.navbar-primary {
+	margin-top: 0;
+}
+
+.toggle-menu{
+	margin: 0 !important;
 }
 
 /*banner area*/
@@ -208,7 +226,7 @@ ul.nav{
 }
 .banner img{
 	position: absolute;
-	margin-top:125px;
+	margin-top:25px;
 }
 
 /*features area*/
@@ -272,10 +290,10 @@ ul.nav{
 
 /*feature-detail area*/
 .feature-detail{
-	background: #f2f2f2;
+	
 }
 .feature-detail h4{
-	margin-top: 120px;
+
 }
 .feature-detail h2{
 	margin-bottom: 10px;
@@ -553,6 +571,7 @@ ul.nav{
 /*footer section*/
 .footer{
 	background: #15141a;
+	padding-top: 50px;
 }
 .footer i.fa{
 	font-size: 15px;
@@ -698,4 +717,29 @@ ul.nav{
 
 #breadcrumbs.well{
 	padding: 5px;
+}
+
+#home,
+#categories, 
+#delivery,
+#news,
+#testimonials,
+#pricing,
+#contact
+{
+	padding: 25px 3em;
+}
+
+#categories h4, 
+#delivery h4,
+#news h4,
+#testimonials h4,
+#pricing h4,
+#contact h4{
+	font-size: 14px;
+	color: #008ed6;
+}
+
+#delivery, #pricing{
+	margin-bottom: 20px;
 }

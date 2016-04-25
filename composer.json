@@ -1,6 +1,9 @@
 {
-	"require": {
-		"phpunit/phpunit": "3.7.24",
-		"phing/phing": "dev-master"
-	}
+  "require": {
+    "phpunit/phpunit": "3.7.24",
+    "phing/phing": "dev-master",
+    "symfony/dom-crawler": "^3.0",
+    "spatie/crawler": "^1.2",
+    "dg/rss-php": "^1.2"
+  }
 }

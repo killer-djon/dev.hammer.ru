@@ -36,6 +36,19 @@ class Controller_Main extends Controller_Template
     }
 
 
+	public function setStyle( $hrefSrc = NULL, $media = 'all' )
+	{
+		if( !is_null( $hrefSrc ) )
+		{
+			$this->template->styles = ( is_string($hrefSrc)
+                ? [$hrefSrc => $media]
+                : (is_array($scriptSrc) ? $scriptSrc : []) );
+			
+			//'assets/css/sidebar.css'  => 'all',
+		}
+		
+	}
+
 	
 	public function after()
 	{
@@ -46,8 +59,7 @@ class Controller_Main extends Controller_Template
 				'assets/css/font-awesome.min.css'  => 'all',
 				'assets/css/bootstrap.min.css'  => 'all',
 				'assets/css/animate.css'  => 'all',
-				'assets/css/style.css'  => 'all',
-				'assets/css/sidebar.css'  => 'all',
+				'assets/css/common_style.css'  => 'all',
 				'assets/css/responsive.css'  => 'all',
 				'http://fonts.googleapis.com/css?family=Open+Sans:600italic,400,800,700,300'  => 'all'
 			];
@@ -77,7 +89,7 @@ class Controller_Main extends Controller_Template
 	
 	public function action_index()
 	{
-		$this->template->content = 'Главная';
+		//$this->template->content = 'Главная';
 	}
 
 } // End Welcome

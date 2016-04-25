@@ -103,7 +103,7 @@ class Kohana_HTML {
 	 * @uses    URL::site
 	 * @uses    HTML::attributes
 	 */
-	public static function anchor($uri, $title = NULL, array $attributes = NULL, $protocol = NULL, $index = TRUE)
+	public static function anchor($uri, $title = NULL, array $attributes = NULL, $protocol = NULL, $index = FALSE)
 	{
 		if ($title === NULL)
 		{

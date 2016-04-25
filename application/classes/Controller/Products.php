@@ -1,9 +1,25 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 
-class Controller_Products extends Controller_Main {
+class Controller_Products extends Controller_Main 
+{
+
+	public $template = 'templates/second/main';
+	
+	
+	public function after()
+    {
+        $this->template->header = View::factory('templates/second/header');
+        $this->template->footer = View::factory('templates/second/footer');
+
+        parent::after();
+
+    }
 
 	public function action_index()
 	{
+		$this->setScript('assets/js/second.js', 'footer');
+		$this->setStyle('assets/css/sidebar.css', 'all');
+		
 		$path = $this->request->param('path', NULL);
 		
 		if( !empty( $path ) )
@@ -62,6 +78,16 @@ class Controller_Products extends Controller_Main {
 			->where('search_page', '=', 'products/?search='.$name)
 			->find();
 	
+		$this->template->title = "";
+		$this->template->content = View::factory('templates/second/search_content');
+		$this->template->content->title = 'Поиск по номеру детали: '.$name;
+		$this->template->content->breadcrumbs = View::factory('templates/breadcrumbs');
+
+		Breadcrumbs::set([
+            URL::base() => 'Главная',
+            '/categories' => 'Производители',
+        ]);
+        
 			
 		if( $searchRow->loaded() )
 		{
@@ -76,19 +102,19 @@ class Controller_Products extends Controller_Main {
 			$productsArr = $product->getOffsets();
 			$offsets = Arr::build_tree($productsArr, 'groupName');
 			
-			$this->template->title = 'Детали двигателя';
-			$this->template->content = View::factory('search/product');
+			//$this->template->title = 'Детали двигателя';
+			$this->template->content->category_view = View::factory('search/product');
 			
-			$this->template->content->current = $product->getCurrent();
-			$this->template->content->parts = $offsets;
-			$this->template->content->cross_products = $product->getCrossProductsData();
+			$this->template->content->category_view->current = $product->getCurrent();
+			$this->template->content->category_view->parts = $offsets;
+			$this->template->content->category_view->cross_products = $product->getCrossProductsData();
 		}else
 		{
-			$this->template->title = 'Детали двигателя';
-			$this->template->content = View::factory('search/product');
+			//$this->template->title = 'Детали двигателя';
+			$this->template->content->category_view = View::factory('search/product');
 			
-			$this->template->content->current = $product->getCurrent();
-			$this->template->content->empty_parts = 'По вашему запросу ничего не найдено, попробуйте ввести еще раз';
+			$this->template->content->category_view->current = $product->getCurrent();
+			$this->template->content->category_view->empty_parts = 'По вашему запросу ничего не найдено, попробуйте ввести еще раз';
 			
 		}
 	}
@@ -117,6 +143,21 @@ class Controller_Products extends Controller_Main {
 				->where('value', '=', $article)
 				->where('search_page', '=', 'products/?type=crosses&product='.$productArticle.'&article='.$article)
 				->find();	
+			
+			$this->template->title = "";
+			$this->template->content = View::factory('templates/second/parts_content');
+			
+			$this->template->content->title = 'Возможные замены детали: '.$article;
+			$this->template->content->breadcrumbs = View::factory('templates/breadcrumbs');
+			$this->template->content->category_view = View::factory('products/product');
+				
+			Breadcrumbs::set([
+	            URL::base() => 'Главная',
+	            '/categories' => 'Производители',
+	            "/categories/{$productRow['category']}/{$productRow['parentName']}"	=> $productRow['parentName'],
+	            "/products/?type=products&article={$productArticle}"	=> $productArticle,
+	            "?type=crosses&product={$productArticle}&article={$article}"	=> $article
+	        ]);	
 				
 			if( !$searchRow->loaded() )
 			{
@@ -140,22 +181,25 @@ class Controller_Products extends Controller_Main {
 				$productsArr = $product->getOffsets();
 				$offsets = Arr::build_tree($productsArr, 'groupName');
 				
-				$this->template->title = 'Список возможных замен для детали: '.$article;
-				$this->template->content = View::factory('products/product');
+				//$this->template->title = 'Список возможных замен для детали: '.$article;
+				//$this->template->content = View::factory('products/product');
 				
-				$this->template->content->title = 'Список возможных замен для детали: '.$article;
-				$this->template->content->current = $product->getCurrent();
-				$this->template->content->parts = $offsets;
+				$this->template->content->category_view->title = 'Список возможных замен для детали: '.$article;
+				$this->template->content->category_view->current = $product->getCurrent();
+				$this->template->content->category_view->parts = $offsets;
 			}else
 			{
-				$this->template->title = 'Список возможных замен для детали: '.$article;
-				$this->template->content = View::factory('products/product');
+				//$this->template->title = 'Список возможных замен для детали: '.$article;
+				//$this->template->content = View::factory('products/product');
 				
-				$this->template->content->title = 'Список возможных замен для детали: '.$article;
-				$this->template->content->current = $product->getCurrent();
-				$this->template->content->empty_parts = 'По вашему запросу ничего не найдено, попробуйте ввести еще раз';
+				$this->template->content->category_view->title = 'Список возможных замен для детали: '.$article;
+				$this->template->content->category_view->current = $product->getCurrent();
+				$this->template->content->category_view->empty_parts = 'По вашему запросу ничего не найдено, попробуйте ввести еще раз';
 				
 			}
+		}else
+		{
+			$this->template->content->category_view->empty_parts = 'По вашему запросу ничего не найдено, попробуйте ввести еще раз';
 		}	
 		
 	}
@@ -166,6 +210,14 @@ class Controller_Products extends Controller_Main {
 		$product = Product::getInstance();
 		$row = $product->getProductByArticle($article);
 		
+		
+		$this->template->title = "";
+		$this->template->content = View::factory('templates/second/parts_content');
+		
+		$this->template->content->title = 'Возможные замены детали: '.$article;
+		$this->template->content->breadcrumbs = View::factory('templates/breadcrumbs');
+		$this->template->content->category_view = View::factory('products/product');		
+        
 		if( !empty($row) )
 		{
 			$model = MongoModel::factory('SearchIndex');
@@ -192,29 +244,38 @@ class Controller_Products extends Controller_Main {
 				);
 			}
 			
+			$current = $product->getCurrent();
+			
+			Breadcrumbs::set([
+	            URL::base() => 'Главная',
+	            '/categories' => 'Производители',
+	            "/categories/{$current['category']}/{$current['parentName']}"	=> $current['parentName'],
+	            "/products/?type=products&article={$article}"	=> $article
+	        ]);
+	        
+			$this->template->content->category_view->current = $current;
+			
 			if( $product->offsetSize() > 0 )
 			{
 				$productsArr = $product->getOffsets();
 				$offsets = Arr::build_tree($productsArr, 'groupName');
 				
-				$this->template->title = 'Список возможных замен для детали: '.$article;
-				$this->template->content = View::factory('products/product');
-				
-				$this->template->content->title = 'Список возможных замен для детали: '.$article;
-				$this->template->content->current = $product->getCurrent();
-				$this->template->content->parts = $offsets;
+				$this->template->content->category_view->parts = $offsets;
 			}else
 			{
-				$this->template->title = 'Список возможных замен для детали: '.$article;
-				$this->template->content = View::factory('products/product');
 				
-				$this->template->content->title = 'Список возможных замен для детали: '.$article;
-				$this->template->content->current = $product->getCurrent();
-				$this->template->content->empty_parts = 'По вашему запросу ничего не найдено, попробуйте ввести еще раз';
+				$this->template->content->category_view->empty_parts = 'По вашему запросу ничего не найдено, попробуйте ввести еще раз';
 				
 			}
 			
+			$this->template->content->category_view->cross_products = $product->getCrossProductsData();
+			$this->template->content->category_view->title = 'Список возможных замен для детали: '.$article;
+			
+		}else
+		{
+			$this->template->content->category_view->empty_parts = 'По вашему запросу ничего не найдено, попробуйте ввести еще раз';	
 		}
+		
 	}
 
 } // End Welcome

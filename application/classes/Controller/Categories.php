@@ -32,7 +32,8 @@ class Controller_Categories extends Controller_Main
     public function action_index()
 	{
         $this->setScript('assets/js/second.js', 'footer');
-
+		$this->setStyle('assets/css/sidebar.css', 'all');
+		
         $path = $this->request->param('path');
 		
 		if( !empty($path) )
@@ -111,14 +112,15 @@ class Controller_Categories extends Controller_Main
 		}
 
         $current = $product->getCurrent();
-
+        
+		$this->template->title = "";
         $this->template->content = View::factory('templates/second/parts_content');
         $this->template->content->category_view = View::factory('categories/parts');
         $this->template->content->breadcrumbs = View::factory('templates/breadcrumbs');
 
         Breadcrumbs::set([
             URL::base() => 'Главная',
-            '/categories' => 'Каталог',
+            '/categories' => 'Производители',
             "/categories/view/{$current['auto']}" => $current['auto'],
             "/categories/generic/{$current['auto']}/{$current['parentName']}" => $current['parentName'],
             "/categories/{$current['auto']}/{$current['name']}" => $current['name'],
@@ -169,6 +171,16 @@ class Controller_Categories extends Controller_Main
 			->where('value', '=', $name)
 			->find();
 
+		$this->template->title = "";
+		$this->template->content = View::factory('templates/second/search_content');
+		$this->template->content->title = 'Поиск по коду двигателя: '.$name;
+		$this->template->content->breadcrumbs = View::factory('templates/breadcrumbs');
+
+		Breadcrumbs::set([
+            URL::base() => 'Главная',
+            '/categories' => 'Производители',
+        ]);
+        
 		if( $searchRow->loaded() )
 		{
 			$category->findData($name);
@@ -181,15 +193,15 @@ class Controller_Categories extends Controller_Main
 		if( $category->offsetSize() > 0 )
 		{
 
-			$this->template->title = 'Поиск по коду двигателя';
-			$this->template->content = View::factory('search/category');
-			$this->template->content->parts = $category->getOffsets();
+			//$this->template->title = 'Поиск по коду двигателя';
+			$this->template->content->category_view = View::factory('search/category');
+			$this->template->content->category_view->parts = $category->getOffsets();
 		}else
 		{
-			$this->template->title = 'Поиск по коду двигателя';
-			$this->template->content = View::factory('search/category');
-			$this->template->content->empty_categories = 'По вашему запросу ничего не найдено, попробуйте ввести еще раз';
-			$this->template->content->parts = array();
+			//$this->template->title = 'Поиск по коду двигателя';
+			$this->template->content->category_view = View::factory('search/category');
+			$this->template->content->category_view->empty_categories = 'По вашему запросу ничего не найдено, попробуйте ввести еще раз';
+			$this->template->content->category_view->parts = array();
 		}
 
 	}
@@ -201,6 +213,7 @@ class Controller_Categories extends Controller_Main
 		$category = Category::getInstance();
 		$category->getCategories($type, $name); // get default view categories - first levent
 
+		$this->template->title = "";
         $this->template->content = View::factory('templates/second/content');
         $this->template->content->title = 'Каталог производителей';
         $this->template->content->breadcrumbs = View::factory('templates/breadcrumbs');
@@ -208,30 +221,36 @@ class Controller_Categories extends Controller_Main
         $current = $category->getCurrent();
 		if( $type == 'view' )
 		{
-            Breadcrumbs::set(array(URL::base() => 'Главная'));
+            Breadcrumbs::set([
+	            URL::base() => 'Главная',
+	            '/categories' => 'Производители',
+            ]);
             $this->template->content->category_view = View::factory('categories/category_view');
+            $this->template->content->category_view->title = 'Каталог производителей';
 		}else if( $type == 'generic' )
 		{
             Breadcrumbs::set([
                 URL::base() => 'Главная',
-                '/categories' => 'Каталог',
+                '/categories' => 'Производители',
                 "/categories/view/{$current['name']}"  => $current['name'],
             ]);
             $this->template->content->title = 'Производитель '.$current['name'];
 			$this->template->content->category_view = View::factory('categories/category_generic');
+			$this->template->content->category_view->title = 'Производитель '.$current['name'];
 		}else if( $type == 'engine' )
 		{
             Breadcrumbs::set([
                 URL::base() => 'Главная',
-                '/categories' => 'Каталог',
+                '/categories' => 'Производители',
                 "/categories/view/{$current['parentName']}"  => "{$current['parentName']}",
                 "/categories/generic/{$current['parentName']}/{$current['name']}"   => $current['name']
             ]);
 
             $this->template->content->title = 'Модель '.$current['name'];
 			$this->template->content->category_view = View::factory('categories/category_engine');
+			$this->template->content->category_view->title = 'Модель '.$current['name'];
 		}
-
+		
         $this->template->content->category_view->current = $current;
         $this->template->content->category_view->categories = $category->getOffsets();
 	}

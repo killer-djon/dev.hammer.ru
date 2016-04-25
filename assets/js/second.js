@@ -72,24 +72,24 @@ jQuery(document).ready(function() {
 	});
 	
 	jQuery(".cart-qty").click(function(){
-		var inputText = jQuery(this).closest('.count-detail').find('input[type=text]');
+		var inputText = jQuery(this).closest('.count-detail').find('.btn-number');
 		var inputVal = parseInt(inputText.val());
 		
 		if( jQuery(this).hasClass('cart-minus') )
 		{
-			var newVal = ( inputVal-- == 0 ? 0 : inputVal-- );
+			var newVal = ( inputVal == 0 ? 1 : inputVal-- );
 			inputText.val(newVal);
 		}
 		
 		if( jQuery(this).hasClass('cart-plus') )
 		{
-			var newVal = ( inputVal++ == 0 ? 1 : inputVal++);
-			inputText.val(inputVal++);
+			var newVal = ( inputVal++ == 0 ? 1 : inputVal++ );
+			inputText.val(newVal++);
 		}
 		
 		if( jQuery(this).hasClass('cart-refresh') )
 		{
-			inputText.val(0)
+			inputText.val(1)
 		}
 		
 	});

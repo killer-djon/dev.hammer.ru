@@ -101,6 +101,8 @@ if ( ! defined('KOHANA_START_MEMORY'))
 // Bootstrap the application
 require APPPATH.'bootstrap'.EXT;
 
+require_once DOCROOT . DIRECTORY_SEPARATOR . 'vendor/autoload'.EXT;
+
 if (PHP_SAPI == 'cli') // Try and load minion
 {
 	class_exists('Minion_Task') OR die('Please enable the Minion module for CLI support.');

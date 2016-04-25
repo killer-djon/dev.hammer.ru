@@ -279,6 +279,7 @@ class Kohana_Product extends Kohana_Search
 			}
 			
 			$this->refreshData('link');
+			$this->_cross_products = $this->collectCrossProducts('article');
 		}
 		
 		return $this;
@@ -302,6 +303,7 @@ class Kohana_Product extends Kohana_Search
 		$page = $this->searchPage($url);
 		
 		$this->setCurrent($product);
+		
 		if ( !empty( $page ) )
 		{
 			$htmlNodes = Domparser::getInstance($page);
@@ -356,6 +358,7 @@ class Kohana_Product extends Kohana_Search
 				}
 				
 				$this->refreshData('link');
+				$this->_cross_products = $this->collectCrossProducts('article');
 			}
 		}
 		

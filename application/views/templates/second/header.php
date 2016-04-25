@@ -34,7 +34,7 @@
                 </ul>
             </div>
             <a class="navbar-brand no-anchor pull-left" href="<? echo URL::base(); ?>">HAMMERSCHMIDT</a>
-            <button class="navbar-toggle fa fa-search " type="button" data-target=".navbar-collapse" data-toggle="collapse"></button>
+            <button class="navbar-toggle fa fa-search visible-xs" type="button" data-target=".navbar-collapse" data-toggle="collapse"></button>
         </div>
 
         <div class="col-xs-12 col-sm-12 col-md-8 top-search">
@@ -45,7 +45,7 @@
                             <div class="input-group col-xs-12 navbar-right">
                                 <input type="text" class="form-control" placeholder="Поиск по номеру детали" name="search">
                                 <span class="input-group-btn">
-                                    <button type="button" class="btn btn-default" title="Начать поиск по номеру детали">
+                                    <button type="submit" class="btn btn-default" title="Начать поиск по номеру детали">
                                         <i class="fa fa-search"></i>
                                     </button>
                                 </span>
@@ -57,7 +57,7 @@
                             <div class="input-group col-xs-12 navbar-right">
                                 <input type="text" class="form-control" placeholder="Поиск по коду двигателя" name="search">
                                 <span class="input-group-btn">
-                                    <button type="button" class="btn btn-default" title="Начать поиск по коду двигателя">
+                                    <button type="submit" class="btn btn-default" title="Начать поиск по коду двигателя">
                                         <i class="fa fa-search"></i>
                                     </button>
                                 </span>

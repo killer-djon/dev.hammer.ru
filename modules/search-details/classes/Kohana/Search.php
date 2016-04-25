@@ -273,7 +273,8 @@ abstract class Kohana_Search implements \ArrayAccess
 				->sort('article')
 				->find_all();
 			$data = [];
-			if( is_array($rows) && count($rows) )	
+			
+			/*if( is_array($rows) && count($rows) )	
 			{
 				foreach($rows as $key => $item)
 				{
@@ -282,6 +283,28 @@ abstract class Kohana_Search implements \ArrayAccess
 			}
 			
 			$responseData = array_values($data);
+			*/
+			
+			/**
+			 * Refactoring code
+			 * this values return with group at crosses articles	
+			 */
+			 
+			if( is_array($rows) && count($rows) )	
+			{
+				foreach( $rows as $key => $item )
+				{
+					foreach( $keys as $arKey )
+					{
+						if( in_array($arKey, $item['cross_article']) )
+						{
+							$data[$arKey][] = $item;
+						}
+					}
+				}
+			}
+			
+			$responseData = $data;
 		}
 		
 		return $responseData;

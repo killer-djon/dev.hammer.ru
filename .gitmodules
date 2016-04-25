@@ -4,3 +4,6 @@
 [submodule "modules/phpexcel"]
 	path = modules/phpexcel
 	url = git://github.com/yuankai/kohana-phpexcel.git
+[submodule "modules/kohana-restful-api"]
+	path = modules/kohana-restful-api
+	url = https://github.com/SupersonicAds/kohana-restful-api.git

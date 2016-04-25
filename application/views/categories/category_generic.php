@@ -1,3 +1,10 @@
+<div class="panel-heading">
+    <div class="container-fluid">
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <h1><? echo $title;?></h1><img src="/assets/img/daag.png" alt="">
+        </div>
+    </div>
+</div>
 <div class="panel-body">
     <div class="row">
         <? if( !empty($categories) ): ?>
