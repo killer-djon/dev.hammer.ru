@@ -2,7 +2,33 @@ jQuery(document).ready(function() {
   
   //WOW js code
     new WOW().init();
-
+    
+    
+    jQuery("#search-view").keyup(function(){
+	
+		jQuery("#category-list").find("[role=listitem]").hide();
+		
+		var data = this.value.split(" ");
+		var jo = jQuery("#category-list").find("[role=listitem]");
+		
+	    jQuery.each(data, function(i, v){
+	    	var reg = new RegExp(v, 'ig');
+	    	jo = jo.filter(function(){
+		    	return jQuery(this).text().match(reg);
+	    	});
+	    });
+	    
+	    jo.show();
+    }).focus(function(){
+		this.value="";
+		jQuery(this).unbind('focus');
+    });
+    
+    jQuery('#clear-search-input').click(function(){
+	    jQuery("#search-view").val('');
+	    jQuery("#search-view").trigger('keyup');
+    });
+	
     //this code is for the gmap
 	 /*var map = new GMaps({
         el: '#map',
@@ -12,38 +38,37 @@ jQuery(document).ready(function() {
 
 
       //this code is for smooth scroll and nav selector
-            $(document).ready(function () {
-              $(document).on("scroll", onScroll);
+        jQuery(document).on("scroll", onScroll);
+          
+          //smoothscroll
+          jQuery('a[href^="#"]:not(.no-anchor)').on('click', function (e) {
+              e.preventDefault();
+              jQuery(document).off("scroll");
               
-              //smoothscroll
-              $('a[href^="#"]:not(.no-anchor)').on('click', function (e) {
-                  e.preventDefault();
-                  $(document).off("scroll");
-                  
-                  $('a').each(function () {
-                      $(this).removeClass('active');
-                  })
-                  $(this).addClass('active');
-                
-                  var target = this.hash,
-                      menu = target;
-                  $target = $(target);
-                  $('html, body').animate({
-                      'scrollTop': $target.offset().top+2
-                  }, 600, 'swing', function () {
-                      window.location.hash = target;
-                      $(document).on("scroll", onScroll);
-                  });
+              jQuery('a').each(function () {
+                  jQuery(this).removeClass('active');
+              })
+              jQuery(this).addClass('active');
+            
+              var target = this.hash,
+                  menu = target;
+              jQuerytarget = jQuery(target);
+              jQuery('html, body').animate({
+                  'scrollTop': jQuerytarget.offset().top+2
+              }, 600, 'swing', function () {
+                  window.location.hash = target;
+                  jQuery(document).on("scroll", onScroll);
               });
           });
-
+          
+          
           function onScroll(event){
-              var scrollPos = $(document).scrollTop();
-              $('.navbar-default .navbar-nav>li>a').each(function () {
-                  var currLink = $(this);
-                  var refElement = $(currLink.attr("href"));
+              var scrollPos = jQuery(document).scrollTop();
+              jQuery('.navbar-default .navbar-nav>li>a').each(function () {
+                  var currLink = jQuery(this);
+                  var refElement = jQuery(currLink.attr("href"));
                   if (refElement.position().top <= scrollPos && refElement.position().top + refElement.height() > scrollPos) {
-                      $('.navbar-default .navbar-nav>li>a').removeClass("active");
+                      jQuery('.navbar-default .navbar-nav>li>a').removeClass("active");
                       currLink.addClass("active");
                   }
                   else{

@@ -122,7 +122,7 @@ class Controller_Categories extends Controller_Main
             URL::base() => 'Главная',
             '/categories' => 'Производители',
             "/categories/view/{$current['auto']}" => $current['auto'],
-            "/categories/generic/{$current['auto']}/{$current['parentName']}" => $current['parentName'],
+            //"/categories/generic/{$current['auto']}/{$current['parentName']}" => $current['parentName'],
             "/categories/{$current['auto']}/{$current['name']}" => $current['name'],
         ]);
 

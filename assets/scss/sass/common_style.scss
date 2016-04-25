@@ -110,7 +110,7 @@ h2 {
     //Instead of the line below you could use @include border-radius($radius, $vertical-radius)
     border-radius: unset;
     &.active {
-      margin-left: 200px;
+      margin-left: 230px;
     }
   }
 }
@@ -872,4 +872,8 @@ tr.info {
 	.tab-content{
 		padding:20px
 	}
+}
+
+a[data-toggle]{
+	cursor: pointer;
 }

@@ -59,7 +59,7 @@ class Kohana_Product extends Kohana_Search
 			->where('auto', '=', $categoryName)
 			->where('name', 'regex', "/^$partsName$/is")
 			->find();
-			
+		
 		if( $parts->loaded() )
 		{
 			$this->setCurrent($parts->lastDocument());
