@@ -1,5 +1,5 @@
 <!-- footer starts here -->
-<footer class="footer text-center">
+<footer id="footer" class="footer text-center">
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-md-12">
@@ -12,7 +12,7 @@
 					<a href=""><i class="fa fa-linkedin"></i></a>
 				</div>
 				-->
-				<p>COPYRIGHT &copy; 2016 Все права защищены</p>
+				<p>&copy; 2016 Все права защищены</p>
 			</div>
 		</div>
 	</div>

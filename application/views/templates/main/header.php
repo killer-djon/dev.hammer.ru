@@ -14,8 +14,8 @@
 				                        <span class="caret"></span>
 				                    </a>
 				                    <ul class="dropdown-menu dropdown-menu-right">
-				                        <li><a rel="nofollow" href="#home">О нас</a></li>
-								        <li><a rel="nofollow" href="#categories">Каталог</a></li>
+				                        <li><a rel="nofollow" href="#about">О компании</a></li>
+								        <li><a rel="nofollow" href="#categories">Категории</a></li>
 								        <li><a rel="nofollow" href="#testimonials">Производители</a></li>
 								        <li><a rel="nofollow" href="#delivery">Оплата/Доставка</a></li>
 								        <li><a rel="nofollow" href="#news">Автоновости</a></li>
@@ -28,8 +28,8 @@
 					    </div>
 					    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 					      <ul class="nav navbar-nav navbar-right">
-						      <li><a rel="nofollow" href="#home">О нас</a></li>
-						        <li><a rel="nofollow" href="#categories">Каталог</a></li>
+						      	<li><a rel="nofollow" href="#about">О компании</a></li>
+								<li><a rel="nofollow" href="#categories">Категории</a></li>
 						        <li><a rel="nofollow" href="#testimonials">Производители</a></li>
 						        <li><a rel="nofollow" href="#delivery">Оплата/Доставка</a></li>
 						        <li><a rel="nofollow" href="#news">Автоновости</a></li>

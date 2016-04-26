@@ -7,6 +7,8 @@
     <meta name="keywords" content="<?php echo $meta_keywords;?>" />
     <meta name="description" content="<?php echo $meta_description;?>" />
     <meta name="copyright" content="<?php echo $meta_copywrite;?>" />
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no, maximum-scale=1" /> 
+    <script type="text/javascript" charset="utf-8" src="//api-maps.yandex.ru/services/constructor/1.0/js/?sid=eFnBnTDCnz2AffGQJhpuTjBira_BWco9&height=450&id=map_canvas"></script>
     <?php foreach($styles as $file => $type) { echo HTML::style($file, array('media' => $type)), "\n"; }?>
 
     <? if( !empty($scripts['header']) ): ?>

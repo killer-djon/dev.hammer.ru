@@ -3,7 +3,7 @@
     margin-right:0px;
 }
 
-#wrapper {
+#wrapper, #wrapper-footer {
     padding-left: 70px;
     transition: all .4s ease 0s;
     height: 100%
@@ -38,7 +38,7 @@
 }
 
 
-#wrapper.active {
+#wrapper.active, #wrapper-footer.active {
     padding-left: 230px;
 }
 #wrapper.active #sidebar-wrapper {

@@ -84,7 +84,7 @@ jQuery(document).ready(function() {
      
      jQuery("#menu-toggle").click(function(e) {
 	        e.preventDefault();
-	        jQuery("#wrapper").toggleClass("active");
+	        jQuery("#wrapper,#wrapper-footer").toggleClass("active");
 	        jQuery("#top-header-second > .navbar").toggleClass("active");
 	});
 	

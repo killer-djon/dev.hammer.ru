@@ -23,11 +23,20 @@ $font_1: "sans-serif";
 %extend_1 {
   color: $white;
   display: block;
-  font-size: 1.5em;
+  font-size: 1.2em;
   //Instead of the line below you could use @include text-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
   text-shadow: 2px 3px $color_mountain_mist_approx;
 }
 
+html{
+	position: relative;
+	min-height: 100%;
+
+}
+
+h2, .h2, h1, .h1{
+	font-size: 2em !important;
+}
 
 body {
   margin: 0;
@@ -56,7 +65,6 @@ h4 {
   font-weight: 700;
 }
 h2 {
-  font-size: 36px;
   color: $color_rangoon_green_approx;
   font-weight: 600;
   margin-bottom: 25px;
@@ -193,14 +201,14 @@ h2 {
     font-weight: 700;
   }
   h1 {
-    font-size: 48px;
+    font-size: 2em;
     color: $white;
   }
   p {
     font-size: 18px;
     color: $color_mountain_mist_approx;
     margin-top: 25px;
-    line-height: 2;
+    line-height: 1.5;
     font-weight: 600;
   }
   img {
@@ -262,7 +270,7 @@ h2 {
     margin-bottom: 50px;
   }
   h3 {
-    font-size: 24px;
+    font-size: 1.5em;
     color: $color_rangoon_green_approx;
   }
   p {
@@ -599,6 +607,10 @@ h2 {
   height: 370px;
   pointer-events: none;
 }
+#footer{
+	position: absolute;
+    width: 100%;
+}
 .footer {
   background: $color_vulcan_approx;
   padding-top: 50px;
@@ -714,6 +726,11 @@ h2 {
 }
 .page-content {
   padding: 30px 20px;
+  
+  & p{
+	  line-height: 1.7;
+	  font-size: 1.1em;
+  }
 }
 .cart-qty {
   cursor: pointer;
@@ -735,14 +752,14 @@ h2 {
   padding: 25px 3em;
 }
 #categories {
-  padding: 25px 3em;
+  padding: 25px 1em;
   h4 {
     font-size: 14px;
     color: $color_lochmara_approx;
   }
 }
 #delivery {
-  padding: 25px 3em;
+  padding: 25px 1em;
   margin-bottom: 20px;
   h4 {
     font-size: 14px;
@@ -750,18 +767,23 @@ h2 {
   }
 }
 #news {
-  padding: 25px 3em;
+  padding: 25px 1em;
+  margin-bottom: 0 !important;
   h4 {
     font-size: 14px;
     color: $color_lochmara_approx;
   }
 }
 #testimonials {
-  padding: 25px 3em;
+  padding: 25px 1em;
+  
+  .panel, .panel-heading{
+	  border: none !important;
+	  background:  none !important;
+  }
   h4 {
     font-size: 14px;
     color: $color_lochmara_approx;
-    margin-bottom: 60px;
   }
 }
 #pricing {
@@ -773,7 +795,8 @@ h2 {
   }
 }
 #contact {
-  padding: 25px 3em;
+	overflow: hidden;
+    width: 100%;
   h4 {
     font-size: 14px;
     color: $color_lochmara_approx;
@@ -876,4 +899,27 @@ tr.info {
 
 a[data-toggle]{
 	cursor: pointer;
+}
+
+.row-centered {
+    text-align:center;
+}
+.col-centered {
+    display:inline-block;
+    float:none;
+    /* reset the text-align */
+    text-align:left;
+    /* inline-block space fix */
+    margin-right:-4px;
+}
+
+#category-list{
+	
+	> div {
+		line-height: 1.5;
+		
+		a{
+			font-size: 1.2em;
+		}
+	}
 }
