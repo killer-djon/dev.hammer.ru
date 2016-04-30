@@ -16,7 +16,7 @@ jQuery(document).ready(function() {
               $(document).on("scroll", onScroll);
               
               //smoothscroll
-              $('a[href^="#"]').on('click', function (e) {
+              $('a[href^="#"]:not(.no-anchor)').on('click', function (e) {
                   e.preventDefault();
                   $(document).off("scroll");
                   
@@ -63,15 +63,15 @@ jQuery(document).ready(function() {
      
      function doScrollContent(scrollTop)
      {
-	     if(scrollTop >= 150) {
+	     if(scrollTop >= 50) {
 	          jQuery(".top-header").css({"background": "#18171D",});
-	          jQuery(".top-header img.logo").css({"margin-top": "-30px", "margin-bottom": "15px"});
+	          //jQuery(".top-header img.logo").css({"margin-top": "-30px", "margin-bottom": "15px"});
 	          jQuery(".nav-bar").css({"margin-top": "6px",});
 	        }
 	        else{
 	          jQuery(".top-header").css({"background": "transparent",});
-	           jQuery(".top-header img.logo").css({"margin-top": "-30px", "margin-bottom": "25px"});
-	           //jQuery(".nav-bar").css({"margin-top": "28px"});
+	           //jQuery(".top-header img.logo").css({"margin-top": "-30px", "margin-bottom": "25px"});
+	           jQuery(".nav-bar").css({"margin-top": "28px"});
 	          
 	        }
      }

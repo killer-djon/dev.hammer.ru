@@ -1,7 +1,7 @@
 <!-- header section -->
 <header class="top-header-second" id="top-header-second">
     <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-        <div class="navbar-header col-xs-12 col-sm-12 col-md-4">
+        <div class="navbar-header col-xs-12 col-sm-12 col-md-4 pull-left">
             <ul class="navbar-toggle user-profile">
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">

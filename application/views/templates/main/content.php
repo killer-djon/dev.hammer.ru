@@ -1,46 +1,81 @@
-<!-- banner section starts here -->
 		<section class="banner" id="about">
 			<div class="container-fluid">
-				<div class="row">
-					<div class="col-md-6 col-sm-12 col-xs-12 wow fadeInLeft animated">
-						<h3>интернет-магазин Hammerschmidt</h3>
-						<h1>Добро пожаловать в интернет-магазин Hammerschmidt!</h1>
+				<div class="row row-centered">
+					<div class="text-center col-centered col-md-10 col-sm-12 col-xs-12 wow fadeInLeft animated">
+						<h3>Добро пожаловать в интернет-магазин Hammerschmidt!</h3>
 						<p>Немецкий бренд Hammerschmidt является одним из лидеров по производству и продаже комплектующих моторной группы - ДВС (двигателей внутреннего сгорания) для автомобилей различных производителей как Европейских и Американских, так и для Корейских и Японских.</p>
 					</div>
-					<div class="col-md-6 hidden-sm hidden-xs wow fadeInRight animated">
-						<img class="img-responsive" src="/assets/img//Sonic-turbocharged-engine.png" alt="">
+					<div class="text-center col-centered col-md-10 col-sm-12 col-xs-12 wow fadeInRight animated">
+						<div class="row row-centered best-block">
+							<h4>почему лучше покупать у нас:</h4>
+							<div class="col-centered col-md-5 col-sm-6 col-xs-12">
+								<div class="list-group">
+									<div href="#" class="list-group-item">
+		                                <h4 class="list-group-item-heading">Собственный склад хранения</h4>
+		                                <p class="list-group-item-text">
+		                                    Наличие собственного склада для хранения запасных частей. 
+		                                    Именно поэтому у нас широкий ассортимент продукции, более 5 000 наименований запчастей в наличии.
+		                                </p>
+		                            </div>
+		                            <div href="#" class="list-group-item">
+		                                <h4 class="list-group-item-heading">Опытные менеджеры</h4>
+		                                <p class="list-group-item-text">
+		                                    Все наши менеджеры проходят постоянное повышение квалификации. 
+		                                    Наши менеджеры подберут запчасти подходящие исключительно Вашему автомобилю.
+		                                </p>
+		                            </div>
+								</div>
+							</div>
+							<div class="col-centered col-md-5 col-sm-6 col-xs-12">
+								<div class="list-group">
+									<div href="#" class="list-group-item">
+		                                <h4 class="list-group-item-heading">Ассортимент и доставка</h4>
+		                                <p class="list-group-item-text">
+		                                    Не надо долго ждать и ехать на другой конец города. 
+		                                    Мы доставим Вам любую запчасть со нашего склада в любое комфортное для Вас время.
+		                                </p>
+		                            </div>
+		                            <div href="#" class="list-group-item">
+		                                <h4 class="list-group-item-heading">Гарантия качества</h4>
+		                                <p class="list-group-item-text">
+		                                    Мы гарантируем качество своих запчастей. 
+		                                    Поэтому мы предоставляем гарантию на каждую нашу запчасть в течении месяца.
+		                                </p>
+		                            </div>
+								</div>
+							</div>
+						</div>
 					</div>
-					<div class="col-xs-12 col-sm-12 col-md-12 text-center btn-group-horizontal">
-						<a class="btn btn-primary" href="/categories">каталог</a>
-						<a class="btn btn-default" href="">производители</a>
+					<div class="col-centered col-xs-12 col-sm-12 col-md-12 text-center btn-group-horizontal">
+						<a class="btn btn-primary" href="/categories">каталог производителей</a>
 					</div>
 				</div>
 			</div>
-		</section><!-- end of banner section -->
+		</section>
 
 		<!-- feature sectiona -->
 		<section class="features text-center" id="categories">
 			<div class="container-fluid">
-				<div class="row">
+				<div class="row row-centered">
 					<h4>детали двигателей всех производителей</h4>
 					<h2>Самые популярные категории</h2><img src="/assets/img/daag.png" alt="">
 					
-					<div class="col-xs-12 col-sm-6 col-md-3 wow zoomIn animated">
+					<div class="col-centered col-xs-12 col-sm-6 col-md-3 wow zoomIn animated">
 						
 						<h3>ПОРШНИ ДВИГАТЕЛЯ</h3>
 						<p>Большой ассортимент автозапчастей. Каталог запчастей моторной группы для иностранных автомобилей.</p>
 					</div>
-					<div class="col-xs-12 col-sm-6 col-md-3 wow zoomIn animated">
+					<div class="col-centered col-xs-12 col-sm-6 col-md-3 wow zoomIn animated">
 						
 						<h3>ВКЛАДЫШИ ДВИГАТЕЛЯ </h3>
 						<p>В наличии поршни двигателя для всех автомобилей. Поршни двигателя самых известных производителей.</p>
 					</div>
-					<div class="col-xs-12 col-sm-6 col-md-3 wow zoomIn animated">
+					<div class="col-centered col-xs-12 col-sm-6 col-md-3 wow zoomIn animated">
 						
 						<h3>ГОЛОВКИ БЛОКА ЦИЛИНДРА</h3>
 						<p>Продажа вкладышей двигателя, коленвала. Большой выбор, привлекательные цены.</p>
 					</div>
-					<div class="col-xs-12 col-sm-6 col-md-3 wow zoomIn animated">
+					<div class="col-centered col-xs-12 col-sm-6 col-md-3 wow zoomIn animated">
 						
 						<h3>ПРОКЛАДКИ ДВИГАТЕЛЯ </h3>
 						<p>Все виды прокладок двигателя для авто любого бренда в наличии. Доставка!</p>
@@ -80,8 +115,8 @@
 	                            <div class="col-xs-4 col-sm-2 col-md-1 brand-icon col-centered">
 	                                <a href="/categories/view/Citroen" class="btn btn-primary btn-icon icon-citroen center-block">&nbsp;</a>
 	                            </div>
-	                            
-	                            
+
+
 	                            <div class="col-xs-4 col-sm-2 col-md-1 brand-icon col-centered">
 	                                <a href="/categories/view/Fiat" class="btn btn-primary btn-icon icon-fiat center-block">&nbsp;</a>
 	                            </div>
@@ -112,7 +147,7 @@
 	                            <div class="col-xs-4 col-sm-2 col-md-1 brand-icon col-centered">
 	                                <a href="/categories/view/Mercedes" class="btn btn-primary btn-icon icon-mercedes center-block">&nbsp;</a>
 	                            </div>
-								
+
 	                            <div class="col-xs-4 col-sm-2 col-md-1 brand-icon col-centered">
 	                                <a href="/categories/view/Mitsubishi" class="btn btn-primary btn-icon icon-mitsubishi center-block">&nbsp;</a>
 	                            </div>
@@ -137,7 +172,7 @@
 	                            <div class="col-xs-4 col-sm-2 col-md-1 brand-icon col-centered">
 	                                <a href="/categories/view/Saab" class="btn btn-primary btn-icon icon-saab center-block">&nbsp;</a>
 	                            </div>
-	                            
+
 								<div class="col-xs-4 col-sm-2 col-md-1 brand-icon col-centered">
 	                                <a href="/categories/view/Skoda" class="btn btn-primary btn-icon icon-shkoda center-block">&nbsp;</a>
 	                            </div>
@@ -168,9 +203,9 @@
 		<!-- details section -->
 		<section class="details" id="delivery">
 			<div class="container-fluid">
-				<div class="row">
+				<div class="row row-centered">
 					<h4 class="text-center">оптала заказа и доставка</h4>
-					<div class="col-xs-12 col-sm-12 col-md-6 wow fadeInLeft animated">
+					<div class="col-centered col-xs-12 col-sm-12 col-md-5 wow fadeInLeft animated">
 						<h3>Как оплатить заказанные детали?</h3><img src="/assets/img/daag.png" alt="">
 						<p>Оплата вашего заказа, оформленного в нашем интернет-магазине деталей, осуществляется предельно просто. Для этого можно воспользоваться любым удобным для Вас способом.</p>
 <ul class="fa-ul no-margin">
@@ -178,10 +213,8 @@
 <li><i class="fa-li fa  fa-money"></i>Для частных лиц – внесение нужной суммы наличными в банковском отделении, после чего денежные средства будут перечислены на наш расчетный счет.</li>
 <li><i class="fa-li fa fa-bank"></i>Для частных лиц, имеющих лицевой счет в банке, – безналичный перевод на расчетный счет нашей компании.</li>
 </ul>
-<p>
-Кроме того, все, кто пользуется услугами интернет-банкинга, могут перевести денежные средства с помощью своего онлайн-сервиса (то есть напрямую со своего счета в банке). Несколько минут – и оформленный Вами заказ, будет готов к самовывозу или отправке курьером.</p>
 					</div>
-					<div class="col-xs-12 col-sm-12 col-md-6 wow fadeInRight animated">
+					<div class="col-centered col-xs-12 col-sm-12 col-md-5 wow fadeInRight animated">
 						<h3>Способы доставки деталей</h3><img src="/assets/img/daag.png" alt="">
 						<p>
 Самовывоз своего заказа можно осуществить в любой рабочий день, предъявив документ об оплате. Наша компания работает слаженно, как единый механизм, поэтому, подъезжая к нашему складу, будьте уверены: ваш заказ уже укомплектован и дожидается вас. Что же касается доставки автозапчастей, то этой услуге вы можете полностью доверять. Работа наших курьеров строиться на основе четырех столпах:.</p>
@@ -194,25 +227,98 @@
                             </ul>
 						</p>
 					</div>
+					
+					<div class="col-centered col-md-10 col-sm-12 col-xs-12 fadeInUp animated">
+						<p>
+Кроме того, все, кто пользуется услугами интернет-банкинга, могут перевести денежные средства с помощью своего онлайн-сервиса (то есть напрямую со своего счета в банке). Несколько минут – и оформленный Вами заказ, будет готов к самовывозу или отправке курьером.</p>
+					</div>
 				</div>
 			</div>
 		</section><!-- end of details section -->
 
 		<!-- features details section -->
-		<section class="feature-detail well" id="news">
-			<div class="container-fluid">
-				<div class="row">
-					<div class="col-xs-12 col-md-7 wow fadeInLeft animated">
-						<h4>автоновости</h4>
-						<h2>Свежие новости в мире авто</h2>
-						<img src="/assets/img/daag.png" alt="">
-						<p>Duis sed odio sit amet nibh vulputate cursus a sit amet mauris. Morbi accumsan ipsum velit. Nam nec tellus a odio tincidunt auctor a ornare odio. Sed non  mauris vitae erat consequat auctor eu in elit. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.</p>
-					</div>
-					<div class="hidden-xs col-md-5 horizontal-phone wow fadeInRight animated">
-						<img class="img-responsive" src="/assets/img/laid-phone2.png" alt="phone">
-					</div>
-				</div>
-			</div>
+		<section class="feature-detail well hidden-xs" id="news">
+            <div class="container-fluid">
+
+                <div class="pricing-heading text-center">
+                    <h3>Свежие новости мира авто</h3>
+                </div>
+
+                <div class="row row-centered">
+                    <div class="col-centered col-xs-12 col-md-3 col-sm-4 wow zoomIn animated animated">
+                        <div class="single-table panel">
+                            <div class="table-heading">
+                                <h4>Компания Мерседес проведет ренейминг своих моделей</h4>
+                            </div>
+                            <div class="table-price">
+                                <p>
+                                    <img class="img-responsive" src="/upload_images/tooyota-auris-2015.jpg" alt="Компания Мерседес проведет ренейминг своих моделей">
+                                </p>
+                            </div>
+                            <div class="table-description text-muted">
+                                <p>
+                                    На Парижском автосалоне Сузуки показала кроссовер Витара – новинку в классе субкомпактных кроссоверов. Автомобиль представлен в переднемприводном  и заднеприводном варианте, с АКП и МКП на выбор, мотор на 1.6л на 120л.с.
+                                </p>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12 text-center btn-more">
+                                    <a href="#" class="btn btn-info read-more" role="button">Подробнее...</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-centered col-xs-12 col-md-3 col-sm-4 wow zoomIn animated animated">
+                        <div class="single-table  panel">
+                            <div class="table-heading">
+                                <h4>Компания Мерседес проведет ренейминг своих моделей</h4>
+                            </div>
+                            <div class="table-price">
+                                <p>
+                                    <img class="img-responsive" src="/upload_images/tooyota-auris-2015.jpg" alt="Компания Мерседес проведет ренейминг своих моделей">
+                                </p>
+                            </div>
+                            <div class="table-description text-muted">
+                                <p>
+                                    На Парижском автосалоне Сузуки показала кроссовер Витара – новинку в классе субкомпактных кроссоверов. Автомобиль представлен в переднемприводном  и заднеприводном варианте, с АКП и МКП на выбор, мотор на 1.6л на 120л.с.
+                                </p>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12 text-center btn-more">
+                                    <a href="#" class="btn btn-info read-more" role="button">Подробнее...</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-centered col-xs-12 col-md-3 col-sm-4 wow zoomIn animated animated">
+                        <div class="single-table panel">
+                            <div class="table-heading">
+                                <h4>Компания Мерседес проведет ренейминг своих моделей</h4>
+                            </div>
+                            <div class="table-price">
+                                <p>
+                                    <img class="img-responsive" src="/upload_images/tooyota-auris-2015.jpg" alt="Компания Мерседес проведет ренейминг своих моделей">
+                                </p>
+                            </div>
+                            <div class="table-description text-muted">
+                                <p>
+                                    На Парижском автосалоне Сузуки показала кроссовер Витара – новинку в классе субкомпактных кроссоверов. Автомобиль представлен в переднемприводном  и заднеприводном варианте, с АКП и МКП на выбор, мотор на 1.6л на 120л.с.
+                                </p>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12 text-center btn-more">
+                                    <a href="#" class="btn btn-info read-more" role="button">Подробнее...</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-center col-md-12">
+                    <a href="#" class="text-info" role="button">Все новости</a>
+                </div>
+
+            </div>
+            <hr>
 		</section><!-- end of features-detail section -->
 
 		

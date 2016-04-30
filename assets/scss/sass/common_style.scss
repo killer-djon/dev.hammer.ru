@@ -25,7 +25,7 @@ $font_1: "sans-serif";
   display: block;
   font-size: 1.2em;
   //Instead of the line below you could use @include text-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
-  text-shadow: 2px 3px $color_mountain_mist_approx;
+  @include text-shadow(2px 3px $color_mountain_mist_approx);
 }
 
 html{
@@ -73,7 +73,8 @@ h2 {
 .btn-group-horizontal {
   margin-bottom: 2.5em;
   > a {
-    line-height: 35px !important;
+    font-size: 1.2em;
+    line-height: 35px;
   }
 }
 .top-header {
@@ -98,6 +99,21 @@ h2 {
     -moz-transition: all .7s ease 0s;
     -o-transition: all .7s ease 0s;
     -ms-transition: all .7s ease 0s;
+  }
+  .navbar-primary.navbar{
+	  margin-bottom: 0 !important;
+  }
+  .top-logo{
+	  margin-bottom: 20px;
+  }
+  
+  #shopping-cart{
+	  margin: 0;
+	  > .label-cart-count{
+		  left: 1em;
+		    position: absolute;
+		    top: 0;
+	  }
   }
 }
 .top-header-second {
@@ -130,13 +146,16 @@ h2 {
   -o-transition: all .7s ease 0s;
   -ms-transition: all .7s ease 0s;
 }
-.navbar-primary {
+
+
+
+.navbar-primary, .navbar-shopping {
   background-color: transparent;
   border-color: transparent;
   margin-bottom: 10px !important;
   margin-top: 0;
   .navbar-nav > li > a {
-    font-size: 16px;
+    font-size: 1.2em;
     color: $white;
     text-transform: capitalize;
     //Instead of the line below you could use @include transition($transition-1, $transition-2, $transition-3, $transition-4, $transition-5, $transition-6, $transition-7, $transition-8, $transition-9, $transition-10)
@@ -146,8 +165,8 @@ h2 {
     -o-transition: all .7s ease 0s;
     -ms-transition: all .7s ease 0s;
     padding: 8px 0;
-    margin: 0 15px;
-    font-weight: 600;
+    margin: 0 10px;
+    font-weight: 300;
     &:hover {
       color: $white;
       border-bottom: 2px solid $color_lochmara_approx;
@@ -165,6 +184,12 @@ h2 {
       background-color: transparent !important;
     }
   }
+}
+
+.navbar-primary{
+	.navbar-nav > li > a {
+		font-size: 1em;
+	}
 }
 .nav-bar {
   margin-top: 28px;
@@ -193,6 +218,28 @@ h2 {
   overflow: hidden;
   -webkit-background-size: cover;
   background-size: cover;
+  padding-top: 5em;
+  .list-group{
+    > h4{
+      color: $color_lochmara_approx;
+      margin: 40px 0 20px;
+    }
+    & .list-group-item{
+      border: none;
+      background: none;
+      margin-bottom: 15px;
+
+      .list-group-item-heading{
+        color: $white;
+        font-size: 1.2em;
+      }
+      .list-group-item-text{
+        margin-top: 0 !important;
+        line-height: 1.5em;
+        font-size: 1.2em;
+      }
+    }
+  }
   h3 {
     font-size: 14px;
     color: $color_lochmara_approx;
@@ -212,13 +259,14 @@ h2 {
     font-weight: 600;
   }
   img {
-    position: absolute;
-    margin-top: 125px;
+    //position: absolute;
+    margin-top: 80px;
   }
 }
 .navbar-header {
   color: $white;
   font-size: 1.3em;
+  float: none !important;
   .navbar-brand:hover {
     color: $color_chicago_approx;
   }
@@ -332,7 +380,6 @@ h2 {
     margin-bottom: 10px;
   }
   p {
-    font-size: 18px;
     color: $color_mountain_mist_approx;
     margin-top: 20px;
   }
@@ -418,7 +465,6 @@ h2 {
   }
   &:hover {
     .table-heading {
-      background: $color_lochmara_approx;
       h5,h4 {
         color: $white;
       }
@@ -613,13 +659,13 @@ h2 {
 }
 .footer {
   background: $color_vulcan_approx;
-  padding-top: 50px;
+  padding-top: 25px;
   p {
     font-size: 14px;
     color: $color_gravel_approx;
     text-transform: uppercase;
     font-weight: 600;
-    margin-bottom: 30px;
+
   }
   i.fa {
     font-size: 15px;
@@ -653,7 +699,7 @@ h2 {
   }
 }
 .icons {
-  padding-top: 30px;
+
 }
 @media screen and(max-width: 768px) and(min-width: 1024px) {
   .top-search {
@@ -772,6 +818,9 @@ h2 {
   h4 {
     font-size: 14px;
     color: $color_lochmara_approx;
+  }
+  .btn-more{
+    margin: 20px auto;
   }
 }
 #testimonials {
@@ -906,11 +955,12 @@ a[data-toggle]{
 }
 .col-centered {
     display:inline-block;
-    float:none;
+    float:none !important;
     /* reset the text-align */
     text-align:left;
     /* inline-block space fix */
     margin-right:-4px;
+    vertical-align: top;
 }
 
 #category-list{
@@ -922,4 +972,111 @@ a[data-toggle]{
 			font-size: 1.2em;
 		}
 	}
+}
+
+.contacts-address{
+  & address{
+    color: $white;
+  }
+}
+
+.best-block{
+	h4{
+		color: $white;
+	    font-size: 1.5em;
+	    margin: 20px;
+	}
+	.col-centered{
+		.list-group-item{
+			h4{
+				margin-left: 0;
+			}
+		}
+	}
+}
+.navbar.center .navbar-inner {
+    text-align: center;
+}
+
+.navbar.center .navbar-inner .nav {
+    display:inline-block;
+    float: none;
+}
+.shopping{
+	position: absolute;
+    right: 1em;
+    top: 1em;
+}
+
+.search-toggle{
+	cursor: pointer;
+}
+
+/* Portrait phones and smaller */
+@media(max-width:767px){
+	.top-header {
+		.navbar-toggle{
+			a{
+				color: $white;
+			}
+		}
+		.navbar-header{
+			text-align: left !important;
+		}
+		.logo-link{
+			padding-top: 9px;
+			font-size: 1em;
+			@include text-shadow(1px 1px $color_mountain_mist_approx);
+		}
+		.main-top-header{
+			background: #18171d;
+		}
+	}
+}
+
+.dropdown-submenu {
+    position:relative;
+}
+.dropdown-submenu>.dropdown-menu {
+    top:0;
+    
+    margin-top:-6px;
+    margin-left:-1px;
+    @include border-radius(6px 0 6px 6px);
+    
+    &.dropdown-menu-left{
+	    left:auto;
+		right: 100%;
+    }
+    &.dropdown-menu-right{
+	    left:100%;
+		right: auto;
+    }
+}
+.dropdown-submenu:hover>.dropdown-menu {
+    display:block;
+}
+.dropdown-submenu>a:after {
+    display:block;
+    content:" ";
+    float:right;
+    width:0;
+    height:0;
+    border-color:transparent;
+    border-style:solid;
+    border-width:5px 0 5px 5px;
+    border-left-color:#cccccc;
+    margin-top:5px;
+    margin-right:-10px;
+}
+.dropdown-submenu:hover>a:after {
+    border-left-color:#ffffff;
+}
+.dropdown-submenu.pull-left {
+    float:none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+    left:-100%;
+    margin-left:10px;
+    @include border-radius(6px 0 6px 6px);
 }
