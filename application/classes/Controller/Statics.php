@@ -17,29 +17,32 @@ class Controller_Statics extends Controller_Main
 	public function action_index()
     {
         $this->setScript('assets/js/custom.js', 'footer');
-		$this->template->content = View::factory('templates/main/content');
 		
 		$params = $this->request->param('static');
 		if( !empty($params) )
 		{
-			
+			$this->render_static();
 		}else
 		{
 			$category = Category::getInstance();
 			$category->getCategories('view', NULL); // get default view categories - first levent
-
+			
+			$this->template->content = View::factory('templates/main/content');
 			$this->template->title = 'Интернет-магазин деталей всех производителей';
-			//$this->template->content = View::factory('categories/category_view');
+
 			$this->template->content->categories = $category->getOffsets();
+			return $this->response->body($this->template);
+			
 		}
 		
 	}
 	
-	
-	
-	public function render_static($params = NULL)
+	public function render_static()
 	{
 		
+		$route = $this->request->uri();
+		$this->template->content = $route;
+		return $this->response->body($this->template);
 	}
 
 } // End Welcome

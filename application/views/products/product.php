@@ -56,7 +56,9 @@
 						            </tr>
 						            
 						            <? foreach($item as $key => $detail): ?>
-						            	<tr class="detail-row collapsed">
+						            	<?$price = (isset($detail['price']) && 0!==$detail['price'] ? $detail['price'].' руб.' : 0);?>
+						            	
+						            	<tr class="detail-row <?=($price!==0?'bg-success':'bg-danger')?> collapsed">
 											<td><?=($key+1);?></td>
 											<td>
 												<?=(!empty($detail['name'])?$detail['name']:'<img alt="" src="/assets/img/daag.png">')?>
@@ -65,7 +67,9 @@
 												<a href="/products/?type=products&article=<?=$detail['article']?>"><?=$detail['article']?></a>
 											</td>
 											<td><?=strtoupper($detail['manufacture'])?></td>
-											<td>0.00 руб.</td>
+											<td class="text-right">
+												<?=($price!==0 ? $price : '<img alt="" src="/assets/img/daag.png">')?>
+											</td>
 											<td>
 												<div class="btn-group dropdown">
 						                            <button href="#" class="btn btn-info no-anchor dropdown-toggle" data-toggle="dropdown">
@@ -125,8 +129,9 @@
 			
 				<div id="products" role="tabpanel" class="tab-pane fade  in active">
 					<div class="">				
-						<h3>Аналоги детали: <?=$current['name']?>&mdash;<?=$current['article']?></h3>
 						<?if( !empty($parts) ):?>
+						
+						<h3>Аналоги детали: <?=$current['name']?>&mdash;<?=$current['article']?></h3>
 				        <table class="table table-hover table-bordered">
 				            <col width="50px"/>
 				            <col/>
@@ -146,15 +151,19 @@
 				            </thead>
 				            <tbody>
 				            <? $i = 1; ?>
+				            
 							<? foreach($parts as $key => $detail): ?>
-								<tr class="detail-row">
+								<?$price = (isset($detail['price']) && 0!==$detail['price'] ? $detail['price'].' руб.' : 0);?>
+								<tr class="detail-row <?=($price!==0?'bg-success':'bg-danger')?>">
 									<td><?=$i;?></td>
 									<td><?=$detail['name']?></td>
 									<td>
 										<a href="/products/?type=crosses&product=<?=$current['article']?>&article=<?=$detail['article']?>"><?=$detail['article']?></a>
 									</td>
 									<td><?=strtoupper($detail['manufacture'])?></td>
-									<td>0.00 руб.</td>
+									<td class="text-right">
+										<?=($price!==0 ? $price : '<img alt="" src="/assets/img/daag.png">')?>
+									</td>
 									<td>
 										<div class="btn-group dropdown">
 				                            <button href="#" class="btn btn-info no-anchor dropdown-toggle" data-toggle="dropdown">

@@ -26,4 +26,5 @@ class Model_Products extends MongoModel
 	);
 	
 	
+	
 }

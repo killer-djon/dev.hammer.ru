@@ -77,13 +77,16 @@ class Kohana_Product extends Kohana_Search
 				
 			if( !empty($rowProducts) && count($rowProducts) > 0 )
 			{
+				$rowProducts = $this->makePrice($rowProducts);
 				foreach( $rowProducts as $key => $item )
 				{
 					$this->offsetSet($key, $item);
 				}
 				
 				$this->refreshData('link');
-				$this->_cross_products = $this->collectCrossProducts('article');
+				
+				$crosses = $this->collectCrossProducts('article');
+				$this->_cross_products = $this->makePrice($crosses);
 			}
 		}
 		
@@ -137,6 +140,7 @@ class Kohana_Product extends Kohana_Search
 					$offsets = $this->getOffsets();
 					$this->clearOffsets();
 					
+					$offsets = $this->makePrice($offsets);
 					foreach($offsets as $key => $item)
 					{
 						$modelView = MongoModel::factory('Products');
@@ -169,7 +173,9 @@ class Kohana_Product extends Kohana_Search
 					}
 					
 					$this->refreshData('link');
-					$this->_cross_products = $this->collectCrossProducts('article');
+					
+					$crosses = $this->collectCrossProducts('article');
+					$this->_cross_products = $this->makePrice($crosses);
 				}
 			}
 		}
@@ -235,13 +241,16 @@ class Kohana_Product extends Kohana_Search
 		if( !empty($rows) )
 		{
 			$this->clearOffsets();
+			$rows = $this->makePrice($rows);
 			foreach( $rows as $key => $item )
 			{
 				$this->offsetSet($key, $item);
 			}	
 			
 			$this->refreshData('article');
-			$this->_cross_products = $this->collectCrossProducts('article');
+			
+			$crosses = $this->collectCrossProducts('article');
+			$this->_cross_products = $this->makePrice($crosses);
 		}
 		
 		return $this;
@@ -273,13 +282,16 @@ class Kohana_Product extends Kohana_Search
 			$this->createSearchIndex('crosses', 'cross_article', 'crosses', $searchURL);
 			
 			$this->clearOffsets();
+			$rows = $this->makePrice($rows);
+			
 			foreach( $rows as $key => $item )
 			{
 				$this->offsetSet($key, $item);
 			}
-			
 			$this->refreshData('link');
-			$this->_cross_products = $this->collectCrossProducts('article');
+			
+			$crosses = $this->collectCrossProducts('article');
+			$this->_cross_products = $this->makePrice($crosses);
 		}
 		
 		return $this;
@@ -324,6 +336,7 @@ class Kohana_Product extends Kohana_Search
 				
 				$this->clearOffsets();
 				
+				$offsets = $this->makePrice($offsets);
 				foreach( $offsets as $key => $item )
 				{
 					$model = MongoModel::factory('Crosses');
@@ -358,7 +371,9 @@ class Kohana_Product extends Kohana_Search
 				}
 				
 				$this->refreshData('link');
-				$this->_cross_products = $this->collectCrossProducts('article');
+				
+				$crosses = $this->collectCrossProducts('article');
+				$this->_cross_products = $this->makePrice($crosses);
 			}
 		}
 		
@@ -389,6 +404,7 @@ class Kohana_Product extends Kohana_Search
 				$offsets = $this->getOffsets();
 				
 				$this->clearOffsets();
+				$offsets = $this->makePrice($offsets);
 				foreach( $offsets as $key => $item )
 				{
 					$model = MongoModel::factory('Products');
@@ -422,7 +438,9 @@ class Kohana_Product extends Kohana_Search
 				}
 				
 				$this->refreshData('link');
-				$this->_cross_products = $this->collectCrossProducts('article');
+				
+				$crosses = $this->collectCrossProducts('article');
+				$this->_cross_products = $this->makePrice($crosses);
 			}
 			
 		}

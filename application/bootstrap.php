@@ -136,6 +136,7 @@ Kohana::modules(array(
 	'html-parser'	=> MODPATH.'html-parser',
 	'breadcrumbs'	=> MODPATH.'kohana-breadcrumbs', // breadcrumbs for pages
 	'cache-redis'	=> MODPATH.'kohana-cache-redis', // redis module for caching
+	'shopping-cart'	=> MODPATH.'kohana-shopping-cart', // shopping cart module
 	));
 
 
@@ -184,7 +185,7 @@ if ( ! Route::cache())
             'controller'    => 'tests',
             'action'    => 'index'
         ]);
-
+        
 	/**
 	 * Set the routes. Each route must have a minimum of a name, a URI and a set of
 	 * defaults for the URI.

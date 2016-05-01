@@ -258,6 +258,7 @@ class Controller_Products extends Controller_Main
 			if( $product->offsetSize() > 0 )
 			{
 				$productsArr = $product->getOffsets();
+				
 				$offsets = Arr::build_tree($productsArr, 'groupName');
 				
 				$this->template->content->category_view->parts = $offsets;

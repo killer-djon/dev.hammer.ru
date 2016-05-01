@@ -55,7 +55,8 @@
 						            </tr>
 						            
 						            <? foreach($item as $key => $detail): ?>
-						            	<tr class="detail-row collapsed">
+						            	<?$price = (isset($detail['price']) && 0!==$detail['price'] ? $detail['price'].' руб.' : 0);?>
+						            	<tr class="detail-row <?=($price!==0?'bg-success':'bg-danger')?> collapsed">
 											<td><?=($key+1);?></td>
 											<td>
 												<?=(!empty($detail['name'])?$detail['name']:'<img alt="" src="/assets/img/daag.png">')?>
@@ -64,7 +65,9 @@
 												<a href="/products/?type=products&article=<?=$detail['article']?>"><?=$detail['article']?></a>
 											</td>
 											<td><?=strtoupper($detail['manufacture'])?></td>
-											<td>0.00 руб.</td>
+											<td class="text-right">
+												<?=($price!==0 ? $price : '<img alt="" src="/assets/img/daag.png">')?>
+											</td>
 											<td>
 												<div class="btn-group dropdown">
 						                            <button href="#" class="btn btn-info no-anchor dropdown-toggle" data-toggle="dropdown">
@@ -161,7 +164,8 @@
 						                </td>
 				                    </tr>
 				                    <? foreach($groupdetail['children'] as $key => $detail): ?>
-				                        <tr class="detail-row collapsed">
+				                    	<?$price = (isset($detail['price']) && 0!==$detail['price'] ? $detail['price'].' руб.' : 0);?>
+				                        <tr class="detail-row <?=($price!==0?'bg-success':'bg-danger')?> collapsed">
 				                            <td><?=$i;?></td>
 				                            <td>
 				                            	<?=(!empty($detail['name'])?$detail['name']:'<img alt="" src="/assets/img/daag.png">')?>
@@ -170,7 +174,9 @@
 				                                <a href="/products/?type=products&article=<?=$detail['article']?>"><?=$detail['article']?></a>
 				                            </td>
 				                            <td><?=strtoupper($detail['manufacture'])?></td>
-				                            <td>0.00 руб.</td>
+				                            <td class="text-right">
+												<?=($price!==0 ? $price : '<img alt="" src="/assets/img/daag.png">')?>
+											</td>
 				                            <td>
 				                                <div class="btn-group dropdown">
 						                            <button href="#" class="btn btn-info no-anchor dropdown-toggle" data-toggle="dropdown">

@@ -274,17 +274,6 @@ abstract class Kohana_Search implements \ArrayAccess
 				->find_all();
 			$data = [];
 			
-			/*if( is_array($rows) && count($rows) )	
-			{
-				foreach($rows as $key => $item)
-				{
-					$data[ $item['identifier'] ] = $item;
-				}
-			}
-			
-			$responseData = array_values($data);
-			*/
-			
 			/**
 			 * Refactoring code
 			 * this values return with group at crosses articles	
@@ -382,5 +371,54 @@ abstract class Kohana_Search implements \ArrayAccess
 		$model->selectDB();
 		
 		return $model->find()->lastDocument();
+	}
+	
+	/**
+	 * Make price items like (qty, price)
+	 * on the products array
+	 *
+	 * @param array $rows Reference of the products rows
+	 * @return void	
+	 */
+	public function makePrice(array & $rows)
+	{
+		if( empty($rows) )
+			return;
+		
+		$articles = array_column($rows, 'article');
+		
+		$articles = array_map(function($item){
+			settype($item, 'string');
+			return $item;
+		}, $articles);
+		
+		$model = MongoModel::factory('Prices');
+		$model->selectDB();	
+		
+		$priceRows = $model
+			->where('article', 'in', $articles)
+			->find_all();
+			
+		if( empty($priceRows) )
+		{
+			foreach( $rows as $key =>& $item )
+			{
+				$item['qty'] = 0;
+				$item['price'] = 0;
+			}
+			
+			return $rows;
+		}
+		
+		
+		$priceRows = array_combine(array_column($priceRows, 'article'), $priceRows);
+
+		foreach( $rows as $key =>& $item )
+		{
+			$item['qty'] = ( isset($priceRows[$item['article']]['qty']) ? $priceRows[$item['article']]['qty'] : 0 ); 
+			$item['price'] = ( isset($priceRows[$item['article']]['price']) ? $priceRows[$item['article']]['price'] : 0 ); 
+		}
+		return $rows;
+		
 	}
 }

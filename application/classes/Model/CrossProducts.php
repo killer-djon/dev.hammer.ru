@@ -19,6 +19,7 @@ class Model_CrossProducts extends MongoModel
         "date_create" => 'date',
         "cross_article" => [
 	        '_keys'	=> 'string'
-        ]
-	];
+        ],
+	];	
+	
 }

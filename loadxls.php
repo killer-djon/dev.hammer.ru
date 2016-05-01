@@ -57,15 +57,51 @@ function flatten($array)
 	}
 	return $flat;
 }
+
 echo '<pre>';
-$objPHPExcel = PHPExcel_IOFactory::load("catalogs/Кросс Аналоги2.xlsx");
-$objWorksheet = $objPHPExcel->getSheet(5);
+$objPHPExcel = PHPExcel_IOFactory::load("catalogs/FKT-AVTO.xlsx");
+$objWorksheet = $objPHPExcel->getActiveSheet();
 
 $arrExcel = $objWorksheet->toArray();
 
 
 if( !empty($arrExcel) )
 {
+	$prices = [];
+	foreach( $arrExcel as $index => $row )
+	{
+		if( $index == 0 ) continue;
+		
+		$prices[] = [
+			'article'	=> $row[0],
+			'clear_article' => preg_replace('/[^\w+]/is', '', $row[0]),
+			'manufacture'	=> $row[1],
+			'name'	=> $row[2],
+			'qty'	=> preg_replace('/[^\d+]/U', '', $row[3]),
+			'price'	=> sprintf("%01.2f", $row[4]),
+			'date_create'	=> new MongoDate()
+		];
+	}
+	
+	
+	$options = [
+		'authMechanism' => 'SCRAM-SHA-1',
+		'db'		=> 'dev_hammer_v3',
+		'username'	=> 'hammer',
+		'password'	=> 'nyFFqv2015',
+	];
+	$m = new MongoClient("mongodb://localhost:27017", $options);
+	$collection = $m->selectCollection('dev_hammer_v3', 'prices');
+	
+		
+	if( $collection instanceof MongoCollection && is_array( $prices ) )
+	{
+		$dbRes = $collection->batchInsert($prices, ['w'	=> 1]);
+		print_r( $dbRes );
+	}
+	
+	print_r( $prices );
+	/*
 	$name = '';
 	$result = array();
 	$result2 = array();
@@ -136,4 +172,5 @@ if( !empty($arrExcel) )
 		$dbRes = $collection->batchInsert($result2, ['w'	=> 1]);
 		print_r( $dbRes );
 	}
+	*/
 }
