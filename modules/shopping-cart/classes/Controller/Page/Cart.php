@@ -1,9 +1,14 @@
-<?php defined('SYSPATH') or die('No direct script access.');
+<?php defined('SYSPATH') OR die('No direct script access.');
 
-class Controller_Main extends Controller_Template  
+class Controller_Page_Cart extends Cart
 {
-
-	public $template = 'templates/default';
+	/**
+	 * Template view
+	 * @var string $template String name of the template
+	 */
+	public $template = 'templates/second/main';
+	
+	public $auto_render = TRUE;
 
 	public function before()
 	{
@@ -64,6 +69,8 @@ class Controller_Main extends Controller_Template
 				'assets/css/animate.css'  => 'all',
 				'assets/css/common_style.css'  => 'all',
 				'assets/css/responsive.css'  => 'all',
+				'assets/css/common_style.css'  => 'all',
+				'assets/css/sidebar.css'  => 'all',
 				'http://fonts.googleapis.com/css?family=Open+Sans:600italic,400,800,700,300'  => 'all'
 			];
 
@@ -77,6 +84,7 @@ class Controller_Main extends Controller_Template
                     'assets/js/bootstrap.min.js',
                     'assets/js/wow.js',
                     'assets/js/detectmobile.js',
+                    'assets/js/second.js'
 				]
 			];
 
@@ -90,9 +98,34 @@ class Controller_Main extends Controller_Template
         parent::after();
 	}
 	
+	
 	public function action_index()
 	{
-		//$this->template->content = 'Главная';
-	}
+		$this->template->header = View::factory('templates/second/header');
+        $this->template->footer = View::factory('templates/second/footer');
+        
+		$this->template->content = View::factory('page/main');
+		$this->template->content->cart_view = View::factory('page/shopcart');
+		$this->template->content->breadcrumbs = View::factory('templates/breadcrumbs');
+		
+		Breadcrumbs::set([
+            URL::base() => 'Главная',
+            '/cart' => 'Корзина заказов',
+        ]);
+		
+		$this->template->title = 'Ваша корзина заказов в Интернет-магазине деталей Hammerschmidt';
+		$this->template->content->cart_view->title = 'Корзина заказов';
+		
 
-} // End Welcome
+		$cartContent = $this->_cart->getProductContent();
+
+		if( !empty($cartContent) && isset($cartContent['total']) && $cartContent['total']['count'] > 0 )
+		{
+			$this->template->content->cart_view->cart = $this->_cart->getProductContent();	
+		}else
+		{
+			$this->template->content->cart_view->cart = [];
+			$this->template->content->cart_view->empty_cart = 'Ваша корзина деталей пустая, '.HTML::anchor('/categories', 'вернитесь к покупкам');
+		}
+	}
+}

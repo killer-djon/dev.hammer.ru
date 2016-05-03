@@ -104,7 +104,7 @@ if (isset($_SERVER['KOHANA_ENV']))
  */
 Kohana::init(array(
 	'base_url'   => '/',
-	'caching'	=> true
+	'caching'	=> FALSE
 ));
 
 /**
@@ -136,7 +136,7 @@ Kohana::modules(array(
 	'html-parser'	=> MODPATH.'html-parser',
 	'breadcrumbs'	=> MODPATH.'kohana-breadcrumbs', // breadcrumbs for pages
 	'cache-redis'	=> MODPATH.'kohana-cache-redis', // redis module for caching
-	'shopping-cart'	=> MODPATH.'kohana-shopping-cart', // shopping cart module
+	'shopping-cart'	=> MODPATH.'shopping-cart', // shopping cart module
 	));
 
 
@@ -149,6 +149,7 @@ Cache::$default = 'redis';
  * uncomment the line below and define a preferrably long salt.
  */
 Cookie::$salt = md5('nyFFqv2015');
+Kohana::$caching = FALSE;
 
 if ( ! Route::cache())
 {
@@ -186,6 +187,7 @@ if ( ! Route::cache())
             'action'    => 'index'
         ]);
         
+
 	/**
 	 * Set the routes. Each route must have a minimum of a name, a URI and a set of
 	 * defaults for the URI.

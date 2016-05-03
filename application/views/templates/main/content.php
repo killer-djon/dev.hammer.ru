@@ -314,7 +314,7 @@
                 </div>
 
                 <div class="text-center col-md-12">
-                    <a href="#" class="text-info" role="button">Все новости</a>
+                    <a href="/news" class="text-info" role="button">Все новости</a>
                 </div>
 
             </div>

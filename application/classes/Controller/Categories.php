@@ -89,6 +89,7 @@ class Controller_Categories extends Controller_Main
 	
 	public function renderParts($categoryName, $partsName)
 	{
+		$this->setScript('assets/js/second.js', 'footer');
 		$product = Product::getInstance();
 		
 		//$view = View::factory('categories/parts');
@@ -120,7 +121,7 @@ class Controller_Categories extends Controller_Main
 
         Breadcrumbs::set([
             URL::base() => 'Главная',
-            '/categories' => 'Производители',
+            '/categories' => 'Каталог производителей',
             "/categories/view/{$current['auto']}" => $current['auto'],
             //"/categories/generic/{$current['auto']}/{$current['parentName']}" => $current['parentName'],
             "/categories/{$current['auto']}/{$current['name']}" => $current['name'],
@@ -178,7 +179,7 @@ class Controller_Categories extends Controller_Main
 
 		Breadcrumbs::set([
             URL::base() => 'Главная',
-            '/categories' => 'Производители',
+            '/categories' => 'Каталог производителей',
         ]);
         
 		if( $searchRow->loaded() )
@@ -223,7 +224,7 @@ class Controller_Categories extends Controller_Main
 		{
             Breadcrumbs::set([
 	            URL::base() => 'Главная',
-	            '/categories' => 'Производители',
+	            '/categories' => 'Каталог производителей',
             ]);
             $this->template->content->category_view = View::factory('categories/category_view');
             $this->template->content->category_view->title = 'Каталог производителей';
@@ -231,7 +232,7 @@ class Controller_Categories extends Controller_Main
 		{
             Breadcrumbs::set([
                 URL::base() => 'Главная',
-                '/categories' => 'Производители',
+                '/categories' => 'Каталог производителей',
                 "/categories/view/{$current['name']}"  => $current['name'],
             ]);
             $this->template->content->title = 'Производитель '.$current['name'];
@@ -241,7 +242,7 @@ class Controller_Categories extends Controller_Main
 		{
             Breadcrumbs::set([
                 URL::base() => 'Главная',
-                '/categories' => 'Производители',
+                '/categories' => 'Каталог производителей',
                 "/categories/view/{$current['parentName']}"  => "{$current['parentName']}",
                 "/categories/generic/{$current['parentName']}/{$current['name']}"   => $current['name']
             ]);

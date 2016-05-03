@@ -21,11 +21,11 @@
     <ul class="sidebar-nav" id="shopping-cart">
 
         <li class="">
-            <a class="no-anchor" rel="nofollow" href="#">Корзина заказов
-                <span class="fa fa-shopping-basket sub_icon">
-                    <span class="label label-info label-cart-count">5</span>
-                </span>
-            </a>
+        	<?=HTML::anchor('/cart', 'Корзина заказов<span class="fa fa-shopping-basket sub_icon" id="cart-total"></span>', [
+            	'class'	=> 'no-anchor',
+            	'rel'	=> 'nofollow',
+            ]);?>
+					
         </li>
     </ul>
 </div>

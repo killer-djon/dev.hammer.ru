@@ -78,13 +78,18 @@
 							                            	<div class="row">
 								                            	<div class="col-md-12">
 									                            	<form role="form" class="form product-qty">
+										                            	<input type="hidden" name="id" value="<?=$detail['_id']['$id']?>">
+										                            	<input type="hidden" name="article" value="<?=$detail['article']?>">
+										                            	<input type="hidden" name="name" value="<?=(!empty($detail['name'])?$detail['name']:'--')?>">
+										                            	<input type="hidden" name="price" value="<?=($price!==0 ? $price : 0)?>">
+										                            	
 													                    <div class="form-group">
 													                        <label for="qty">Выберите кол-во</label>
 													                        <div class="input-group count-detail">
 																				<span class="input-group-addon cart-qty cart-minus">
 																					<i class="fa fa-minus"></i>
 																				</span>
-													                            <input type="text" class="form-control text-right btn-number" placeholder="1" value="1">
+													                            <input name="qty" type="text" class="form-control text-right btn-number" placeholder="1" value="1">
 																				<span class="input-group-addon cart-qty cart-plus">
 																					<i class="fa fa-plus"></i>
 																				</span>
@@ -97,7 +102,7 @@
 													                    </div>
 													                    
 													                    <div class="form-group text-right">
-														                    <button type="button" class="btn btn-primary" id="add_to_cart">Добавить в корзину</button>
+														                    <a role="button" class="btn btn-primary add_to_cart">Добавить в корзину</a>
 													                    </div>
 													                </form>
 								                            	</div>
@@ -187,13 +192,18 @@
 							                            	<div class="row">
 								                            	<div class="col-md-12">
 									                            	<form role="form" class="form product-qty">
+										                            	<input type="hidden" name="id" value="<?=$detail['_id']['$id']?>">
+										                            	<input type="hidden" name="article" value="<?=$detail['article']?>">
+										                            	<input type="hidden" name="name" value="<?=(!empty($detail['name'])?$detail['name']:'--')?>">
+										                            	<input type="hidden" name="price" value="<?=($price!==0 ? $price : 0)?>">
+										                            	
 													                    <div class="form-group">
 													                        <label for="qty">Выберите кол-во</label>
 													                        <div class="input-group count-detail">
 																				<span class="input-group-addon cart-qty cart-minus">
 																					<i class="fa fa-minus"></i>
 																				</span>
-													                            <input type="text" class="form-control text-right btn-number" placeholder="1" value="1">
+													                            <input name="qty" type="text" class="form-control text-right btn-number" placeholder="1" value="1">
 																				<span class="input-group-addon cart-qty cart-plus">
 																					<i class="fa fa-plus"></i>
 																				</span>
@@ -206,7 +216,7 @@
 													                    </div>
 													                    
 													                    <div class="form-group text-right">
-														                    <button type="button" class="btn btn-primary" id="add_to_cart">Добавить в корзину</button>
+														                    <a role="button" class="btn btn-primary add_to_cart">Добавить в корзину</a>
 													                    </div>
 													                </form>
 								                            	</div>

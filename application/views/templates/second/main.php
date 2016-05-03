@@ -33,6 +33,8 @@
         echo HTML::script($file, NULL, NULL), "\n";
     }?>
 <? endif; ?>
+<?=HTML::script('/assets/js/shopping_cart.js');?>
+<?=HTML::script('/assets/bootstrap-notify/bootstrap-notify.min.js');?>
 </body>
 
 </html>

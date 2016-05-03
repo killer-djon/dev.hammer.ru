@@ -6,7 +6,9 @@ abstract class Controller_Page_Cart extends Controller_Template
 	
 	public function action_index() 
 	{
-		$this->template->cart = Cart::instance()->content;
+		//$this->template->cart = Cart::instance()->content;
+		print_r( func_get_args() );
+		exit;
 	}
 	
 }

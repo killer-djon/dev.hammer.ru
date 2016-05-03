@@ -36,6 +36,7 @@ class Controller_Widget_Cart extends Controller_Template
 	{
 		if ($product = Arr::extract($this->request->post(), array('id', 'qty', 'options')))
 		{
+			
 			try
 			{
 				$this->_cart->set($product['id'], $product['qty'], (array) $product['options']);

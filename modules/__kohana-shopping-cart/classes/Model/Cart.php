@@ -162,18 +162,20 @@ abstract class Model_Cart extends Model
 	protected function _get_product($id, $qty = 1, array $options = NULL)
 	{
 		// Create model only when it's needed
-		if ( ! is_object($this->_model_product))
+		/*if ( ! is_object($this->_model_product))
 		{
-			$this->_model_product = ORM::factory($this->_config['model_product']);
+			$this->_model_product = MongoModel::factory($this->_config['model_product']);
+			$this->_model_product->selectDB();
+			
 		}
 		// Get product(s) in cart format
-		return $this->_model_product->get_product($id, $qty, $options);
+		return $this->_model_product->get_product($id, $qty, $options);*/
+		return $this->_session->get($id);
 	}
 	
 	// Set(add) product(s) from cart content
 	public function set($id, $qty = 1, array $options = NULL)
 	{
-
 		if (Arr::is_array($id))
 		{
 			// TODO: not work !
@@ -188,6 +190,7 @@ abstract class Model_Cart extends Model
 		else
 		{
 			$qty = max(1, $qty);
+			
 			$products[0] = $this->_get_product($id, $qty, $options);
 		}
 		

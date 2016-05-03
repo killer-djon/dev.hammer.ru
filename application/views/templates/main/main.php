@@ -33,6 +33,7 @@
         echo HTML::script($file, NULL, NULL), "\n";
     }?>
 <? endif; ?>
+<?=HTML::script('/assets/js/shopping_cart.js');?>
 </body>
 
 </html>

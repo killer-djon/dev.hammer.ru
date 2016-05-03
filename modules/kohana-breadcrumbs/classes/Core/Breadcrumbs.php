@@ -78,6 +78,11 @@ class Core_Breadcrumbs {
 	}
 	
 	
+	public static function clean()
+	{
+		self::$_items = [];
+	}
+	
 
 	/**
 	 * Generate (uses controller data) and add items

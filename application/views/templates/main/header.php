@@ -13,9 +13,14 @@
 								    <!-- user toggle menu -->
 								    <ul class="navbar-toggle toggle-menu">
 									    <li>
-									    	<a rel="nofollow" href="#" class="fa fa-shopping-basket no-anchor" id="shopping-cart">
+									    	<!--<a rel="nofollow" href="#" class="fa fa-shopping-basket no-anchor" id="shopping-cart-total">
 							                    <span class="label label-info label-cart-count">5</span>
-							                </a>
+							                </a>-->
+							                <?=HTML::anchor('/cart', '', [
+								            	'class'	=> 'fa fa-shopping-basket no-anchor',
+								            	'rel'	=> 'nofollow',
+								            	'id'	=> 'shopping-cart-total'
+								            ]);?>
 									    </li>
 								    </ul>
 								    <ul class="navbar-toggle toggle-menu">
@@ -148,9 +153,11 @@
 						                    </ul>
 						                </li>
 						                <li>
-						                	<a rel="nofollow" href="#" class="fa fa-shopping-basket no-anchor" id="shopping-cart">
-							                    <span class="label label-info label-cart-count">5</span>
-							                </a>
+							                <?=HTML::anchor('/cart', '', [
+								            	'class'	=> 'fa fa-shopping-basket no-anchor',
+								            	'rel'	=> 'nofollow',
+								            	'id'	=> 'shopping-cart-total-icon'
+								            ]);?>
 						                </li>
 							      	</ul>
 							    </nav>

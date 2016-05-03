@@ -21,7 +21,7 @@ class Model_Crosses extends MongoModel
 		'search_article'	=> array(
 			'_keys'	=> 'string'
 		),
-		'link'	=> 'string',
+		'link'	=> 'string'
 	);
 	
 	

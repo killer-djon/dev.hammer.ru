@@ -288,6 +288,7 @@ class Kohana_Product extends Kohana_Search
 			{
 				$this->offsetSet($key, $item);
 			}
+			
 			$this->refreshData('link');
 			
 			$crosses = $this->collectCrossProducts('article');
@@ -336,7 +337,6 @@ class Kohana_Product extends Kohana_Search
 				
 				$this->clearOffsets();
 				
-				$offsets = $this->makePrice($offsets);
 				foreach( $offsets as $key => $item )
 				{
 					$model = MongoModel::factory('Crosses');
@@ -369,6 +369,10 @@ class Kohana_Product extends Kohana_Search
 						$this->offsetSet($key, $row->lastDocument());
 					}
 				}
+				
+				$_offsets = $this->getOffsets();
+				$_offsets = $this->makePrice( $_offsets );
+				$this->offsetSets($_offsets);
 				
 				$this->refreshData('link');
 				

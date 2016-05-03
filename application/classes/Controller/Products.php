@@ -18,6 +18,9 @@ class Controller_Products extends Controller_Main
 	public function action_index()
 	{
 		$this->setScript('assets/js/second.js', 'footer');
+		
+		
+		
 		$this->setStyle('assets/css/sidebar.css', 'all');
 		
 		$path = $this->request->param('path', NULL);
@@ -88,7 +91,6 @@ class Controller_Products extends Controller_Main
             '/categories' => 'Производители',
         ]);
         
-			
 		if( $searchRow->loaded() )
 		{
 			$product->findData($name);
@@ -207,10 +209,10 @@ class Controller_Products extends Controller_Main
 	
 	public function render_product( $article = NULL )
 	{
+		
 		$product = Product::getInstance();
 		$row = $product->getProductByArticle($article);
-		
-		
+	
 		$this->template->title = "";
 		$this->template->content = View::factory('templates/second/parts_content');
 		
@@ -249,7 +251,8 @@ class Controller_Products extends Controller_Main
 			Breadcrumbs::set([
 	            URL::base() => 'Главная',
 	            '/categories' => 'Производители',
-	            "/categories/{$current['category']}/{$current['parentName']}"	=> $current['parentName'],
+	            //"/categories/{$current['category']}/{$current['parentName']}"	=> $current['parentName'],
+	            '/categories/view/'.$current['category']	=> $current['category'],
 	            "/products/?type=products&article={$article}"	=> $article
 	        ]);
 	        

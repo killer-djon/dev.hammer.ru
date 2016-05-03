@@ -220,6 +220,16 @@ abstract class Kohana_Search implements \ArrayAccess
 	}
 	
 	
+	public function offsetSets( array $offsets )
+	{
+		$this->clearOffsets();
+		foreach( $offsets as $key => $offset )
+		{
+			$this->offsetSet($key, $offset);
+		}
+	}
+	
+	
 	public function offsetGet( $offset )
 	{
 		if( $this->offsetExists($offset) )

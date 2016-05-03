@@ -4,6 +4,8 @@ jQuery(document).ready(function() {
     new WOW().init();
     
     
+    
+    
     jQuery("#search-view").keyup(function(){
 	
 		jQuery("#category-list").find("[role=listitem]").hide();
@@ -102,8 +104,8 @@ jQuery(document).ready(function() {
 		
 		if( jQuery(this).hasClass('cart-minus') )
 		{
-			var newVal = ( inputVal == 0 ? 1 : inputVal-- );
-			inputText.val(newVal);
+			var newVal = ( inputVal-- <= 1 ? 1 : inputVal-- );
+			inputText.val(newVal--);
 		}
 		
 		if( jQuery(this).hasClass('cart-plus') )
@@ -134,5 +136,7 @@ jQuery(document).ready(function() {
 	}
 	
 	resizeModal();
+	
+	
 	
 });

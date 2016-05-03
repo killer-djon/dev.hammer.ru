@@ -16,8 +16,27 @@
  *           );
  
  */
-class Model_Cart_Product extends ORM
+class Model_Cart_Product extends MongoModel
 {
+	
+	protected $_collection_name = 'shopping_cart';
+	
+	
+	protected $_schema = [
+		'id'	=> 'string',
+		'name'	=> 'string',
+		'price'	=> 'double',
+		'in_stock'	=> 'int',
+		'active'	=> 'bool'
+	];
+	
+	public function get_product($id, $qty, array $options = array())
+	{
+		
+	}
+		
+		
+	/*
 	protected $_table_name    = 'products';
 	
 	protected $_primary_key   = 'id';
@@ -59,5 +78,5 @@ class Model_Cart_Product extends ORM
 			throw new Database_Exception(__('Old data =\ '));
 		}
 	}
-	
+	*/
 } // End Model_Cart_Product

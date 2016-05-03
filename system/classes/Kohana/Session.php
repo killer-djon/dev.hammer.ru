@@ -316,6 +316,7 @@ abstract class Kohana_Session {
 			else
 			{
 				// Ignore these, session is valid, likely no data though.
+				
 			}
 		}
 		catch (Exception $e)
