@@ -10,3 +10,6 @@
 [submodule "modules/kohana-oauth2"]
 	path = modules/kohana-oauth2
 	url = https://github.com/tamaspap/kohana-oauth2.git
+[submodule "modules/oauth"]
+	path = modules/oauth
+	url = https://github.com/biakaveron/oauth.git
