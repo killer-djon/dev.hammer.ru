@@ -7,3 +7,6 @@
 [submodule "modules/kohana-restful-api"]
 	path = modules/kohana-restful-api
 	url = https://github.com/SupersonicAds/kohana-restful-api.git
+[submodule "modules/kohana-oauth2"]
+	path = modules/kohana-oauth2
+	url = https://github.com/tamaspap/kohana-oauth2.git
