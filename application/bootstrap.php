@@ -137,6 +137,7 @@ Kohana::modules(array(
 	'breadcrumbs'	=> MODPATH.'kohana-breadcrumbs', // breadcrumbs for pages
 	'cache-redis'	=> MODPATH.'kohana-cache-redis', // redis module for caching
 	'shopping-cart'	=> MODPATH.'shopping-cart', // shopping cart module
+    'oauth'         => MODPATH.'oauth', // oauth,oauth2 module authorize
 	));
 
 
@@ -169,8 +170,16 @@ if ( ! Route::cache())
 			  ->defaults(array(
 			    'controller' => 'products',
 			    'action' => 'index',
-			  ));		  
-			  
+			  ));
+
+    Route::set('user', 'user(/<action>(/<provider>))', [
+            'provider'  => '[a-zA-Z_\-\.]+'
+        ])
+        ->defaults(array(
+            'controller' => 'user',
+            'action' => 'index',
+        ));
+
 			  
 	Route::set('redirect_category', '<path>.html',
 			  array(
