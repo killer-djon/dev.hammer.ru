@@ -1,3 +1,8 @@
+.icon-yandex
+{
+  background: url("../img/yandex_256.png") no-repeat center center;
+}
+
 .btn-icon{
   background-color: transparent !important;
   background-image: url("../img/car-logos.png") !important;
@@ -5,7 +10,6 @@
   display: block;
   height: 90px;
   width: 90px;
-
   &.icon-audi{
     background-position: -105px -10px;
   }
