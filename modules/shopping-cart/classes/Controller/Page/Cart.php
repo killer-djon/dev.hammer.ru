@@ -112,7 +112,7 @@ class Controller_Page_Cart extends Cart
             URL::base() => 'Главная',
             '/cart' => 'Корзина заказов',
         ]);
-		
+        
 		$this->template->title = 'Ваша корзина заказов в Интернет-магазине деталей Hammerschmidt';
 		$this->template->content->cart_view->title = 'Корзина заказов';
 		
@@ -122,6 +122,7 @@ class Controller_Page_Cart extends Cart
 		if( !empty($cartContent) && isset($cartContent['total']) && $cartContent['total']['count'] > 0 )
 		{
 			$this->template->content->cart_view->cart = $this->_cart->getProductContent();	
+			
 		}else
 		{
 			$this->template->content->cart_view->cart = [];

@@ -1,3 +1,15 @@
+<!-- panel for shopping cart -->
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<h3 class="panel-title">
+			<a data-toggle="collapse" data-parent="#accordion" data-target="#shopping-cart-list">
+				Наличие деталей в корзине
+			</a>
+		<button data-toggle="modal" data-target="#clearCart" type="button" class="btn btn-danger pull-right fa fa-eraser" title="Очистить корзину"></button>
+		<div class="clearfix"></div>
+		</h3>
+
+	</div>
 <div id="shopping-cart-list" class="panel-collapse collapse in">
     <div class="panel-body">
         <table class="table table-bordered table-condensed table-responsive cart_content_form">
@@ -102,4 +114,5 @@
             </tfoot>
         </table>
     </div>
+</div>
 </div>

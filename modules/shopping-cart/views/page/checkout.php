@@ -28,23 +28,32 @@
                     <div class="row row-centered">
                         <div class="col-md-6 col-sm-6 col-xs-12 text-right">
                             <div class="col-md-8 col-sm-12 col-xs-12 pull-right">
+	                            <!--
+	                            <p>
+		                            Необходима авторизация на сайте, для завершения покупки. Если у Вас есть аккаунт на нашем сайте,
+		                            пожалуйста введите его в соответствующие поля, или Вы можете зарегистрироваться на нашем сайте, что позволит 
+		                            в дальнейшем использовать его.
+	                            </p>
+                                -->
                                 <p>
                                     Если у Вас нет аккаунта в нашем интернет-магазине деталей, тогда Вы можете авторизоваться через один из предложенных способов
                                 </p>
-                                <a href="/user/authorize/twitter" class="btn btn-default btn-lg">
-                                    <i class="fa fa-twitter" title="Авторизация через сервис twitter.com" aria-hidden="true"></i>
-                                </a>
-                                <a href="/user/authorize/facebook" class="btn btn-default btn-lg">
+                                <!--
+	                            <a rel="nofollow" href="<?=Request::factory('user/authorize/facebook')->execute()->body();?>" class="btn btn-default btn-lg">
                                     <i class="fa fa-facebook" title="Авторизация через сервис facebook.com" aria-hidden="true"></i>
                                 </a>
-                                <a href="/user/authorize/google" class="btn btn-default btn-lg">
+                                <a rel="nofollow" href="<?=Request::factory('user/authorize/google')->execute()->body();?>" class="btn btn-default btn-lg">
                                     <i class="fa fa-google-plus" title="Авторизация через сервис google.com" aria-hidden="true"></i>
                                 </a>
-                                <a href="/user/authorize/linkedin" class="btn btn-default btn-lg">
+                                <a rel="nofollow" href="<?=Request::factory('user/authorize/linkedin')->execute()->body();?>" class="btn btn-default btn-lg">
                                     <i class="fa fa-linkedin" title="Авторизация через сервис linkedin.com" aria-hidden="true"></i>
                                 </a>
-                                <a href="/user/authorize/vk" class="btn btn-default btn-lg">
+                                -->
+                                <a rel="nofollow" href="/user/authorize/vk<?=(isset($_REQUEST['code'])?'?code='.$_REQUEST['code'] : '')?>" class="btn btn-default btn-lg">
                                     <i class="fa fa-vk" title="Авторизация через сервис vk.com" aria-hidden="true"></i>
+                                </a>
+                                <a rel="nofollow" href="/user/authorize/facebook<?=(isset($_REQUEST['code'])?'?code='.$_REQUEST['code'] : '')?>" class="btn btn-default btn-lg">
+                                    <i class="fa fa-facebook" title="Авторизация через сервис vk.com" aria-hidden="true"></i>
                                 </a>
                             </div>
                         </div>

@@ -1,0 +1,32 @@
+{
+  "name": "killer-djon/kohana-oauth",
+  "description": "OAuth 2.0 Client Library for Kohana",
+  "license": "MIT",
+  "require": {
+    "php": ">=5.5.0",
+    "ext-curl": "*",
+    "ircmaxell/random-lib": "~1.1",
+    "guzzlehttp/guzzle": "~6.0",
+    "league/oauth2-client": "^1.4"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "~4.0",
+    "mockery/mockery": "~0.9",
+    "squizlabs/php_codesniffer": "~2.0",
+    "satooshi/php-coveralls": "0.6.*",
+    "jakub-onderka/php-parallel-lint": "0.8.*"
+  },
+  "keywords": [
+    "oauth",
+    "oauth2",
+    "authorization",
+    "authentication",
+    "idp",
+    "identity",
+    "sso",
+    "single sign on",
+    "kohana module",
+    "kohana",
+    "module"
+  ]
+}

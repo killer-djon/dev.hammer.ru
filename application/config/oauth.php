@@ -34,8 +34,27 @@ return array(
      * @https://oauth.yandex.ru/
      * this is url when we can edit develop project
      */
-    'yandex' => [
-        'id' => '3be595ed92b4482da87780cc69638342',
-        'secret' => '537749d215894a30be09504a0847cfc9'
+    'vk'	=> [
+	    'clientId'	=> '5453046',
+	    'clientSecret'	=> 'ftTxMgp07SgyQikyocfN'
+    ],
+    'google'	=> [
+	    'clientId'	=> '96332511459-bsjnc4h45dr4sr88i0hl3kc7hcmd720m.apps.googleusercontent.com',
+	    'clientSecret'	=> '_-xOn3EZQNPxq_jvYulsGAPo',
+	    'login_hint'	=> 'sub',
+	    'prompt'	=> 'select_account',
+	    'display'	=> 'popup'
+    ],
+    /**
+     * @https://apps.twitter.com/app/
+     * this is url when we can edit develop project
+     */
+    'twitter'	=> [
+	    'id'	=> 'nEvWeBkrdUrhsiovVnTaCUFl6',
+	    'secret'	=> 'bJojViHgSa0PlCYLmM6YmibFeSj5rxWZApRUYx35UnqwlnkCfW',
+    ],
+    'facebook'	=> [
+	    'clientId'	=> '261669577518915',
+	    'clientSecret'	=> '3cdd30357040b97d0dc9cf07d3c6288f'
     ]
 );

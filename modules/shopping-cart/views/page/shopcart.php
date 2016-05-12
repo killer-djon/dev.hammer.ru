@@ -16,24 +16,15 @@
 						<div class="col-md-12 col-xs-12 col-sm-12" id="cart-items">
 							<? if(!empty($cart) && isset($cart['products']) && count($cart['products'])): ?>
 								<div id="accordion" class="panel-group">
-
-									<!-- panel for shopping cart -->
-									<div class="panel panel-default">
-										<div class="panel-heading">
-											<h3 class="panel-title">
-												<a data-toggle="collapse" data-parent="#accordion" data-target="#shopping-cart-list">
-													Наличие деталей в корзине
-												</a>
-											<button data-toggle="modal" data-target="#clearCart" type="button" class="btn btn-danger pull-right fa fa-eraser" title="Очистить корзину"></button>
-											<div class="clearfix"></div>
-											</h3>
-
-										</div>
-										<?=View::factory('page/cartlist', ['cart'   => $cart])->render();?>
-
-									</div>
-								    <!-- panel for shopping cart -->
+									
+									<!-- shopping cart list -->
+									<?=View::factory('page/cartlist', ['cart'   => $cart])->render();?>
+									
+								    <!-- checkout cart list -->
                                     <?=View::factory('page/checkout')->render();?>
+                                    
+                                    <!-- shipping methods list -->
+                                    <?=View::factory('page/shipping')->render();?>
 
                                 </div>
 							<?else:?>	
