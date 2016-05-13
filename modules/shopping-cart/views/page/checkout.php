@@ -29,32 +29,80 @@
                         <div class="col-md-6 col-sm-6 col-xs-12 text-right">
                             <div class="col-md-8 col-sm-12 col-xs-12 pull-right">
 	                            <!--
+                                <p>
+                                    Если у Вас нет аккаунта в нашем интернет-магазине деталей, тогда Вы можете авторизоваться через один из предложенных способов
+                                </p>-->
 	                            <p>
 		                            Необходима авторизация на сайте, для завершения покупки. Если у Вас есть аккаунт на нашем сайте,
 		                            пожалуйста введите его в соответствующие поля, или Вы можете зарегистрироваться на нашем сайте, что позволит 
 		                            в дальнейшем использовать его.
 	                            </p>
-                                -->
-                                <p>
-                                    Если у Вас нет аккаунта в нашем интернет-магазине деталей, тогда Вы можете авторизоваться через один из предложенных способов
-                                </p>
-                                <!--
-	                            <a rel="nofollow" href="<?=Request::factory('user/authorize/facebook')->execute()->body();?>" class="btn btn-default btn-lg">
-                                    <i class="fa fa-facebook" title="Авторизация через сервис facebook.com" aria-hidden="true"></i>
-                                </a>
-                                <a rel="nofollow" href="<?=Request::factory('user/authorize/google')->execute()->body();?>" class="btn btn-default btn-lg">
-                                    <i class="fa fa-google-plus" title="Авторизация через сервис google.com" aria-hidden="true"></i>
-                                </a>
-                                <a rel="nofollow" href="<?=Request::factory('user/authorize/linkedin')->execute()->body();?>" class="btn btn-default btn-lg">
-                                    <i class="fa fa-linkedin" title="Авторизация через сервис linkedin.com" aria-hidden="true"></i>
-                                </a>
-                                -->
-                                <a rel="nofollow" href="/user/authorize/vk<?=(isset($_REQUEST['code'])?'?code='.$_REQUEST['code'] : '')?>" class="btn btn-default btn-lg">
-                                    <i class="fa fa-vk" title="Авторизация через сервис vk.com" aria-hidden="true"></i>
-                                </a>
-                                <a rel="nofollow" href="/user/authorize/facebook<?=(isset($_REQUEST['code'])?'?code='.$_REQUEST['code'] : '')?>" class="btn btn-default btn-lg">
-                                    <i class="fa fa-facebook" title="Авторизация через сервис vk.com" aria-hidden="true"></i>
-                                </a>
+                                <p class="text-info">Так же вы можете войти одним из способов:</p>
+                                <?
+	                                echo HTML::anchor('user/authorize/facebook', 
+	                                	'<i class="fa fa-facebook" aria-hidden="true"></i>', 
+										[
+			                                'rel'	=> 'nofollow',
+			                                'class'	=> 'btn btn-default',
+			                                'title'	=> 'Войти через Facebook'
+										]
+									);
+									echo '&nbsp;';
+									echo HTML::anchor('user/authorize/vk', 
+	                                	'<i class="fa fa-vk" aria-hidden="true"></i>', 
+										[
+			                                'rel'	=> 'nofollow',
+			                                'class'	=> 'btn btn-default',
+			                                'title'	=> 'Войти через Vkontakte'
+										]
+									);
+									echo '&nbsp;';
+									echo HTML::anchor('user/authorize/instagram', 
+	                                	'<i class="fa fa-instagram" aria-hidden="true"></i>', 
+										[
+			                                'rel'	=> 'nofollow',
+			                                'class'	=> 'btn btn-default',
+			                                'title'	=> 'Войти через Instagram'
+										]
+									);
+									echo '&nbsp;';
+									echo HTML::anchor('user/authorize/linkedin', 
+	                                	'<i class="fa fa-linkedin" aria-hidden="true"></i>', 
+										[
+			                                'rel'	=> 'nofollow',
+			                                'class'	=> 'btn btn-default',
+			                                'title'	=> 'Войти через LinkedIn'
+										]
+									);
+									echo '&nbsp;';
+									echo HTML::anchor('user/authorize/yandex', 
+	                                	'<i class="fa fa-yc" aria-hidden="true"></i>', 
+										[
+			                                'rel'	=> 'nofollow',
+			                                'class'	=> 'btn btn-default',
+			                                'title'	=> 'Войти через Yandex'
+										]
+									);
+									echo '&nbsp;';
+									echo HTML::anchor('user/authorize/google', 
+	                                	'<i class="fa fa-google" aria-hidden="true"></i>', 
+										[
+			                                'rel'	=> 'nofollow',
+			                                'class'	=> 'btn btn-default',
+			                                'title'	=> 'Войти через Google'
+										]
+									);
+									echo '&nbsp;';
+									echo HTML::anchor('user/authorize/dropbox', 
+	                                	'<i class="fa fa-dropbox" aria-hidden="true"></i>', 
+										[
+			                                'rel'	=> 'nofollow',
+			                                'class'	=> 'btn btn-default',
+			                                'title'	=> 'Войти через DropBox'
+										]
+									);
+									echo '&nbsp;';
+                                ?>
                             </div>
                         </div>
 

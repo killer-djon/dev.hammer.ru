@@ -67,7 +67,8 @@ abstract class Kohana_Provider extends AbstractProvider
      */
     public function getAccessTokenUrl(array $params)
     {
-        return parent::getAccessTokenUrl($params);
+        $url = parent::getAccessTokenUrl($params);
+        return $url;
     }
 
 
@@ -125,6 +126,7 @@ abstract class Kohana_Provider extends AbstractProvider
     public function getResourceOwner(AccessToken $token)
     {
         $resourceOwner = parent::getResourceOwner($token);
+        
         $this->setStorageKey(self::AUTH_DATA, $resourceOwner);
 
         return $this;

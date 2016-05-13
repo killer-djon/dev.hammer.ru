@@ -1,3 +1,6 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 
-class Account_Vk extends Kohana_Account_Vk{}
+class Provider_Dropbox extends Kohana_Provider_Dropbox
+{
+
+}

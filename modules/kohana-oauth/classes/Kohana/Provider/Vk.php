@@ -14,7 +14,7 @@ class Kohana_Provider_Vk extends Provider
      *
      * @const string
      */
-    const BASE_URL = 'https://oauth.vk.com';
+    const BASE_URL = 'http://oauth.vk.com';
 
     /**
      * Version api
@@ -168,8 +168,8 @@ class Kohana_Provider_Vk extends Provider
     {
         $fields = $this->getFields();
 
-        $url = static::BASE_TOKEN_URL.$this->_urlResourceOwnerDetails . http_build_query([
-            'user_id'   => $token->user_id,
+        $url = $this->_urlResourceOwnerDetails . http_build_query([
+            'uids'   => $token->user_id,
             'fields' => implode(',', $fields),
             'access_token'    => $token->getToken()
         ]);
@@ -193,6 +193,18 @@ class Kohana_Provider_Vk extends Provider
                 $error = $error['error_msg'];
             }
             throw new IdentityProviderException($error, $code, $data);
+        }
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function createResourceOwner(array $response, AccessToken $token)
+    {
+        if( isset($response['response']) && count($response['response']) )
+        {
+	        return $response['response'];
+            //Account_Vk::getInstance( array_values($response['response']), $token );
         }
     }
     

@@ -1,3 +1,3 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 
-class Account_Vk extends Kohana_Account_Vk{}
+class Account_Yandex extends Kohana_Account_Yandex{}

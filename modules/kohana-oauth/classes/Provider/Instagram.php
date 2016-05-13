@@ -1,6 +1,6 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 
-class Kohana_Account_Vk extends Account
+class Provider_Instagram extends Kohana_Provider_Instagram
 {
 
 }

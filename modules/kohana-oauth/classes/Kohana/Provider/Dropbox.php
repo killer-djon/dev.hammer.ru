@@ -2,22 +2,17 @@
 
 use League\OAuth2\Client\Provider\AbstractProvider;
 use League\OAuth2\Client\Token\AccessToken;
-use League\OAuth2\Client\Provider\Exception\FacebookProviderException;
 use League\OAuth2\Client\Provider\Exception\IdentityProviderException;
 use Psr\Http\Message\ResponseInterface;
 use League\OAuth2\Client\Tool\BearerAuthorizationTrait;
 
-class Kohana_Provider_Google extends Provider
+class Kohana_Provider_Dropbox extends Provider
 {
-	use BearerAuthorizationTrait;
-	
-	const ACCESS_TOKEN_RESOURCE_OWNER_ID = 'id';
-	
 	/**
-     * @var string If set, this will be sent to google as the "access_type" parameter.
-     * @link https://developers.google.com/accounts/docs/OAuth2WebServer#offline
+     * @var string Key used in the access token response to identify the resource owner.
      */
-    protected $accessType;
+    const ACCESS_TOKEN_RESOURCE_OWNER_ID = 'uid';
+	
 
 	
 	/**
@@ -25,7 +20,7 @@ class Kohana_Provider_Google extends Provider
      *
      * @const string
      */
-    const BASE_URL = 'https://accounts.google.com';
+    const BASE_URL = 'https://www.dropbox.com/1';
 
     /**
      * Version api
@@ -39,44 +34,28 @@ class Kohana_Provider_Google extends Provider
      *
      * @const string
      */
-    const BASE_TOKEN_URL = 'https://www.googleapis.com';
-    
-    /**
-	 * @var string	
-	 */
-	protected 
-		
-		$hd = '',
-		
-		$login_hint = '',
-		
-		$prompt = '',
-		
-		$display = '',
-		
-		$access_type = '';
-	
-	
+    const BASE_TOKEN_URL = 'https://www.dropbox.com/1';
+
     /**
      * Uri to authorize user
      *
      * @var string
      */
-    protected $_urlAuthorize = '/o/oauth2/v2/auth';
+    protected $_urlAuthorize = '/oauth2/authorize';
 
     /**
      * Access token basre url
      *
      * @var string
      */
-    protected $_urlAccessToken = '/oauth2/v4/token';
+    protected $_urlAccessToken = '/oauth2/token';
 
     /**
      * Personal info uri
      *
      * @var string
      */
-    protected $_urlResourceOwnerDetails = 'https://www.googleapis.com/plus/v1/people/me?';
+    protected $_urlResourceOwnerDetails = 'https://api.dropbox.com/1/account/info?';
 
     /**
      * Auth code string
@@ -92,7 +71,7 @@ class Kohana_Provider_Google extends Provider
      *
      * @var string
      */
-    protected $_provider = 'google';
+    protected $_provider = 'dropbox';
 
     /**
      * Redirect uri to get the access_token
@@ -114,13 +93,7 @@ class Kohana_Provider_Google extends Provider
     //protected $_redirectUri;
 
 
-    protected $_fields = [
-        'id',
-        'name(familyName,givenName)',
-        'displayName',
-        'emails',
-        'image'
-    ];
+    protected $_fields = [];
 
     /*
     'clientId'                => 'demoapp',    // The client ID assigned to you by the provider
@@ -137,10 +110,8 @@ class Kohana_Provider_Google extends Provider
      */
     protected function getAuthorizationParameters(array $options)
     {	     
-        $params = array_merge(
-            parent::getAuthorizationParameters($options),
-            $this->_config
-        );
+        $params = parent::getAuthorizationParameters($options);
+        
         if( isset($params['approval_prompt']) )
         {
 	        unset($params['approval_prompt']);
@@ -175,19 +146,9 @@ class Kohana_Provider_Google extends Provider
      */
     public function getDefaultScopes()
     {
-        return [
-        	'openid',
-        	'email'
-        ];
+        return [];
     }
-    
-    /**
-     * @inheritdoc
-     */
-    protected function getScopeSeparator()
-    {
-        return ' ';
-    }
+
 
     /**
      * @inheritdoc
@@ -195,10 +156,7 @@ class Kohana_Provider_Google extends Provider
     public function getResourceOwnerDetailsUrl(AccessToken $token)
     {
         $fields = $this->getFields();
-        return $this->_urlResourceOwnerDetails . http_build_query([
-            'fields' => implode(",", $fields),
-            'alt'    => 'json',
-        ]);
+        return $this->_urlResourceOwnerDetails . 'access_token='.$token;
     }
     
     
@@ -207,14 +165,12 @@ class Kohana_Provider_Google extends Provider
      */
     protected function checkResponse(ResponseInterface $response, $data)
     {
-        if (!empty($data['error'])) {
-            $code  = 0;
-            $error = $data['error'];
-            if (is_array($error)) {
-                $code  = $error['code'];
-                $error = $error['message'];
-            }
-            throw new IdentityProviderException($error, $code, $data);
+        if (isset($data['error'])) {
+            throw new IdentityProviderException(
+                $data['error'] ?: $response->getReasonPhrase(),
+                $response->getStatusCode(),
+                $response
+            );
         }
     }
 
@@ -224,7 +180,7 @@ class Kohana_Provider_Google extends Provider
     public function createResourceOwner(array $response, AccessToken $token)
     {
 	    return $response;
-        //Account_Google::getInstance( $response, $token );
+        //Account_Dropbox::getInstance( $response, $token );
     }
 
 }
