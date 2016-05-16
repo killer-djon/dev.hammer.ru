@@ -47,20 +47,19 @@
                             <input type="hidden" name="price" value="<?= $product['price']; ?>">
 
                             <div class="input-group count-detail">
-																		<span
-                                                                            class="input-group-addon cart-qty cart-minus">
-																			<i class="fa fa-minus"></i>
-																		</span>
-                                <input name="qty" type="text" class="form-control text-right btn-number"
-                                       value="<?= $product['qty']; ?>">
-																		<span
-                                                                            class="input-group-addon cart-qty cart-plus">
-																			<i class="fa fa-plus"></i>
-																		</span>
-																		<span
-                                                                            class="input-group-addon cart-qty cart-refresh">
-																			<i class="fa fa-refresh"></i>
-																		</span>
+								<span
+                                    class="input-group-addon cart-qty cart-minus">
+									<i class="fa fa-minus"></i>
+								</span>
+								<input name="qty" type="text" class="form-control text-right btn-number" value="<?= $product['qty']; ?>">
+								<span
+                                    class="input-group-addon cart-qty cart-plus">
+									<i class="fa fa-plus"></i>
+								</span>
+								<span
+                                    class="input-group-addon cart-qty cart-refresh">
+									<i class="fa fa-refresh"></i>
+								</span>
                             </div>
                         </div>
                     </td>

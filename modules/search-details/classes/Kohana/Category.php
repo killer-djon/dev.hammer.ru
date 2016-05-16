@@ -20,13 +20,14 @@ class Kohana_Category extends Kohana_Search
 	
 	
 	
-	public static function getInstance()
+	public static function getInstance(Cache $cache = NULL)
 	{
 		if( is_null( self::$_instance ) )
 		{
 			self::$_instance = new self();
 		}
 		
+		self::$_instance->attachCache($cache);
 		return self::$_instance;
 	}
 	

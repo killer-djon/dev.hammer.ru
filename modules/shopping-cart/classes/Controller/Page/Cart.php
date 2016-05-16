@@ -113,7 +113,7 @@ class Controller_Page_Cart extends Cart
             '/cart' => 'Корзина заказов',
         ]);
         
-		$this->template->title = 'Ваша корзина заказов в Интернет-магазине деталей Hammerschmidt';
+		$this->template->title = 'Корзина заказов в Интернет-магазине деталей Hammerschmidt';
 		$this->template->content->cart_view->title = 'Корзина заказов';
 		
 
@@ -126,7 +126,7 @@ class Controller_Page_Cart extends Cart
 		}else
 		{
 			$this->template->content->cart_view->cart = [];
-			$this->template->content->cart_view->empty_cart = 'Ваша корзина деталей пустая, '.HTML::anchor('/categories', 'вернитесь к покупкам');
+			$this->template->content->cart_view->empty_cart = 'Необходимо выбрать и добавить детали в корзину, а затем перейти в корзину заказов и завершить процесс покупки. '.HTML::anchor('/categories', 'вернитесь к покупкам');
 		}
 	}
 }

@@ -3,7 +3,24 @@ jQuery(document).ready(function() {
   //WOW js code
     new WOW().init();
     
-    
+    jQuery('[data-load="ajax"]').each(function(item){
+	    var _href = jQuery(this).attr('data-href');
+	    var _block = jQuery(this);
+	    jQuery.ajax({
+		    url: _href,
+		    type: 'GET',
+		    data: {
+			    view: 'short_news'
+		    },
+		    success: function(result, success)
+		    {
+				if( success )    
+				{
+					_block.html(result);
+				}
+		    }
+	    });
+    });
     
     
     jQuery("#search-view").keyup(function(){

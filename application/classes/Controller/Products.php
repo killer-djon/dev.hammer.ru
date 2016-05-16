@@ -182,22 +182,23 @@ class Controller_Products extends Controller_Main
 			{
 				$productsArr = $product->getOffsets();
 				$offsets = Arr::build_tree($productsArr, 'groupName');
-				
-				//$this->template->title = 'Список возможных замен для детали: '.$article;
-				//$this->template->content = View::factory('products/product');
-				
-				$this->template->content->category_view->title = 'Список возможных замен для детали: '.$article;
-				$this->template->content->category_view->current = $product->getCurrent();
-				$this->template->content->category_view->parts = $offsets;
+			
+				$this->template->content = [
+					'category_view'	=> [
+						'title'	=> 'Список возможных замен для детали: '.$article,
+						'current'	=> $product->getCurrent(),
+						'parts'	=> $offsets
+					]
+				];
 			}else
 			{
-				//$this->template->title = 'Список возможных замен для детали: '.$article;
-				//$this->template->content = View::factory('products/product');
-				
-				$this->template->content->category_view->title = 'Список возможных замен для детали: '.$article;
-				$this->template->content->category_view->current = $product->getCurrent();
-				$this->template->content->category_view->empty_parts = 'По вашему запросу ничего не найдено, попробуйте ввести еще раз';
-				
+				$this->template->content = [
+					'category_view'	=> [
+						'title'	=> 'Список возможных замен для детали: '.$article,
+						'current'	=> $product->getCurrent(),
+						'empty_parts'	=> 'По вашему запросу ничего не найдено, попробуйте ввести еще раз'
+					]
+				];
 			}
 		}else
 		{

@@ -57,32 +57,77 @@ class Controller_Statics extends Controller_Main
 		
 		$page = $modelPage
 			->where('pagealias', '=', $route)
+			->sort('datecreate', -1)
 			->find();
 
 		$this->template->content = View::factory('pages/content');
 		$this->template->content->breadcrumbs = View::factory('templates/breadcrumbs');
+		
 		
 		if( $page->loaded() )
 		{
 			$singlePage = $page->getSingleDocument();
 			$modelPage->unload();
 			
+			$configPagination = Kohana::$config->load('pagination')->get($singlePage['pagealias']);	
+			$pageKey = $this->request->query($configPagination['current_page']['key']);
+			
 			Breadcrumbs::set([
 	            URL::base() => 'Главная',
 	            '/'.$singlePage['pagealias'] => 'Автоновости',
 	        ]);
-			
-			$this->template->content->category_view = View::factory($singlePage['template']);
-			
-			$singlePage['children'] = $modelPage
-				->where('parentId', '=', $singlePage['_id']['$id'])
-				->find_all();
+	        
+	        $this->template->content->category_view = View::factory($singlePage['template']);
+	        
+	        if( !empty($configPagination) )
+	        {
+		        $countPages = $modelPage
+					->where('parentId', '=', $singlePage['_id']['$id'])
+					->count();
+					
+		        $modelPage
+					->where('parentId', '=', $singlePage['_id']['$id'])
+					->sort('datecreate', -1);
+				
+				$page  = !empty($pageKey) ? (int) $pageKey : 1;
+				$limit = $configPagination['items_per_page'];
+				$skip  = ($page - 1) * $limit;
+				
+				$modelPage->limit($limit);
+				$modelPage->skip($skip);
+				
+				$singlePage['children'] = $modelPage->find_all();
+				
+				if( !empty($singlePage['children']) && count($singlePage['children']) )
+				{
+					$pagination = Pagination::factory([
+						'total_items'	=> $countPages,
+						'view'	=> implode('/', [
+							'pagination',
+							$singlePage['pagealias']
+						])
+					])->render();
+				
+					$this->template->content->category_view->pagination = $pagination;
+				}
+				
+	        }else
+	        {
+		        $singlePage['children'] = $modelPage
+					->where('parentId', '=', $singlePage['_id']['$id'])
+					->sort('datecreate', -1)
+					->find_all();
+	        }
+	        
 			
 			$this->template->title = $singlePage['metatitle'];
 			$this->template->meta_keywords = $singlePage['metakeywords'];
 			$this->template->meta_description = $singlePage['metadescription'];
 			
-			$this->template->content->category_view->page = $singlePage;			
+			$this->template->content->category_view->page = $singlePage;	
+			
+			
+			
 			
 			return $this->response
 				->status(200)

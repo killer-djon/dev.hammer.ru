@@ -20,11 +20,11 @@
 									<!-- shopping cart list -->
 									<?=View::factory('page/cartlist', ['cart'   => $cart])->render();?>
 									
-								    <!-- checkout cart list -->
-                                    <?=View::factory('page/checkout')->render();?>
-                                    
                                     <!-- shipping methods list -->
                                     <?=View::factory('page/shipping')->render();?>
+                                    
+                                    <!-- checkout cart list -->
+                                    <?=View::factory('page/checkout')->render();?>
 
                                 </div>
 							<?else:?>	

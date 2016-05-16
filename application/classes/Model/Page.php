@@ -30,4 +30,14 @@ class Model_Page extends MongoModel
 		"mainpage" => 'bool',
 		"description_img" => 'string'
 	);
+	
+	public function filters()
+	{
+	    return [
+		  	'datecreate' => [
+			  	//['Format::date', [':value', 'Y-m-d H:i:s']]
+		  	]
+	    ];
+        
+	}
 }

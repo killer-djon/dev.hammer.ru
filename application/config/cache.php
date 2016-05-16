@@ -5,6 +5,7 @@ return [
         'default_expire'        => 3600,
         'cache_prefix'          => 'cache',
         'tag_prefix'            => '_tag',
+        'cache_prefix'			=> 'hammer_',
         'servers' => [
             'local' => [
                 //'host'          => 'unix:///var/run/redis/redis.sock',

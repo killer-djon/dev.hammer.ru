@@ -134,6 +134,75 @@
 
                 <!-- without auth panel body -->
                 <div id="userdata" role="tabpanel" class="tab-pane fade in">
+	                <form data-toggle="validator" role="form" class="form">
+		                <div class="row row-centered">
+			                <!-- first parts to user data form -->
+			                <div class="col-md-5 col-sm-6 col-xs-12 col-centered">
+				                <!-- User name full|mixed -->
+				                <div class="form-group">
+                                    <label for="username">Представьтесь:&nbsp;&nbsp;<span class="text-danger"><strong>*</strong></span></label>
+                                    <div class="input-group">
+										<span class="input-group-addon">
+											<i class="fa fa-user"></i>
+										</span>
+										<input type="text" class="form-control" id="username" name="username" required>
+    								</div>                                    
+                                    <div class="help-block with-errors"></div>
+                                </div>
+                                <!-- User name full|mixed -->
+                                
+                                <!-- Correct user Email -->
+                                <div class="form-group">
+                                    <label for="useremail">Контактный Email:&nbsp;&nbsp;<span class="text-danger"><strong>*</strong></span></label>
+                                    <div class="input-group">
+										<span class="input-group-addon">@</span>
+										<input placeholder="example@domain.ltd" type="email" class="form-control" id="useremail" name="useremail" data-error="Не заполнено поле или некорректный Email" required>
+    								</div>                                    
+                                    <div class="help-block with-errors"></div>
+                                </div>
+                                <!-- Correct user Email -->
+                                
+                                <!-- Phone number -->
+                                <div class="form-group">
+                                    <label for="userphone">Телефон для связи:</label>
+                                    <div class="input-group">
+										<span class="input-group-addon">
+											<i class="fa fa-phone"></i>
+										</span>
+										<input type="tel" class="form-control" id="userphone" name="userphone" placeholder="79031234567">
+    								</div>  
+    								<div class="help-block with-errors"><em>Формат: 79031234567</em></div>                                  
+                                </div>
+                                <!-- Phone number -->
+				                
+			                </div>
+			                <!-- first parts to user data form -->
+			                
+			                <!-- second parts to user data form -->
+			                <div class="col-md-5 col-sm-6 col-xs-12 col-centered">
+				                <!-- Phone number -->
+	                            <div class="form-group">
+	                                <label for="usermessage">Комментарий к заказу:</label>
+	                                <div class="input-group">
+										<span class="input-group-addon">
+											<i class="fa fa-comment "></i>
+										</span>
+										<textarea class="form-control" rows="4" id="usermessage" name="usermessage" placeholder="Вы можете указать дополнительные пожелания к Вашему заказу, и мы обязательно их учтем" style="resize: none;"></textarea>
+									</div>  
+	                            </div>
+	                            <!-- Phone number -->
+	                            
+	                            <!-- Country -->
+	                            <div class="form-group">
+	                                <label for="usercity">Город:</label>
+	                                <input class="form-control" type="text" name="usercity" id="usercity" placeholder="Москва">  
+	                                <div class="help-block with-errors"><em>С какого Вы города?</em></div>  
+	                            </div>
+	                            <!-- Country -->
+			                </div>
+			                <!-- second parts to user data form -->
+						</div>
+	                </form>
                 </div>
                 <!-- without auth panel body -->
             </div>

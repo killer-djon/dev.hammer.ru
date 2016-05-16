@@ -33,17 +33,18 @@ Breadcrumbs::set([
 								        		<div class="panel-heading">
 									        		<h4><?=$item['pagetitle']?></h4>
 									        		<span class="label label-primary pull-right text-center news-date">
-										        		<?if(is_object($item['datecreate'])):?>
-									        				
+										        		<?if(is_array($item['datecreate'])):?>
+									        				<? $timestamp = strtotime(date('d.m.Y', $item['datecreate']['sec'])); ?>
 									        			<?else:?>
 									        				<?$timestamp = strtotime($item['datecreate']);?>
-									        				<span class="day row">
-									        				<?=date('d.m', $timestamp)?>
-									        				</span>
-									        				<span class="year row">
-									        				<?=date('Y', $timestamp)?>
-									        				</span>
 									        			<?endif;?>
+									        			
+									        			<span class="day row">
+								        					<?=date('d.m', $timestamp)?>
+								        				</span>
+								        				<span class="year row">
+								        					<?=date('Y', $timestamp)?>
+								        				</span>
 									        		</span>
 								        		</div>
 								        		<div class="panel-body">
@@ -70,6 +71,9 @@ Breadcrumbs::set([
 						        	<? endforeach; ?>
 					        	</div>
 				        	</div>
+				        	
+				        	<?=$pagination;?>
+				        	
 				        <? endif; ?>
 				    </div>
 				</div>

@@ -13,3 +13,6 @@
 [submodule "modules/kohana-oauth"]
 	path = modules/kohana-oauth
 	url = https://github.com/Lusitanian/PHPoAuthLib.git
+[submodule "modules/kohana-pagination"]
+	path = modules/kohana-pagination
+	url = https://github.com/Aculeo/kohana-pagination.git

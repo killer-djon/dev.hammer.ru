@@ -90,9 +90,7 @@ class Controller_Categories extends Controller_Main
 	public function renderParts($categoryName, $partsName)
 	{
 		$this->setScript('assets/js/second.js', 'footer');
-		$product = Product::getInstance();
-		
-		//$view = View::factory('categories/parts');
+		$product = Product::getInstance($this->_cache);
 		
 		$model = MongoModel::factory('SearchIndex');
 		$model->selectDB();
@@ -111,7 +109,7 @@ class Controller_Categories extends Controller_Main
 		{
 			$product->getProducts($categoryName, $partsName);
 		}
-
+		
         $current = $product->getCurrent();
         
 		$this->template->title = "";
@@ -133,21 +131,14 @@ class Controller_Categories extends Controller_Main
 			$productsArr = $product->getOffsets();
 			$offsets = Arr::build_tree($productsArr, 'groupName');
 
-			//$this->template->title = 'Детали двигателя';
-
-
-			//$this->template->content = View::factory('categories/parts');
-
             $this->template->content->category_view->current = $current;
             $this->template->content->category_view->parts = $offsets;
             $this->template->content->category_view->cross_products = $product->getCrossProductsData();
 		}else
 		{
             $this->template->content->category_view->title = 'Детали двигателя';
-			//$this->template->content = View::factory('categories/parts');
-
             $this->template->content->category_view->current = $current;
-            $this->template->content->category_view->parts = 'По вашему запросу ничего не найдено, попробуйте ввести еще раз';
+            $this->template->content->category_view->empty_parts = 'По вашему запросу ничего не найдено, попробуйте ввести еще раз';
 		}
 	}
 

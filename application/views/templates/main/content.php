@@ -216,16 +216,16 @@
 					</div>
 					<div class="col-centered col-xs-12 col-sm-12 col-md-5 wow fadeInRight animated">
 						<h3>Способы доставки деталей</h3><img src="/assets/img/daag.png" alt="">
-						<p>
+				<p>
 Самовывоз своего заказа можно осуществить в любой рабочий день, предъявив документ об оплате. Наша компания работает слаженно, как единый механизм, поэтому, подъезжая к нашему складу, будьте уверены: ваш заказ уже укомплектован и дожидается вас. Что же касается доставки автозапчастей, то этой услуге вы можете полностью доверять. Работа наших курьеров строиться на основе четырех столпах:.</p>
 
-                            <ul class="fa-ul no-margin">
-                                <li><i class="fa-li fa fa-cc-mastercard"></i>Скорость.</li>
-                                <li><i class="fa-li fa fa-cc-mastercard"></i>Точность.</li>
-                                <li><i class="fa-li fa fa-cc-mastercard"></i>Ответственность.</li>
-                                <li><i class="fa-li fa fa-cc-mastercard"></i>Аккуратность.</li>
-                            </ul>
-						</p>
+                        <ul class="fa-ul no-margin">
+                            <li><i class="fa-li fa fa-cc-mastercard"></i>Скорость.</li>
+                            <li><i class="fa-li fa fa-cc-mastercard"></i>Точность.</li>
+                            <li><i class="fa-li fa fa-cc-mastercard"></i>Ответственность.</li>
+                            <li><i class="fa-li fa fa-cc-mastercard"></i>Аккуратность.</li>
+                        </ul>
+						
 					</div>
 					
 					<div class="col-centered col-md-10 col-sm-12 col-xs-12 fadeInUp animated">
@@ -237,89 +237,8 @@
 		</section><!-- end of details section -->
 
 		<!-- features details section -->
-		<section class="feature-detail well hidden-xs" id="news">
-            <div class="container-fluid">
-
-                <div class="pricing-heading text-center">
-                    <h3>Свежие новости мира авто</h3>
-                </div>
-
-                <div class="row row-centered">
-                    <div class="col-centered col-xs-12 col-md-3 col-sm-4 wow zoomIn animated animated">
-                        <div class="single-table panel">
-                            <div class="table-heading">
-                                <h4>Компания Мерседес проведет ренейминг своих моделей</h4>
-                            </div>
-                            <div class="table-price">
-                                <p>
-                                    <img class="img-responsive" src="/upload_images/tooyota-auris-2015.jpg" alt="Компания Мерседес проведет ренейминг своих моделей">
-                                </p>
-                            </div>
-                            <div class="table-description text-muted">
-                                <p>
-                                    На Парижском автосалоне Сузуки показала кроссовер Витара – новинку в классе субкомпактных кроссоверов. Автомобиль представлен в переднемприводном  и заднеприводном варианте, с АКП и МКП на выбор, мотор на 1.6л на 120л.с.
-                                </p>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12 text-center btn-more">
-                                    <a href="#" class="btn btn-info read-more" role="button">Подробнее...</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-centered col-xs-12 col-md-3 col-sm-4 wow zoomIn animated animated">
-                        <div class="single-table  panel">
-                            <div class="table-heading">
-                                <h4>Компания Мерседес проведет ренейминг своих моделей</h4>
-                            </div>
-                            <div class="table-price">
-                                <p>
-                                    <img class="img-responsive" src="/upload_images/tooyota-auris-2015.jpg" alt="Компания Мерседес проведет ренейминг своих моделей">
-                                </p>
-                            </div>
-                            <div class="table-description text-muted">
-                                <p>
-                                    На Парижском автосалоне Сузуки показала кроссовер Витара – новинку в классе субкомпактных кроссоверов. Автомобиль представлен в переднемприводном  и заднеприводном варианте, с АКП и МКП на выбор, мотор на 1.6л на 120л.с.
-                                </p>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12 text-center btn-more">
-                                    <a href="#" class="btn btn-info read-more" role="button">Подробнее...</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-centered col-xs-12 col-md-3 col-sm-4 wow zoomIn animated animated">
-                        <div class="single-table panel">
-                            <div class="table-heading">
-                                <h4>Компания Мерседес проведет ренейминг своих моделей</h4>
-                            </div>
-                            <div class="table-price">
-                                <p>
-                                    <img class="img-responsive" src="/upload_images/tooyota-auris-2015.jpg" alt="Компания Мерседес проведет ренейминг своих моделей">
-                                </p>
-                            </div>
-                            <div class="table-description text-muted">
-                                <p>
-                                    На Парижском автосалоне Сузуки показала кроссовер Витара – новинку в классе субкомпактных кроссоверов. Автомобиль представлен в переднемприводном  и заднеприводном варианте, с АКП и МКП на выбор, мотор на 1.6л на 120л.с.
-                                </p>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12 text-center btn-more">
-                                    <a href="#" class="btn btn-info read-more" role="button">Подробнее...</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="text-center col-md-12">
-                    <a href="/news" class="text-info" role="button">Все новости</a>
-                </div>
-
-            </div>
-            <hr>
-		</section><!-- end of features-detail section -->
+		<?=View::factory('pages/short_news_list')->render();?>
+		<!-- end of features-detail section -->
 
 		
 
