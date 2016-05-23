@@ -1,0 +1,12 @@
+app_pages_list:
+    pattern:  /pages
+    defaults: { _controller: AppBundle:Pages:list, _format: ~ }
+    requirements:
+        _method: GET
+        
+app_pages_get:
+    pattern:  /pages/{id}
+    defaults: { _controller: AppBundle:Pages:get, _format: ~ }
+    requirements:
+        _method: GET
+        id: '\w+'
