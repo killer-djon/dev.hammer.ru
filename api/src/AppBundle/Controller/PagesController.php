@@ -15,14 +15,22 @@ class PagesController extends Controller
      */
     public function listAction()
     {
-        return [
-	        'success'	=> true,
-	        'items'	=> [
-		        0	=> [
-			        'name'	=> 'vasya'
-		        ]
-	        ]
-        ];
+    	$repository = $this->get('doctrine_mongodb')
+		    ->getManager()
+		    ->getRepository('StorageBundle:Pages');
+		
+		$pages = $repository->findAll();
+		
+		if (!$pages) 
+		{
+	        throw $this->createNotFoundException('No pages found');
+	    }
+	    
+		return [
+			'success'	=> true,
+			'items'	=> $pages,
+			'count'	=> count($pages)
+		];
     }
     
     
@@ -31,14 +39,21 @@ class PagesController extends Controller
      */
     public function getAction($id)
     {
-        return [
-	        'success'	=> true,
-	        'items'	=> [
-		        0	=> [
-			        'name'	=> 'vasya',
-			        'id'	=> $id
-		        ]
-	        ]
-        ];
+        $repository = $this->get('doctrine_mongodb')
+		    ->getManager()
+		    ->getRepository('StorageBundle:Pages');
+		    
+		
+		$page = $repository->find($id);    
+		
+		if( !$page )
+		{
+			throw $this->createNotFoundException('Page not found with id: '.$id);
+		}
+		
+		return [
+			'success'	=> true,
+			'items'	=> $page,
+		];
     }
 }

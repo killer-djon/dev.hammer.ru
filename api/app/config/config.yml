@@ -37,9 +37,10 @@ framework:
 twig:
     debug:            "%kernel.debug%"
     strict_variables: "%kernel.debug%"
-    exception_controller:  AppBundle:MainException:showException
+    # exception_controller:  AppBundle:MainException:showException
 
 fos_rest:
+    allowed_methods_listener: true
     routing_loader:
         default_format: json
     param_fetcher_listener: true
@@ -80,6 +81,7 @@ doctrine_mongodb:
                 db:                   dev_hammer_v3
                 password:             nyFFqv2015
                 username:             hammer
+    default_database: dev_hammer_v3
     document_managers:
         default:
             auto_mapping: true

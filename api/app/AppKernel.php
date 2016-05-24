@@ -21,6 +21,7 @@ class AppKernel extends Kernel
             new JMS\SerializerBundle\JMSSerializerBundle(), // Serializer bundle for FOSRest
             new Doctrine\Bundle\MongoDBBundle\DoctrineMongoDBBundle(), // MongoDB bundle
             new Nelmio\CorsBundle\NelmioCorsBundle(),
+            new StorageBundle\StorageBundle(),
         ];
         
         

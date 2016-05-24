@@ -4,9 +4,21 @@ parameters:
 #    parameter_name: value
 
 services:
-    app.exception_controller:
-        class: AppBundle\Controller\MainExceptionController
-        arguments: ['@twig', '%kernel.debug%']
-#    service_name:
-#        class: AppBundle\Directory\ClassName
-#        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
+    #app.exception_controller:
+    #    class: AppBundle\Controller\MainExceptionController
+    #    arguments: ['@twig', '%kernel.debug%']
+    mongo_doctrine_listener:
+        class: AppBundle\Listener\MongoDoctrinePageListener
+        tags: 
+            -  { name: doctrine_mongodb.odm.event_listener, event: postLoad }
+            -  { name: doctrine_mongodb.odm.event_listener, event: preLoad }
+            
+    # search engines        
+    # like category and details
+    app.category_search:
+        class: AppBundle\Services\Search\CategorySearch
+    
+    # this is manager search service    
+    app.search_manager:
+        class: AppBundle\Services\Search\SearchManager
+        arguments: ["@app.category_search", "@request_stack"]
