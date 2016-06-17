@@ -126,9 +126,15 @@ class Controller_Page_Cart extends Cart
 
 		if( !empty($cartContent) && isset($cartContent['total']) && $cartContent['total']['count'] > 0 )
 		{
-			$userData = $cartModel->where('_id', '=', $cartContent['cartId'])->find();
+			if( isset( $cartContent['cartId'] ) )
+			{
+				$userData = $cartModel->where('_id', '=', $cartContent['cartId'])->find();
+			}
+
 			$this->template->content->cart_view->cart = $cartContent;
-			$this->template->content->cart_view->userdata = $userData->user_data;
+			$this->template->content->cart_view->userdata = isset($userData) ? $userData->user_data : [
+				'shipping_method'	=> 'Самовывоз'
+			];
 		}else
 		{
 			$this->template->content->cart_view->cart = [];
@@ -217,7 +223,7 @@ class Controller_Page_Cart extends Cart
 		$cartModel = MongoModel::factory('CartUser');
 		$cartModel->selectDB();
 		
-		$number = $cartModel->where('_id', '=', $cartContent['cartId'])->count();
+		$number = $cartModel->count();
 		$userData = $cartModel->where('_id', '=', $cartContent['cartId'])->find();
 		
 		$mailConfig = Kohana::$config->load('cart')->as_array();

@@ -229,9 +229,14 @@ jQuery(document).ready(function(){
     function activeShippingMethodBlock(shippingMethod)
     {
 	    var activeOption = jQuery('select[name="shipping-method"] option[value="'+shippingMethod+'"]');
-	    var optionId = activeOption.attr('data-target').substr(1);
-	    jQuery('select[name="shipping-method"]').closest('#accordion-shipping').find('.panel-collapse').removeClass('in');
-	    jQuery("#"+optionId).addClass('in');
+		console.log(activeOption)
+		if( activeOption != undefined && activeOption.length > 0 )
+		{
+			var optionId = activeOption.attr('data-target').substr(1);
+			jQuery('select[name="shipping-method"]').closest('#accordion-shipping').find('.panel-collapse').removeClass('in');
+			jQuery("#"+optionId).addClass('in');
+		}
+
     }
     
     jQuery("#auth-form, #personal-data").submit(function(){

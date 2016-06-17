@@ -52,7 +52,7 @@ abstract class Kohana_IOCart
 	{
 		$storage = $this->getCartStorage();
 
-		return $storage['cartId'];
+		return ( isset($storage['cartId']) ? $storage['cartId'] : NULL );
 
 	}
 	
