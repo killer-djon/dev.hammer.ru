@@ -188,10 +188,11 @@ class Kohana_Provider_Yandex extends Provider
     /**
      * @inheritdoc
      */
-    public function createResourceOwner(array $response, AccessToken $token)
+    protected function createResourceOwner(array $response, AccessToken $token)
     {
-	    return $response;
-        //Account_Linkedin::getInstance( $response, $token );
+	    $account = Account_Yandex::getInstance($response, $token);
+	    
+	    $this->auth_data = $account->getAuthData();
     }
 
 }

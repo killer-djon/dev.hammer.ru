@@ -178,7 +178,6 @@ class Kohana_Provider_Vk extends Provider
     }
     
     
-    
     /**
      * @inheritdoc
      */
@@ -195,18 +194,15 @@ class Kohana_Provider_Vk extends Provider
             throw new IdentityProviderException($error, $code, $data);
         }
     }
-
+    
     /**
      * @inheritdoc
      */
-    public function createResourceOwner(array $response, AccessToken $token)
+    protected function createResourceOwner(array $response, AccessToken $token)
     {
-        if( isset($response['response']) && count($response['response']) )
-        {
-	        return $response['response'];
-            //Account_Vk::getInstance( array_values($response['response']), $token );
-        }
+	    $account = Account_Vk::getInstance($response, $token);
+	    
+	    $this->auth_data = $account->getAuthData();
     }
-    
 
 }

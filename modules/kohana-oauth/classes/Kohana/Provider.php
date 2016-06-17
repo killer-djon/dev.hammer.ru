@@ -43,7 +43,19 @@ abstract class Kohana_Provider extends AbstractProvider
      */
     protected $_storage;
 
+	/**
+     * Key storage
+     *
+     * @var string $_storage_key
+     */
     private $_storage_key = 'hammer_auth';
+    
+    /**
+     * Auth data after authorization
+     *
+     * @var array $auth_data
+     */
+    protected $auth_data = [];
 
 
     public function getProvider()
@@ -92,6 +104,11 @@ abstract class Kohana_Provider extends AbstractProvider
     public function getStorage()
     {
         return $this->_storage;
+    }
+    
+    public function clearStorage()
+    {
+	    Session::instance()->destroy();
     }
 
     public function removeStorageKey($key)
@@ -177,9 +194,9 @@ abstract class Kohana_Provider extends AbstractProvider
         }
     }
     
-    public function createResourceOwner(array $response, AccessToken $token)
+    public function getAuthData()
     {
-	    return $response;
+	    return Session::instance()->get('auth');
     }
     
     /**

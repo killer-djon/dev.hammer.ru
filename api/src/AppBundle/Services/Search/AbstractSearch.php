@@ -56,7 +56,6 @@ abstract class AbstractSearch implements SearchInterface
 	 */
 	private function getRemotePage( $uri )
 	{
-		
 		$client = new Client(['base_uri' => static::REMOTE_URI]);
 		$request = $client->request('GET', $uri, [
 			'curl' => [

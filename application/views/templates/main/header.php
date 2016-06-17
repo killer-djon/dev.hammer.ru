@@ -30,7 +30,7 @@
 									    
 								    </ul>
 								    
-								    
+								    <!--
 								    <ul class="navbar-toggle toggle-menu">
 						                <li class="dropdown">
 						                    <a rel="nofollow" class="dropdown-toggle" data-toggle="dropdown" href="#">
@@ -46,17 +46,17 @@
 						                    </ul>
 						                </li>
 						            </ul>
-						            
+						            -->
 						            <!-- user toggle menu -->
 						            
 						            <!-- content toggle menu -->
 							      	<ul class="navbar-toggle toggle-menu">
 						                <li class="dropdown">
-						                    <a rel="nofollow" class="dropdown-toggle" data-toggle="dropdown" href="#">
+						                    <a rel="nofollow" class="dropdown-toggle no-anchor" data-toggle="dropdown" href="#">
 						                        <span class="fa fa-list"></span>
 						                        <span class="caret"></span>
 						                    </a>
-						                    <ul class="dropdown-menu dropdown-menu-right" role="navigation">
+						                    <ul class="dropdown-menu dropdown-menu-right navbar-inverse" role="navigation">
 						                        <li><a rel="nofollow" href="#about">О компании</a></li>
 										        <li><a rel="nofollow" href="#categories">Категории</a></li>
 										        <li><a rel="nofollow" href="#testimonials">Производители</a></li>
@@ -138,7 +138,7 @@
 						    <div class="navbar-inner">
 							    <nav>
 								    <ul class="nav navbar-nav" role="navigation">
-									    
+									    <!--
 								      	<li class="dropdown">
 						                    <a class="dropdown-toggle no-anchor" data-toggle="dropdown" href="#">
 						                        <span class="fa fa-user"></span>
@@ -151,7 +151,7 @@
 						                        <li class="divider"></li>
 						                        <li><? echo HTML::anchor('/user/?logout=yes', 'Выйти'); ?></li>
 						                    </ul>
-						                </li>
+						                </li>-->
 						                <li>
 							                <?=HTML::anchor('/cart', '', [
 								            	'class'	=> 'fa fa-shopping-basket no-anchor',

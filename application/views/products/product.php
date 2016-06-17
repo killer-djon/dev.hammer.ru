@@ -3,7 +3,6 @@
 		<p><?=$empty_parts?></p>
 	</div>
 <? else: ?>
-
 	<div class="panel card">
 		<ul class="nav nav-tabs" role="tablist">
 			<li role="presentation" class="active">

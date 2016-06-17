@@ -112,7 +112,7 @@ class Controller_Categories extends Controller_Main
 		
         $current = $product->getCurrent();
         
-		$this->template->title = "";
+		$this->template->title = "Детали двигателя {$current['name']} и возможные замены";
         $this->template->content = View::factory('templates/second/parts_content');
         $this->template->content->category_view = View::factory('categories/parts');
         $this->template->content->breadcrumbs = View::factory('templates/breadcrumbs');
@@ -205,7 +205,7 @@ class Controller_Categories extends Controller_Main
 		$category = Category::getInstance();
 		$category->getCategories($type, $name); // get default view categories - first levent
 
-		$this->template->title = "";
+		$this->template->title = "Каталог производителей деталей";
         $this->template->content = View::factory('templates/second/content');
         $this->template->content->title = 'Каталог производителей';
         $this->template->content->breadcrumbs = View::factory('templates/breadcrumbs');
@@ -217,6 +217,7 @@ class Controller_Categories extends Controller_Main
 	            URL::base() => 'Главная',
 	            '/categories' => 'Каталог производителей',
             ]);
+            
             $this->template->content->category_view = View::factory('categories/category_view');
             $this->template->content->category_view->title = 'Каталог производителей';
 		}else if( $type == 'generic' )
@@ -226,6 +227,8 @@ class Controller_Categories extends Controller_Main
                 '/categories' => 'Каталог производителей',
                 "/categories/view/{$current['name']}"  => $current['name'],
             ]);
+            
+            $this->template->title = "Каталог моделей производителя {$current['name']}";
             $this->template->content->title = 'Производитель '.$current['name'];
 			$this->template->content->category_view = View::factory('categories/category_generic');
 			$this->template->content->category_view->title = 'Производитель '.$current['name'];
@@ -238,6 +241,7 @@ class Controller_Categories extends Controller_Main
                 "/categories/generic/{$current['parentName']}/{$current['name']}"   => $current['name']
             ]);
 
+			$this->template->title = "Каталог двигателей модели {$current['name']}";
             $this->template->content->title = 'Модель '.$current['name'];
 			$this->template->content->category_view = View::factory('categories/category_engine');
 			$this->template->content->category_view->title = 'Модель '.$current['name'];

@@ -140,6 +140,8 @@ Kohana::modules(array(
 	'shopping-cart'	=> MODPATH.'shopping-cart', // shopping cart module
     'oauth'         => MODPATH.'kohana-oauth', // oauth,oauth2 module authorize
     'rest-api'		=> MODPATH.'kohana-restful-api', // rest full api
+	'kohana-email'	=> MODPATH.'kohana-email', // swift mailer
+	'pagination'	=> MODPATH.'kohana-pagination'
 	));
 
 

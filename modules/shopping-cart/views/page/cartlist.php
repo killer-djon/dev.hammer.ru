@@ -107,7 +107,6 @@
                 <td colspan="7" class="text-right">
 
                     <button type="button" class="btn btn-info" id="refresh-cart">Пересчитать</button>
-                    <button type="button" class="btn btn-primary">Оформить заказ</button>
                 </td>
             </tr>
             </tfoot>

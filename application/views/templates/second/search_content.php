@@ -6,24 +6,19 @@
         <!-- Page content -->
         <div id="page-content-wrapper">
             <? echo (isset($breadcrumbs)?$breadcrumbs:''); ?>
-            <header>
-	            <h1><? echo $title;?></h1><img src="/assets/img/daag.png" alt="">
-            </header>
+            <!-- Keep all page content within the page-content inset div! -->
+            <div class="container-fluid">
+                <div class="row">
 
+                    <div class="col-xs-12 col-sm-12 wow fadeInRight animated">
+                        <h1><? echo $title;?></h1><img src="/assets/img/daag.png" alt="">
+                        <? echo $category_view; ?>
+                    </div>
+                </div>
+            </div>
+
+            <!--
             <div class="page-content inset">
-	            
-	            <!-- Keep all page content within the page-content inset div! -->
-	            <div class="container-fluid">
-	                <div class="row">
-	
-	                    <div class="col-xs-12 col-sm-12 wow fadeInRight animated">
-	                        
-	                        <? echo $category_view; ?>
-	                    </div>
-	                </div>
-	            </div>
-            
-            
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-xs-12 col-sm-12 wow fadeInLeft animated">
@@ -36,56 +31,13 @@
                         </div>
                     </div>
                 </div>
-
             </div>
+            -->
+
+            <!-- features details section -->
+            <?=View::factory('pages/short_news_list')->render();?>
+            <!-- end of features-detail section -->
         </div>
-
-        <!-- contact section -->
-        <section class="contact text-center" id="contact">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-sm-12">
-                        <div class="contact-heading">
-                            <h4>оставайтесь с нами</h4>
-                            <h2>Наши контакты</h2>
-                            <img class="img-responsive" src="/assets/img/daag.png" alt="">
-                        </div>
-                        <div class="col-md-4">
-                            <i class="fa fa-phone"></i>
-                            <p>Phone: (415) 124-5678</p>
-                            <p>Fax: (412) 123-8290</p>
-                        </div>
-                        <div class="col-md-4">
-                            <i class="fa fa-map-marker"></i>
-                            <p>1001 Brickell Bay Dr.</p>
-                            <p>Suite 1900 </p>
-                            <p>Miami, FL 33131</p>
-                        </div>
-                        <div class="col-md-4">
-                            <i class="fa fa-envelope-o"></i>
-                            <p>user@mail.com</p>
-                        </div>
-                        <div class="col-md-8 col-md-offset-2 col-xs-12 col-sm-12">
-
-                            <article class="contact-form">
-                                <h4>Написать нам</h4>
-                                <form action="contact">
-                                    <div class="col-md-5 col-md-offset-1 contact-form-left">
-                                        <input class="name" type="text" placeholder="Ваше имя*">
-                                        <input class="email" type="email" placeholder="Email*">
-                                        <input class="subject" type="text" placeholder="Тема*">
-                                    </div>
-                                    <div class="col-md-5 contact-form-right text-right">
-                                        <textarea class="message" name="message" id="message" cols="30" rows="10" placeholder="Сообщение"></textarea>
-                                        <input type="submit" class="submit-btn" value="отправить">
-                                    </div>
-                                </form>
-                            </article>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section><!-- end of contact section -->
     </div>
 </section>
 <!-- main section -->

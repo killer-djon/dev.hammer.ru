@@ -2,12 +2,14 @@
 <header class="top-header-second" id="top-header-second">
     <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="navbar-header col-xs-12 col-sm-12 col-md-4 pull-left">
+            <!--
             <ul class="navbar-toggle user-profile">
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                         <span class="fa fa-user"></span>
                         <span class="caret"></span>
                     </a>
+
                     <ul class="dropdown-menu dropdown-menu-right">
                         <li><? echo HTML::anchor('/user/profile', 'Профиль'); ?></li>
                         <li><? echo HTML::anchor('/cart', 'Корзина'); ?></li>
@@ -15,13 +17,16 @@
                         <li class="divider"></li>
                         <li><? echo HTML::anchor('/user/?logout=yes', 'Выйти'); ?></li>
                     </ul>
+
                 </li>
             </ul>
-
+-->
             <div class="dropdown hidden-xs">
+                <!--
                 <ul class="pull-left navbar-nav nav ">
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="fa fa-user"></span><span class="caret"></span></a>
+
 
                         <ul class="dropdown-menu" role="menu">
                             <li><? echo HTML::anchor('/user/profile', 'Профиль'); ?></li>
@@ -30,8 +35,10 @@
                             <li class="divider"></li>
                             <li><? echo HTML::anchor('/user/?logout=yes', 'Выйти'); ?></li>
                         </ul>
+
                     </li>
                 </ul>
+                -->
             </div>
             <a class="navbar-brand no-anchor pull-left" href="<? echo URL::base(); ?>">HAMMERSCHMIDT</a>
             <button class="navbar-toggle fa fa-search visible-xs" type="button" data-target=".navbar-collapse" data-toggle="collapse"></button>

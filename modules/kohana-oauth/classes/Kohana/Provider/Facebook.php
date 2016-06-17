@@ -152,10 +152,11 @@ class Kohana_Provider_Facebook extends Provider
     /**
      * @inheritdoc
      */
-    public function createResourceOwner(array $response, AccessToken $token)
+    protected function createResourceOwner(array $response, AccessToken $token)
     {
-	    return $response;
-        //Account_Facebook::getInstance( $response, $token );
+	    $account = Account_Facebook::getInstance($response, $token);
+	    
+	    $this->auth_data = $account->getAuthData();
     }
 
 }

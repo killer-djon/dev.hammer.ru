@@ -23,12 +23,7 @@ class Controller_User extends Controller
     protected $client = NULL;
     
     protected $accessToken;
-    
-    public function action_index()
-    {
-	    echo $this->request->uri();
-    }
-    
+
     
     /**
      * This method must initialize the OAuth_Client library
@@ -37,13 +32,18 @@ class Controller_User extends Controller
      */
     public function before()
     {
-	    echo '<pre>';
 	    $this->provider = $this->request->param('provider');
 	    
 	    $this->code = $this->request->query('code');
 
 	    if( !empty( $this->provider ) )
 	    {
+		    $backUrl = $this->request->query('backUrl');
+		    if( empty( $backUrl ) )
+		    {
+			    throw new Request_Exception('Not is set backURL in the request type', NULL, 400);
+		    }
+		    
 		    $type = 'Provider_'.ucfirst(strtolower($this->provider));
 		    $this->client = new $type;
 	    }
@@ -60,6 +60,7 @@ class Controller_User extends Controller
 	
 			if( empty($this->code) )
 			{
+				$this->client->clearStorage();
 				HTTP::redirect($this->client->getAuthorizationUrl());
 			}
 		}
@@ -75,9 +76,7 @@ class Controller_User extends Controller
 		{
 			$redirectURI = URL::site('user/access/'.$this->provider, TRUE);
 			$this->client->setRedirectUri( $redirectURI );
-
 			
-
 			$this->accessToken = $this->client->getAccessToken($providerClass::AUTHORIZATION_CODE, [
 				'code' => $this->code
 			]);
@@ -93,6 +92,15 @@ class Controller_User extends Controller
 
 	public function action_login()
 	{
-		print_r( $this->client );
+		echo '<pre>';
+		print_r( $this->client->getAuthData() );
+		
+	}
+
+	public function action_auth()
+	{
+		echo '<pre>';
+		print_r( $this->request->post() );
+		exit;
 	}
 }

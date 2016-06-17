@@ -13,6 +13,8 @@ abstract class Kohana_Cart extends Controller_Template
 	 * @var IOCart isntance of the IOCart abstract object
 	 */
 	protected $_cart = NULL;
+
+	protected $_cartId = NULL;
 	
 	abstract public function action_index();
 	
@@ -175,15 +177,17 @@ abstract class Kohana_Cart extends Controller_Template
 	
 	
 	
-	
 	/**
 	 * If cart is not empty 
 	 * user can checkout all products
 	 *
 	 * @return array Empty array
 	 */
-	public function action_checkout()
+	public function checkout($cartId)
 	{
-		
+		$this->_cartId = $cartId;
+		$this->_cart->setCartId($cartId);
+
+		return $this;
 	}
 }

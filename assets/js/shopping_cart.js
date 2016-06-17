@@ -220,5 +220,43 @@ jQuery(document).ready(function(){
 	    return false;
     });
     
-    refreshRows(jQuery('#cart-items').find('table tbody'))
+    refreshRows(jQuery('#cart-items').find('table tbody'));
+    
+    var shippingMethod = jQuery('select[name="shipping-method"]').val();
+    
+    activeShippingMethodBlock(shippingMethod);
+    
+    function activeShippingMethodBlock(shippingMethod)
+    {
+	    var activeOption = jQuery('select[name="shipping-method"] option[value="'+shippingMethod+'"]');
+	    var optionId = activeOption.attr('data-target').substr(1);
+	    jQuery('select[name="shipping-method"]').closest('#accordion-shipping').find('.panel-collapse').removeClass('in');
+	    jQuery("#"+optionId).addClass('in');
+    }
+    
+    jQuery("#auth-form, #personal-data").submit(function(){
+		/*
+	    var formData = jQuery("#shipping-method-form").serializeArray();
+	    var authFormBlock = jQuery(this);
+	    
+	    jQuery(this).find('input.shipping').remove();
+	    jQuery(formData).each(function(key, item){
+		    jQuery(authFormBlock).prepend('<input type="hidden" name="'+item.name+'" value="'+item.value+'">');
+	    });
+	    */
+		var authFormBlock = jQuery(this);
+		var selectorShipping = jQuery('[name="shipping-method"]');
+
+		jQuery(this).find('input.shipping').remove();
+		jQuery(authFormBlock).prepend('<input type="hidden" name="shipping_method" value="'+ selectorShipping.find('option[value="'+selectorShipping.val()+'"]').text() +'">');
+
+		if( selectorShipping.val() == '2' )
+		{
+			var formData = jQuery("#shipping-method-form").serializeArray();
+			jQuery(formData).each(function(key, item){
+				jQuery(authFormBlock).prepend('<input type="hidden" name="'+item.name+'" value="'+item.value+'">');
+			});
+		}
+
+    });
 });

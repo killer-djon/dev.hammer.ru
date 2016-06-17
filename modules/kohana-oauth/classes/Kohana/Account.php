@@ -2,7 +2,7 @@
 
 use League\OAuth2\Client\Token\AccessToken;
 
-class Kohana_Account
+abstract class Kohana_Account
 {
 
 	/**
@@ -18,13 +18,23 @@ class Kohana_Account
 	/**
 	 * @var array response
 	 */
-	protected $_response = [];
+	protected $_response = NULL;
 	
 	
 	/**
 	 * @var AccessToken object
 	 */
 	protected $_token = NULL;
+	
+	
+	/**
+	 * Return authorization data
+	 * from session storage from auth	
+	 */
+	public function getAuthData()
+	{
+		return Session::instance()->get('auth');
+	}
 	
 	
 	/**
@@ -46,6 +56,21 @@ class Kohana_Account
 		return static::$_instance;
 	}
 	
+	
+	/**
+	 * Set objects in instance
+	 *
+	 * @param array $response incomming response from method create owner
+	 * @param AccessToken $token AccessToken instance
+	 */
+	public function __construct(array $response = [], AccessToken $token = NULL)
+	{
+		Session::instance()->delete('auth');
+		
+		$this->setResponse($response);
+	}
+	
+	
 	/**
 	 * If instance of the static class 
 	 * create empty (without args)
@@ -55,37 +80,38 @@ class Kohana_Account
 	 *
 	 * @return static
 	 */
-	public function setResponse(array $response)
-	{
-		
-	}
+	abstract public function setResponse(array $response);
+	
 	
 	/**
-	 * If instance of the static class 
-	 * create empty (without args)
-	 * then in the futures we must call setters for those args
+	 * Get response data
 	 *
-	 * @param AccessToken $token AccessToken instance
-	 *
-	 * @return static
+	 * @return array $response
 	 */
-	public function setToken(AccessToken $token)
+	public function getResponse()
 	{
-		
+		return Session::instance()->get('auth');
+	}
+
+	
+	/**
+	 * Get token object	
+	 *
+	 * @return AccessToken $token
+	 */
+	public function getToken()
+	{
+		$hammer_auth = Session::instance()->get('hammer_auth');
+		return $hammer_auth['access_token'];
 	}
 	
 	/**
 	 * Method to prepare incomming params data
 	 * to set in on the called class options
 	 *
-	 * @param mixed $params Params with data
-	 *
 	 * @return static
 	 */
-	protected function prepareParams($params = NULL)
-	{
-		
-	}
+	abstract protected function prepareParams( $response );
 	
 	
 	/**
@@ -96,7 +122,10 @@ class Kohana_Account
 	 */
 	public function __set($key, $value = NULL)
 	{
-		
+		if( !empty($value) )
+		{
+			$this->{$key} = $value;	
+		}
 	}
 	
 	/**
@@ -108,7 +137,10 @@ class Kohana_Account
 	 */
 	public function __get($key)
 	{
-		
+		if( isset( $this->{$key} ) )
+		{
+			return $this->{$key};
+		}
 	}
 	
 	

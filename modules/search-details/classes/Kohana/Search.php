@@ -371,7 +371,7 @@ abstract class Kohana_Search implements \ArrayAccess
 			
 			foreacH( $offsets as $key => $item )
 			{
-				$_data[ ( !is_null($keyArr)?$item[$keyArr]:$key ) ] = $item;
+				$_data[ ( !is_null($keyArr)?(isset($item[$keyArr])?$item[$keyArr]:$key):$key ) ] = $item;
 			}
 			
 			if( !empty( $_data ) )

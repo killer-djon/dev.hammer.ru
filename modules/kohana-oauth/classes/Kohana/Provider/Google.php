@@ -221,10 +221,11 @@ class Kohana_Provider_Google extends Provider
     /**
      * @inheritdoc
      */
-    public function createResourceOwner(array $response, AccessToken $token)
+    protected function createResourceOwner(array $response, AccessToken $token)
     {
-	    return $response;
-        //Account_Google::getInstance( $response, $token );
+	    $account = Account_Google::getInstance($response, $token);
+	    
+	    $this->auth_data = $account->getAuthData();
     }
 
 }
