@@ -3,6 +3,8 @@
 class Controller_Main extends Controller_Template  
 {
 
+	protected $_cache = NULL;
+
 	public $template = 'templates/default';
 
 	public function before()
@@ -23,6 +25,8 @@ class Controller_Main extends Controller_Template
 	        $this->template->styles           = [];
 	        $this->template->scripts          = [];
         }
+        
+        //$this->_cache = Cache::instance('redis');
 	}
 
     public function setScript( $scriptSrc = NULL, $path = 'header' )
@@ -93,6 +97,7 @@ class Controller_Main extends Controller_Template
 	public function action_index()
 	{
 		//$this->template->content = 'Главная';
+		
 	}
 
 } // End Welcome

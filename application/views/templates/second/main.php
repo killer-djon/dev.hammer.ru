@@ -35,6 +35,7 @@
 <? endif; ?>
 <?=HTML::script('/assets/js/shopping_cart.js');?>
 <?=HTML::script('/assets/bootstrap-notify/bootstrap-notify.min.js');?>
+<?=HTML::script('/assets/js/validator.min.js');?>
 </body>
 
 </html>

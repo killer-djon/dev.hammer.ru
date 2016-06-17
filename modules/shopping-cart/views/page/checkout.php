@@ -1,4 +1,5 @@
 <!-- panel for checkout -->
+
 <div class="panel panel-default">
     <div class="panel-heading">
         <h3 class="panel-title">
@@ -9,77 +10,84 @@
     </div>
     <div id="shopping-checkout" class="panel-collapse collapse">
         <div class="panel-body card">
-            <ul class="nav nav-tabs" role="tablist">
-                <li role="presentation" class="active">
-                    <a data-toggle="tab" data-target="#authorize" rel="nofollow">
-                        Авторизация
-                    </a>
-                </li>
-                <li role="presentation">
-                    <a data-toggle="tab" data-target="#userdata" rel="nofollow">
-                        Без авторизации
-                    </a>
-                </li>
-            </ul>
+			<form data-toggle="validator" role="form" class="form" id="personal-data" action="/cart/checkout" method="POST">
+				<div class="row row-centered">
+					<div class="col-md-10 col-centered text-center">
+						<p>Поля отмеченные знаком <span class="text-danger"><strong>*</strong></span>, являются обязательными для заполнения.</p>
+					</div>
 
-            <div class="tab-content">
-                <!-- authorize panel body -->
-                <div id="authorize" role="tabpanel" class="tab-pane fade in active">
-                    <div class="row row-centered">
-                        <div class="col-md-6 col-sm-6 col-xs-12 text-right">
-                            <div class="col-md-8 col-sm-12 col-xs-12 pull-right">
-                                <p>
-                                    Если у Вас нет аккаунта в нашем интернет-магазине деталей, тогда Вы можете авторизоваться через один из предложенных способов
-                                </p>
-                                <a href="/user/authorize/twitter" class="btn btn-default btn-lg">
-                                    <i class="fa fa-twitter" title="Авторизация через сервис twitter.com" aria-hidden="true"></i>
-                                </a>
-                                <a href="/user/authorize/facebook" class="btn btn-default btn-lg">
-                                    <i class="fa fa-facebook" title="Авторизация через сервис facebook.com" aria-hidden="true"></i>
-                                </a>
-                                <a href="/user/authorize/google" class="btn btn-default btn-lg">
-                                    <i class="fa fa-google-plus" title="Авторизация через сервис google.com" aria-hidden="true"></i>
-                                </a>
-                                <a href="/user/authorize/linkedin" class="btn btn-default btn-lg">
-                                    <i class="fa fa-linkedin" title="Авторизация через сервис linkedin.com" aria-hidden="true"></i>
-                                </a>
-                                <a href="/user/authorize/vk" class="btn btn-default btn-lg">
-                                    <i class="fa fa-vk" title="Авторизация через сервис vk.com" aria-hidden="true"></i>
-                                </a>
-                            </div>
-                        </div>
+					<!-- first parts to user data form -->
+					<div class="col-md-5 col-sm-6 col-xs-12 col-centered">
+						<!-- User name full|mixed -->
+						<div class="form-group">
+							<label for="username">Представьтесь:&nbsp;&nbsp;<span class="text-danger"><strong>*</strong></span></label>
+							<div class="input-group">
+										<span class="input-group-addon">
+											<i class="fa fa-user"></i>
+										</span>
+								<input type="text" class="form-control" id="username" name="username" value="<?=(!empty($userdata['username']) ? $userdata['username'] : '')?>" required>
+							</div>
+							<div class="help-block with-errors"></div>
+						</div>
+						<!-- User name full|mixed -->
 
-                        <div class="col-md-6 col-sm-6 col-xs-12 col-centered">
-                            <div class="col-md-8 col-sm-12 col-xs-12 pull-left">
-                                <form role="form" class="form">
-                                    <div class="form-group">
-                                        <label for="useremail">Email:</label>
-                                        <input type="email" class="form-control" id="useremail" name="useremail">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="userpass">Password:</label>
-                                        <input type="password" class="form-control" id="userpass" name="userpass">
-                                    </div>
-                                    <div class="form-group text-center">
-                                        <button type="submit" class="btn btn-primary">
-                                            Войти
-                                        </button>
-                                        <button type="reset" class="btn btn-default">
-                                            Сбросить
-                                        </button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- authorize panel body -->
+						<!-- Correct user Email -->
+						<div class="form-group">
+							<label for="useremail">Контактный Email:&nbsp;&nbsp;<span class="text-danger"><strong>*</strong></span></label>
+							<div class="input-group">
+								<span class="input-group-addon">@</span>
+								<input placeholder="example@domain.ltd" type="email" class="form-control" id="useremail" name="useremail" data-error="Не заполнено поле или некорректный Email" value="<?=(!empty($userdata['useremail']) ? $userdata['useremail'] : '')?>" required>
+							</div>
+							<div class="help-block with-errors"></div>
+						</div>
+						<!-- Correct user Email -->
 
-                <!-- without auth panel body -->
-                <div id="userdata" role="tabpanel" class="tab-pane fade in">
-                </div>
-                <!-- without auth panel body -->
-            </div>
+						<!-- Phone number -->
+						<div class="form-group">
+							<label for="userphone">Телефон для связи:</label>
+							<div class="input-group">
+										<span class="input-group-addon">
+											<i class="fa fa-phone"></i>
+										</span>
+								<input type="tel" class="form-control" id="userphone" name="userphone" placeholder="79031234567" value="<?=(!empty($userdata['userphone']) ? $userdata['userphone'] : '')?>">
+							</div>
+							<div class="help-block with-errors"><em>Формат: 79031234567</em></div>
+						</div>
+						<!-- Phone number -->
+
+					</div>
+					<!-- first parts to user data form -->
+
+					<!-- second parts to user data form -->
+					<div class="col-md-5 col-sm-6 col-xs-12 col-centered">
+						<!-- Phone number -->
+						<div class="form-group">
+							<label for="usermessage">Комментарий к заказу:</label>
+							<div class="input-group">
+										<span class="input-group-addon">
+											<i class="fa fa-comment "></i>
+										</span>
+								<textarea class="form-control" rows="4" id="usermessage" name="usermessage" placeholder="Вы можете указать дополнительные пожелания к Вашему заказу, и мы обязательно их учтем" style="resize: none;"><?=(!empty($userdata['usermessage']) ? $userdata['usermessage'] : '')?></textarea>
+							</div>
+						</div>
+						<!-- Phone number -->
+
+						<!-- Country -->
+						<div class="form-group">
+							<label for="usercity">Город:</label>
+							<input class="form-control" type="text" name="usercity" id="usercity" placeholder="Москва" value="<?=(!empty($userdata['usercity']) ? $userdata['usercity'] : '')?>">
+							<div class="help-block with-errors"><em>С какого Вы города?</em></div>
+						</div>
+						<!-- Country -->
+					</div>
+					<!-- second parts to user data form -->
+				</div>
+				<br />
+				<br />
+				<div class="form-group text-center">
+					<button type="submit" class="btn btn-primary">Оформить заказ</button>
+				</div>
+			</form>
         </div>
     </div>
 </div>

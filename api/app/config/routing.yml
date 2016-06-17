@@ -1,0 +1,18 @@
+storage:
+    resource: "@StorageBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+homepage:
+  path : /
+  defaults:  { _controller: AppBundle:Main:index }
+
+Rest_Backend_Pages:
+    type:     rest
+    resource: "@AppBundle/Resources/config/routing_pages.yml"
+    prefix: /api/v1
+    
+Rest_Backend_Category:
+    type:     rest
+    resource: "@AppBundle/Resources/config/routing_category.yml"
+    prefix: /api/v1

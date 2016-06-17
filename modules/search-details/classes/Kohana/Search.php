@@ -7,6 +7,14 @@
 abstract class Kohana_Search implements \ArrayAccess 
 {
 	
+	/*
+	 * Cache instanse
+	 *
+	 * @const Cache_Redis	
+	 */
+	protected $_cache = NULL;
+	
+	
 	protected $_current = NULL;
 
 
@@ -34,6 +42,39 @@ abstract class Kohana_Search implements \ArrayAccess
 	 * @const Array	
 	 */
 	protected $_data = array();
+	
+	
+	/**
+	 * Attach cache instance to this class
+	 * 
+	 * @param Cache $cache	
+	 */
+	public function attachCache(Cache $cache = NULL)
+	{
+		$this->_cache = $cache;
+	}
+	
+	
+	/**
+	 * Dettach cache instance to this class
+	 */
+	public function dettachCache()
+	{
+		if( !is_null( $this->_cache ) )
+		{
+			unset($this->_cache);
+		}
+	}
+	
+	
+	/**
+	 * Get cache instance object 
+	 * to manipulate in the futures
+	 */
+	public function getCaching()
+	{
+		return ( !is_null($this->_cache) ? $this->_cache : Cache::instance('redis') );
+	}
 	
 	
 	/*
@@ -330,7 +371,7 @@ abstract class Kohana_Search implements \ArrayAccess
 			
 			foreacH( $offsets as $key => $item )
 			{
-				$_data[ ( !is_null($keyArr)?$item[$keyArr]:$key ) ] = $item;
+				$_data[ ( !is_null($keyArr)?(isset($item[$keyArr])?$item[$keyArr]:$key):$key ) ] = $item;
 			}
 			
 			if( !empty( $_data ) )

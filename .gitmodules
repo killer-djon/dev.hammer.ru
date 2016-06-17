@@ -7,12 +7,12 @@
 [submodule "modules/kohana-restful-api"]
 	path = modules/kohana-restful-api
 	url = https://github.com/SupersonicAds/kohana-restful-api.git
-[submodule "modules/kohana-oauth2"]
-	path = modules/kohana-oauth2
-	url = https://github.com/tamaspap/kohana-oauth2.git
-[submodule "modules/oauth"]
-	path = modules/oauth
-	url = https://github.com/biakaveron/oauth.git
 [submodule "assets/bootstrap-notify"]
 	path = assets/bootstrap-notify
 	url = https://github.com/mouse0270/bootstrap-notify.git
+[submodule "modules/kohana-oauth"]
+	path = modules/kohana-oauth
+	url = https://github.com/Lusitanian/PHPoAuthLib.git
+[submodule "modules/kohana-pagination"]
+	path = modules/kohana-pagination
+	url = https://github.com/Aculeo/kohana-pagination.git

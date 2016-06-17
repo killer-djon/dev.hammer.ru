@@ -1,4 +1,5 @@
 <!-- footer starts here -->
+    
 <footer id="footer" class="footer text-center">
 	<div class="container-fluid">
 		<div class="row row-centered">

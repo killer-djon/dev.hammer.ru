@@ -20,7 +20,8 @@ class Model_Products extends MongoModel
 		'search_article'	=> array(
 			'_keys'	=> 'string'
 		),
-		
+		'qty'	=> 'int',
+		'price'	=> 'string',
 		'link'	=> 'string',
 		'type'	=> 'string', // this type must be product or cross
 	);

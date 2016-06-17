@@ -32,6 +32,29 @@ abstract class Kohana_IOCart
 	 * @var array $_config
 	 */
 	protected $_config = [];
+
+
+	public function getCartStorage()
+	{
+		return $this->_session->get($this->_config['session']['key']);
+	}
+
+	public function setCartId($cartId)
+	{
+		$this->_content['cartId'] = $cartId;
+		return $this->_save();
+	}
+
+	/**
+	 * Current cart ID
+	 */
+	public function getCartId()
+	{
+		$storage = $this->getCartStorage();
+
+		return $storage['cartId'];
+
+	}
 	
 	
 	public function setProduct(array $product)

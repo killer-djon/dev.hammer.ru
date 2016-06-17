@@ -23,13 +23,14 @@ class Kohana_Product extends Kohana_Search
 	
 	
 	
-	public static function getInstance()
+	public static function getInstance( Cache $cache = NULL )
 	{
 		if( is_null( self::$_instance ) )
 		{
 			self::$_instance = new self();
 		}
 		
+		self::$_instance->attachCache($cache);
 		return self::$_instance;
 	}
 	
@@ -50,7 +51,7 @@ class Kohana_Product extends Kohana_Search
 	 * @return Object Product - Return self instance
  	 */
 	public function loadProducts($categoryName, $partsName)
-	{
+	{	
 		$categoryModel = MongoModel::factory('Categories');
 		$categoryModel->selectDB();
 
@@ -87,6 +88,7 @@ class Kohana_Product extends Kohana_Search
 				
 				$crosses = $this->collectCrossProducts('article');
 				$this->_cross_products = $this->makePrice($crosses);
+				
 			}
 		}
 		

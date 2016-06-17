@@ -1,0 +1,7 @@
+app_category_list:
+    pattern: /{_application}/categories/{name}
+    defaults: { _controller: AppBundle:Category:list, _format: ~ }
+    requirements:
+        _method: GET
+        _application: 'backend'
+        name: \w+

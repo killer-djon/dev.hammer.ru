@@ -1,3 +1,15 @@
+<!-- panel for shopping cart -->
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<h3 class="panel-title">
+			<a data-toggle="collapse" data-parent="#accordion" data-target="#shopping-cart-list">
+				Наличие деталей в корзине
+			</a>
+		<button data-toggle="modal" data-target="#clearCart" type="button" class="btn btn-danger pull-right fa fa-eraser" title="Очистить корзину"></button>
+		<div class="clearfix"></div>
+		</h3>
+
+	</div>
 <div id="shopping-cart-list" class="panel-collapse collapse in">
     <div class="panel-body">
         <table class="table table-bordered table-condensed table-responsive cart_content_form">
@@ -35,20 +47,19 @@
                             <input type="hidden" name="price" value="<?= $product['price']; ?>">
 
                             <div class="input-group count-detail">
-																		<span
-                                                                            class="input-group-addon cart-qty cart-minus">
-																			<i class="fa fa-minus"></i>
-																		</span>
-                                <input name="qty" type="text" class="form-control text-right btn-number"
-                                       value="<?= $product['qty']; ?>">
-																		<span
-                                                                            class="input-group-addon cart-qty cart-plus">
-																			<i class="fa fa-plus"></i>
-																		</span>
-																		<span
-                                                                            class="input-group-addon cart-qty cart-refresh">
-																			<i class="fa fa-refresh"></i>
-																		</span>
+								<span
+                                    class="input-group-addon cart-qty cart-minus">
+									<i class="fa fa-minus"></i>
+								</span>
+								<input name="qty" type="text" class="form-control text-right btn-number" value="<?= $product['qty']; ?>">
+								<span
+                                    class="input-group-addon cart-qty cart-plus">
+									<i class="fa fa-plus"></i>
+								</span>
+								<span
+                                    class="input-group-addon cart-qty cart-refresh">
+									<i class="fa fa-refresh"></i>
+								</span>
                             </div>
                         </div>
                     </td>
@@ -96,10 +107,10 @@
                 <td colspan="7" class="text-right">
 
                     <button type="button" class="btn btn-info" id="refresh-cart">Пересчитать</button>
-                    <button type="button" class="btn btn-primary">Оформить заказ</button>
                 </td>
             </tr>
             </tfoot>
         </table>
     </div>
+</div>
 </div>

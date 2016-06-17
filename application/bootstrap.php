@@ -104,7 +104,8 @@ if (isset($_SERVER['KOHANA_ENV']))
  */
 Kohana::init(array(
 	'base_url'   => '/',
-	'caching'	=> FALSE
+	'caching'	=> FALSE,
+	'index_file'	=> FALSE
 ));
 
 /**
@@ -122,7 +123,7 @@ Kohana::$config->attach(new Config_File);
  */
 Kohana::modules(array(
 	// 'auth'       => MODPATH.'auth',       // Basic authentication
-	'cache'      => MODPATH.'cache',      // Caching with multiple backends
+	//'cache'      => MODPATH.'cache',      // Caching with multiple backends
 	// 'codebench'  => MODPATH.'codebench',  // Benchmarking tool
 	// 'database'   => MODPATH.'database',   // Database access
 	// 'image'      => MODPATH.'image',      // Image manipulation
@@ -135,13 +136,16 @@ Kohana::modules(array(
 	'search-details'=> MODPATH.'search-details', // this package represents new search engine
 	'html-parser'	=> MODPATH.'html-parser',
 	'breadcrumbs'	=> MODPATH.'kohana-breadcrumbs', // breadcrumbs for pages
-	'cache-redis'	=> MODPATH.'kohana-cache-redis', // redis module for caching
+	//'cache-redis'	=> MODPATH.'kohana-cache-redis', // redis module for caching
 	'shopping-cart'	=> MODPATH.'shopping-cart', // shopping cart module
-    'oauth'         => MODPATH.'oauth', // oauth,oauth2 module authorize
+    'oauth'         => MODPATH.'kohana-oauth', // oauth,oauth2 module authorize
+    'rest-api'		=> MODPATH.'kohana-restful-api', // rest full api
+	'kohana-email'	=> MODPATH.'kohana-email', // swift mailer
+	'pagination'	=> MODPATH.'kohana-pagination'
 	));
 
 
-Cache::$default = 'redis';
+//Cache::$default = 'redis';
 /**
  * Cookie Salt
  * @see  http://kohanaframework.org/3.3/guide/kohana/cookies
@@ -171,15 +175,6 @@ if ( ! Route::cache())
 			    'controller' => 'products',
 			    'action' => 'index',
 			  ));
-
-    Route::set('user', 'user(/<action>(/<provider>))', [
-            'provider'  => '[a-zA-Z_\-\.]+'
-        ])
-        ->defaults(array(
-            'controller' => 'user',
-            'action' => 'index',
-        ));
-
 			  
 	Route::set('redirect_category', '<path>.html',
 			  array(

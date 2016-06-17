@@ -11,6 +11,9 @@ class Model_CartUser extends MongoModel
 		'shopping_end'	=> 'bool',
 		'user_data'	=> [
 			'_keys'	=> 'string'
+		],
+		'total'	=> [
+			'_keys'	=> 'string'
 		]
 	);
 }

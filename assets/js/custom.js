@@ -9,7 +9,24 @@ jQuery(document).ready(function() {
         lat: -12.043333,
         lng: -77.028333
       });*/
-
+	jQuery('[data-load="ajax"]').each(function(item){
+	    var _href = jQuery(this).attr('data-href');
+	    var _block = jQuery(this);
+	    jQuery.ajax({
+		    url: _href,
+		    type: 'GET',
+		    data: {
+			    view: 'short_news'
+		    },
+		    success: function(result, success)
+		    {
+				if( success )    
+				{
+					_block.html(result);
+				}
+		    }
+	    });
+    });
 
       //this code is for smooth scroll and nav selector
             $(document).ready(function () {

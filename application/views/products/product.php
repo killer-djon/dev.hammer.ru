@@ -3,7 +3,6 @@
 		<p><?=$empty_parts?></p>
 	</div>
 <? else: ?>
-
 	<div class="panel card">
 		<ul class="nav nav-tabs" role="tablist">
 			<li role="presentation" class="active">
@@ -56,6 +55,7 @@
 						            </tr>
 						            
 						            <? foreach($item as $key => $detail): ?>
+						            	<? if( empty($detail['article']) ) continue; ?>
 						            	<?$price = (isset($detail['price']) && 0!==$detail['price'] ? $detail['price'].' руб.' : 0);?>
 						            	
 						            	<tr class="detail-row <?=($price!==0?'bg-success':'bg-danger')?> collapsed">

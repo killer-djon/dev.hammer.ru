@@ -24,17 +24,18 @@ Breadcrumbs::set([
 				    </div>
 				    
 				    <span class="label label-primary pull-right text-center news-date">
-		        		<?if(is_object($page['datecreate'])):?>
-	        				
+	        			<?if(is_array($page['datecreate'])):?>
+	        				<? $timestamp = strtotime(date('d.m.Y', $page['datecreate']['sec'])); ?>
 	        			<?else:?>
-	        				<?$timestamp = strtotime($page['datecreate']);?>
-	        				<span class="day row">
-	        				<?=date('d.m', $timestamp)?>
-	        				</span>
-	        				<span class="year row">
-	        				<?=date('Y', $timestamp)?>
-	        				</span>
+	        				<?$timestamp = strtotime($$page['datecreate']);?>
 	        			<?endif;?>
+	        			
+	        			<span class="day row">
+        					<?=date('d.m', $timestamp)?>
+        				</span>
+        				<span class="year row">
+        					<?=date('Y', $timestamp)?>
+        				</span>
 	        		</span>
 				</div>
 				
@@ -46,7 +47,11 @@ Breadcrumbs::set([
 					</div>
 				</div>
 				
-                
+               
+            </div>
+            
+            <div class="well text-center">
+                <?=HTML::anchor('news', 'К списку новостей', ['class'	=> 'btn btn-primary']);?>
             </div>
         </div>
     </div>
