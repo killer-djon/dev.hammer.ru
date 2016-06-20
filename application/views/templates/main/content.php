@@ -10,14 +10,14 @@
 							<h4>почему лучше покупать у нас:</h4>
 							<div class="col-centered col-md-5 col-sm-6 col-xs-12">
 								<div class="list-group">
-									<div href="#" class="list-group-item">
+									<div  class="list-group-item">
 		                                <h4 class="list-group-item-heading">Собственный склад хранения</h4>
 		                                <p class="list-group-item-text">
 		                                    Наличие собственного склада для хранения запасных частей. 
 		                                    Именно поэтому у нас широкий ассортимент продукции, более 5 000 наименований запчастей в наличии.
 		                                </p>
 		                            </div>
-		                            <div href="#" class="list-group-item">
+		                            <div  class="list-group-item">
 		                                <h4 class="list-group-item-heading">Опытные менеджеры</h4>
 		                                <p class="list-group-item-text">
 		                                    Все наши менеджеры проходят постоянное повышение квалификации. 
@@ -28,14 +28,14 @@
 							</div>
 							<div class="col-centered col-md-5 col-sm-6 col-xs-12">
 								<div class="list-group">
-									<div href="#" class="list-group-item">
+									<div  class="list-group-item">
 		                                <h4 class="list-group-item-heading">Ассортимент и доставка</h4>
 		                                <p class="list-group-item-text">
 		                                    Не надо долго ждать и ехать на другой конец города. 
 		                                    Мы доставим Вам любую запчасть со нашего склада в любое комфортное для Вас время.
 		                                </p>
 		                            </div>
-		                            <div href="#" class="list-group-item">
+		                            <div  class="list-group-item">
 		                                <h4 class="list-group-item-heading">Гарантия качества</h4>
 		                                <p class="list-group-item-text">
 		                                    Мы гарантируем качество своих запчастей. 
@@ -101,7 +101,7 @@
 	                                <a href="/categories/view/Audi" class="btn btn-primary btn-icon icon-audi center-block">&nbsp;</a>
 	                            </div>
 	                            <div class="col-xs-4 col-sm-2 col-md-1 brand-icon col-centered">
-	                                <a href="/categories/view/Alfa Romeo" class="btn btn-primary btn-icon icon-alfa-romeo center-block">&nbsp;</a>
+	                                <a href="/categories/view/Alfa%20Romeo" class="btn btn-primary btn-icon icon-alfa-romeo center-block">&nbsp;</a>
 	                            </div>
 	                            <div class="col-xs-4 col-sm-2 col-md-1 brand-icon col-centered">
 	                                <a href="/categories/view/BMW" class="btn btn-primary btn-icon icon-bmw center-block">&nbsp;</a>
@@ -167,7 +167,7 @@
 	                                <a href="/categories/view/Renault" class="btn btn-primary btn-icon icon-renault center-block">&nbsp;</a>
 	                            </div>
 	                            <div class="col-xs-4 col-sm-2 col-md-1 brand-icon col-centered">
-	                                <a href="/categories/view/Rover Group" class="btn btn-primary btn-icon icon-rover center-block">&nbsp;</a>
+	                                <a href="/categories/view/Rover%20Group" class="btn btn-primary btn-icon icon-rover center-block">&nbsp;</a>
 	                            </div>
 	                            <div class="col-xs-4 col-sm-2 col-md-1 brand-icon col-centered">
 	                                <a href="/categories/view/Saab" class="btn btn-primary btn-icon icon-saab center-block">&nbsp;</a>
@@ -180,7 +180,7 @@
 	                                <a href="/categories/view/Smart" class="btn btn-primary btn-icon icon-smart center-block">&nbsp;</a>
 	                            </div>
 	                            <div class="col-xs-4 col-sm-2 col-md-1 brand-icon col-centered">
-	                                <a href="/categories/view/Ssang Yong" class="btn btn-primary btn-icon icon-ssangyong center-block">&nbsp;</a>
+	                                <a href="/categories/view/Ssang%20Yong" class="btn btn-primary btn-icon icon-ssangyong center-block">&nbsp;</a>
 	                            </div>
 	                            <div class="col-xs-4 col-sm-2 col-md-1 brand-icon col-centered">
 	                                <a href="/categories/view/Suzuki" class="btn btn-primary btn-icon icon-suzuki center-block">&nbsp;</a>
@@ -243,10 +243,10 @@
 		
 
 		<!-- contact section -->
-		<section id="contact" class="text-center">
+		<aside id="contact" class="text-center">
 			<div class="row">
 				<div class="col-md-12">
 					<div id="map_canvas"></div>
 				</div>
 			</div>
-		</section><!-- end of contact section -->
+		</aside><!-- end of contact section -->

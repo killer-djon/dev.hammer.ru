@@ -1,5 +1,5 @@
 <!-- main section -->
-<section role="main">
+<div role="main">
     <div id="wrapper" class="">
         <? echo View::factory('templates/second/sidebar_left')->render(); ?>
 
@@ -12,11 +12,11 @@
         </div>
 
         <!-- contact section -->
-		<section class="text-center hidden-xs">
+		<aside class="text-center hidden-xs">
 			<div class="row">
 				<div id="map_canvas"></div>
 			</div>
-		</section><!-- end of contact section -->
+		</aside><!-- end of contact section -->
     </div>
-</section>
+</div>
 <!-- main section -->

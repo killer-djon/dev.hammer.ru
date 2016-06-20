@@ -70,11 +70,12 @@
             } else { f(); }
         })(document, window, "yandex_metrika_callbacks");
     </script>
-    <noscript><div><img src="https://mc.yandex.ru/watch/15914218?ut=noindex" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
     <!-- /Yandex.Metrika counter -->
 </head>
 
 <body>
+<noscript><div><img src="https://mc.yandex.ru/watch/15914218?ut=noindex" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+
 <?php echo $header;?>
 <?php echo $content;?>
 <?php echo $footer;?>

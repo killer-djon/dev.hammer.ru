@@ -1,6 +1,6 @@
 <!-- header section -->
 <header class="top-header-second" id="top-header-second">
-    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="navbar navbar-inverse navbar-fixed-top" >
         <div class="navbar-header col-xs-12 col-sm-12 col-md-4 pull-left">
             <!--
             <ul class="navbar-toggle user-profile">
@@ -48,7 +48,7 @@
             <div class="collapse navbar-collapse">
                 <div class="row">
                     <div class="col-md-6 col-xs-12 col-sm-6">
-                        <form role="form" class="navbar-form" action="/products">
+                        <form  class="navbar-form" action="/products">
                             <div class="input-group col-xs-12 navbar-right">
                                 <input type="text" class="form-control" placeholder="Поиск по номеру детали" name="search">
                                 <span class="input-group-btn">
@@ -60,7 +60,7 @@
                         </form>
                     </div>
                     <div class="col-md-6 col-xs-12 col-sm-6">
-                        <form role="form" class="navbar-form" action="/categories">
+                        <form  class="navbar-form" action="/categories">
                             <div class="input-group col-xs-12 navbar-right">
                                 <input type="text" class="form-control" placeholder="Поиск по коду двигателя" name="search">
                                 <span class="input-group-btn">

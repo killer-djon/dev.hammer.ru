@@ -4,7 +4,7 @@
             <h1><? echo $title;?></h1><img src="/assets/img/daag.png" alt="">
         </div>
         <div class="col-xs-12 col-sm-12 col-md-5 pull-right">
-            <form class="form" role="form">
+            <form class="form">
                 <label class="control-label ">Поиск по названию производителя</label>
                 <div class="input-group">
                     <input id="search-view" type="text" placeholder="Поиск производителя" class="form-control">

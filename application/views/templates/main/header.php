@@ -37,7 +37,7 @@
 						                        <span class="fa fa-user"></span>
 						                        <span class="caret"></span>
 						                    </a>
-						                    <ul class="dropdown-menu dropdown-menu-right" role="navigation">
+						                    <ul class="dropdown-menu dropdown-menu-right">
 						                        <li><? echo HTML::anchor('/user/profile', 'Профиль'); ?></li>
 						                        <li><? echo HTML::anchor('/cart', 'Корзина'); ?></li>
 						                        <li><? echo HTML::anchor('#question', 'Задать вопрос'); ?></li>
@@ -56,7 +56,7 @@
 						                        <span class="fa fa-list"></span>
 						                        <span class="caret"></span>
 						                    </a>
-						                    <ul class="dropdown-menu dropdown-menu-right navbar-inverse" role="navigation">
+						                    <ul class="dropdown-menu dropdown-menu-right navbar-inverse" >
 						                        <li><a rel="nofollow" href="#about">О компании</a></li>
 										        <li><a rel="nofollow" href="#categories">Категории</a></li>
 										        <li><a rel="nofollow" href="#testimonials">Производители</a></li>
@@ -80,7 +80,7 @@
 								    <div class="navbar-primary navbar center">
 									    <div class="navbar-inner">
 										    <nav>
-											    <ul class="nav navbar-nav" role="navigation">
+											    <ul class="nav navbar-nav" >
 											      	<li><a rel="nofollow" href="#about">О компании</a></li>
 													<li><a rel="nofollow" href="#categories">Категории</a></li>
 											        <li><a rel="nofollow" href="#testimonials">Производители</a></li>
@@ -100,7 +100,7 @@
 					            <div class="">
 					                <div class="row"> 
 					                    <div class="col-md-6 col-xs-12 col-sm-6">
-					                        <form role="form" class="navbar-form" action="/products">
+					                        <form  class="navbar-form" action="/products">
 					                            <div class="input-group col-xs-12 navbar-right">
 					                                <input type="text" class="form-control" placeholder="Поиск по номеру детали" name="search">
 					                                <span class="input-group-btn">
@@ -112,7 +112,7 @@
 					                        </form>
 					                    </div>
 					                    <div class="col-md-6 col-xs-12 col-sm-6">
-					                        <form role="form" class="navbar-form" action="/categories">
+					                        <form  class="navbar-form" action="/categories">
 					                            <div class="input-group col-xs-12 navbar-right">
 					                                <input type="text" class="form-control" placeholder="Поиск по коду двигателя" name="search">
 					                                <span class="input-group-btn">
@@ -137,7 +137,7 @@
 					    <div class="navbar center">
 						    <div class="navbar-inner">
 							    <nav>
-								    <ul class="nav navbar-nav" role="navigation">
+								    <ul class="nav navbar-nav" >
 									    <!--
 								      	<li class="dropdown">
 						                    <a class="dropdown-toggle no-anchor" data-toggle="dropdown" href="#">

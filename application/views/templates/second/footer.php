@@ -64,7 +64,7 @@
                 <h4 class="modal-title">Уточнить наличие детали</h4>
             </div>
             <div class="modal-body">
-                <form role="form" class="form-horizontal">
+                <form  class="form-horizontal">
                     <div class="form-group">
                         <label for="username" class="col-sm-3 control-label">Ваше имя</label>
                         <div class="col-sm-9">

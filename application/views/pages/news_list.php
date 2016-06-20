@@ -51,7 +51,7 @@ Breadcrumbs::set([
 									        		<div class="row">
 										        		<div class="col-md-4">
 											        		<div class="col-md-12 text-center">
-												        		<img class="img-responsive" src="/upload_images/<?=$item['description_img']?>" title="<?=$item['pagetitle']?>"/>
+												        		<img class="img-responsive" src="/upload_images/<?=$item['description_img']?>" alt="<?=$item['pagetitle']?>" title="<?=$item['pagetitle']?>"/>
 											        		</div>
 											        		
 										        		</div>

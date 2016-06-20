@@ -6,7 +6,7 @@
             </a>
         </li>
     </ul>
-    <nav role="navigation">
+    <nav >
         <ul class="sidebar-nav" id="sidebar">
             <? $uri = Request::detect_uri(); ?>
             <li><a href="/categories" <? echo ($uri =='categories'?'rel="nofollow"':''); ?> class="no-anchor" title="Каталог производителей">Каталог<span class="glyphicon glyphicon-list-alt pull-right sub_icon"></span></a></li>
