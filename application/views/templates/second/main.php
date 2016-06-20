@@ -3,13 +3,18 @@
 
 <head>
     <meta charset="UTF-8">
-
+    <!--[if IE]><meta http-equiv="x-ua-compatible" content="IE=9,IE=edge,chrome=1" /><![endif]-->
     <title><?php echo $title;?></title>
     <meta name="keywords" content="<?php echo $meta_keywords;?>" />
     <meta name="description" content="<?php echo $meta_description;?>" />
     <meta name="copyright" content="<?php echo $meta_copywrite;?>" />
+    <meta name="author" content="Hammerschmidt">
+    
     <meta name="viewport" content="initial-scale=1.0" />
     <meta name='yandex-verification' content='579324aaff5279b8' />
+    <link rel="alternate" href="<?=URL::base(TRUE, FALSE)?>" hreflang="ru" />
+    <link id="favicon" rel="shortcut icon" href="/favicon.ico" type="image/x-icon"/>
+    
     <script type="text/javascript" charset="utf-8" src="//api-maps.yandex.ru/services/constructor/1.0/js/?sid=eFnBnTDCnz2AffGQJhpuTjBira_BWco9&height=450&id=map_canvas"></script>
     <?php foreach($styles as $file => $type) { echo HTML::style($file, array('media' => $type)), "\n"; }?>
 
@@ -28,9 +33,9 @@
         (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
                 (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
             m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
 
-        ga('create', 'UA-33666814-1', 'hammerschmidt.ru');
+        ga('create', 'UA-79581544-1', 'auto');
         ga('send', 'pageview');
 
     </script>
