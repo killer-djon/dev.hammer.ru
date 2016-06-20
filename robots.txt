@@ -1,2 +1,11 @@
-User-agent: *
-Disallow: /
+User-Agent: *
+Allow: /
+Disallow: /cart
+Disallow: /user
+Disallow: /backend
+Disallow: /category*
+Disallow: /crosses*
+Disallow: /product*
+
+Clean-param: type&product /products
+Host: www.hammerschmidt.ru
