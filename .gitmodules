@@ -16,3 +16,6 @@
 [submodule "modules/kohana-pagination"]
 	path = modules/kohana-pagination
 	url = https://github.com/Aculeo/kohana-pagination.git
+[submodule "modules/sitemap"]
+	path = modules/sitemap
+	url = git://github.com/ThePixelDeveloper/kohana-sitemap.git
