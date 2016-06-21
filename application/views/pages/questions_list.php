@@ -51,11 +51,13 @@ Breadcrumbs::set([
 								</div>
 				        	</div>
 				        <? endif; ?>
+                        <!--
 				        <div class="col-md-12">
 					        <div class="panel text-center">
-						        <a href="#" class="btn btn-primary btn-lg" id="add_question" data-toggle="modal" data-target="#add_question_form">Задать вопрос</a>
+						        <a href="#" class="btn btn-primary btn-lg no-anchor" id="add_question" data-toggle="modal" data-target="#add_question_form">Задать вопрос</a>
 					        </div>
 				        </div>
+				        -->
 				    </div>
 				</div>
                 
@@ -77,33 +79,40 @@ Breadcrumbs::set([
                 <h4 class="modal-title">Задать свой вопрос</h4>
             </div>
             <div class="modal-body">
-                <form role="form" class="form-horizontal">
-                    <div class="form-group">
-                        <label for="username" class="col-sm-3 control-label">Ваше имя</label>
-                        <div class="col-sm-9">
-                            <input type="text" class="form-control" id="username" placeholder="Введите свое имя">
-                        </div>
+                <div class="row row-centered">
+                    <div class="col-md-10 col-centered text-center">
+                        <p>Поля отмеченные знаком <span class="text-danger"><strong>*</strong></span>, являются обязательными для заполнения.</p>
                     </div>
+                    <form data-toggle="validator" role="form" class="form-horizontal" action="<?=URL::site('message/send')?>" method="post" id="send-question" data-disable="true">
+                        <div class="form-group">
+                            <label for="username" class="col-sm-3 control-label">Ваше имя:</label>
+                            <div class="col-sm-9">
+                                <input name="username" type="text" class="form-control" id="username" placeholder="Введите свое имя">
+                            </div>
+                        </div>
 
-                    <div class="form-group">
-                        <label for="useremail" class="col-sm-3 control-label">Ваш Email</label>
-                        <div class="col-sm-9">
-                            <input type="email" class="form-control" id="useremail" placeholder="Введите контактный Email">
+                        <div class="form-group has-feedback">
+                            <label for="useremail" class="col-sm-3 control-label">Ваш Email: &nbsp;&nbsp;<span class="text-danger"><strong>*</strong></span></label>
+                            <div class="col-sm-9">
+                                <input name="useremail" data-error="Неверный формат Email адреса" placeholder="example@domain.ltd" type="email" class="form-control" id="useremail" placeholder="Введите контактный Email" required>
+                                <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                                <div class="help-block with-errors text-left"></div>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="form-group">
-                        <label for="useremsg" class="col-sm-3 control-label">Ваш вопрос</label>
-                        <div class="col-sm-9">
-                            <textarea rows="5" class="form-control" id="useremsg" placeholder="Введите контактный Email"></textarea>
+                        <div class="form-group">
+                            <label for="useremsg" class="col-sm-3 control-label">Ваш вопрос:&nbsp;&nbsp;<span class="text-danger"><strong>*</strong></span></label>
+                            <div class="col-sm-9">
+                                <textarea name="useremsg" data-error="Необходимо указать суть вопроса" rows="5" class="form-control" id="useremsg" placeholder="Введите контактный Email" placeholder="Укажите вопрос который Вас интересует" required></textarea>
+                                <div class="help-block with-errors text-left"></div>
+                            </div>
                         </div>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <div class="text-center">
-                    <button type="button" class="btn btn-primary">Отправить</button>
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary">Отправить</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>

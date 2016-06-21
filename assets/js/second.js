@@ -154,6 +154,4 @@ jQuery(document).ready(function() {
 	
 	resizeModal();
 	
-	
-	
 });

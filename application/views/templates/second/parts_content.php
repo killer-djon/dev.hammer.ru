@@ -1,5 +1,5 @@
 <!-- main section -->
-<section role="main">
+<div role="main">
     <div id="wrapper" class="">
         <? echo View::factory('templates/second/sidebar_left')->render(); ?>
 
@@ -39,5 +39,5 @@
 			<!-- end of features-detail section -->
         </div>
     </div>
-</section>
+</div>
 <!-- main section -->

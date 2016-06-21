@@ -185,6 +185,12 @@ if ( ! Route::cache())
 			    'action' => 'singleCategory',
 			  ));
 
+	Route::set('feedback', 'message(/<action>)')
+		->defaults([
+			'controller'    => 'message',
+			'action'    => 'index'
+		]);
+
     Route::set('tests', 'tests')
         ->defaults([
             'controller'    => 'tests',

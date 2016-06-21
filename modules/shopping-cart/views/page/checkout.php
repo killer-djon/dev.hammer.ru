@@ -10,7 +10,7 @@
     </div>
     <div id="shopping-checkout" class="panel-collapse collapse">
         <div class="panel-body card">
-			<form data-toggle="validator" role="form" class="form" id="personal-data" action="/cart/checkout" method="POST">
+			<form data-toggle="validator" class="form" id="personal-data" action="/cart/checkout" method="POST">
 				<div class="row row-centered">
 					<div class="col-md-10 col-centered text-center">
 						<p>Поля отмеченные знаком <span class="text-danger"><strong>*</strong></span>, являются обязательными для заполнения.</p>
