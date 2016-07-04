@@ -78,12 +78,12 @@ if( !empty($arrExcel) )
 			'manufacture'	=> $row[1],
 			'name'	=> $row[2],
 			'qty'	=> preg_replace('/[^\d+]/U', '', $row[3]),
-			'price'	=> sprintf("%01.2f", $row[4]),
+			'price'	=> sprintf("%01.2f", preg_replace('/ /s', '', $row[4])),
 			'date_create'	=> new MongoDate()
 		];
 	}
 	
-	
+
 	$options = [
 		'authMechanism' => 'SCRAM-SHA-1',
 		'db'		=> 'dev_hammer_v3',
@@ -96,11 +96,25 @@ if( !empty($arrExcel) )
 		
 	if( $collection instanceof MongoCollection && is_array( $prices ) )
 	{
-		$dbRes = $collection->batchInsert($prices, ['w'	=> 1]);
-		print_r( $dbRes );
+		//$dbRes = $collection->batchInsert($prices, ['w'	=> 1]);
+		//print_r( $dbRes );
+
+		foreach( $prices as $index => $price )
+		{
+			$dbRes = $collection->update([
+				'article'	=> $price['article']
+			], $price, [
+				'upsert'	=> true
+			]);
+
+			print_r(  $dbRes);
+		}
+
+
 	}
+
 	
-	print_r( $prices );
+	//print_r( $prices );
 	/*
 	$name = '';
 	$result = array();
