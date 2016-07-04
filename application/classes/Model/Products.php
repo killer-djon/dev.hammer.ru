@@ -6,6 +6,7 @@ class Model_Products extends MongoModel
 	
 	
 	protected $_schema = array(
+		'_id'	=> 'id',
 		'category'	=> 'string',
 		'parentId'	=> 'string',
 		'parentName'	=> 'string',

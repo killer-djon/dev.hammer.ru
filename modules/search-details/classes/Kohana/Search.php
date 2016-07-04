@@ -469,6 +469,7 @@ abstract class Kohana_Search implements \ArrayAccess
 			$item['qty'] = ( isset($priceRows[$item['article']]['qty']) ? $priceRows[$item['article']]['qty'] : 0 ); 
 			$item['price'] = ( isset($priceRows[$item['article']]['price']) ? $priceRows[$item['article']]['price'] : 0 ); 
 		}
+		
 		return $rows;
 		
 	}

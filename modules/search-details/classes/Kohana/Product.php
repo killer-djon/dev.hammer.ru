@@ -233,13 +233,38 @@ class Kohana_Product extends Kohana_Search
 		$this->createSearchIndex('products', 'article', 'search', $name, 'products/?search='.$name);
 
 		$model = MongoModel::factory('Products');
-		$model->selectDB();	
-		
+		$model->selectDB();
+
 		$rows = $model
-			->where('search_article', '=', $name)
+			//->where('search_article', '=', $name)
+			->where('clear_article', 'regex', "/{$name}/is")
 			->sort('article')
 			->find_all();
-		
+
+		/**
+		 * Склеиваем результат с уже найденными товарами
+		 * это временное решение надо будет рефакторить
+		 */
+		$priceModel = MongoModel::factory('Prices');
+		$priceModel->selectDB();
+
+		$clearPriceRows = $priceModel
+			->where('clear_article', 'regex', "/{$name}/is")
+			->sort('article')
+			->find_all();
+
+		$clearPriceRows = array_map(function(&$item)
+		{
+			$item['groupName'] = '<span class="text-success">Детали HAMMERSCHMIDT / Takoma</span>';
+			return $item;
+		}, $clearPriceRows);
+
+		$rows = array_merge($rows, $clearPriceRows);
+
+		/**
+		 * Закончили склейку результата но надосделать рефакторинг
+		 */
+
 		if( !empty($rows) )
 		{
 			$this->clearOffsets();
@@ -389,6 +414,27 @@ class Kohana_Product extends Kohana_Search
 	public function searchData($name)
 	{
 		$article = preg_replace('/([^\w]+)/', '', $name);
+		/**
+		 * Склеиваем результат с уже найденными товарами
+		 * это временное решение надо будет рефакторить
+		 */
+		$priceModel = MongoModel::factory('Prices');
+		$priceModel->selectDB();
+
+		$clearPriceRows = $priceModel
+			->where('clear_article', 'regex', "/{$article}/is")
+			->sort('article')
+			->find_all();
+
+		$clearPriceRows = array_map(function(&$item)
+		{
+			$item['groupName'] = '<span class="text-success">Детали HAMMERSCHMIDT / Takoma</span>';
+			return $item;
+		}, $clearPriceRows);
+
+		/**
+		 * Закончили склейку результата но надосделать рефакторинг
+		 */
 		
 		$url = preg_replace('/{product}/', urlencode($article), self::PRODUCT_URL);
 		
@@ -408,7 +454,11 @@ class Kohana_Product extends Kohana_Search
 			if( $this->offsetSize() > 0 )
 			{
 				$offsets = $this->getOffsets();
-				
+				/**
+				 * Склеиваем полученные результаты
+				 */
+				$offsets = array_merge($offsets, $clearPriceRows);
+
 				$this->clearOffsets();
 				$offsets = $this->makePrice($offsets);
 				foreach( $offsets as $key => $item )

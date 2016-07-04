@@ -90,11 +90,18 @@ class Controller_Products extends Controller_Main
             URL::base() => 'Главная',
             '/categories' => 'Производители',
         ]);
-        
+
+		/*
 		if( $searchRow->loaded() )
 		{
 			$product->findData($name);
 		}else
+		{
+			$product->searchData($name);
+		}*/
+		
+		$product->findData($name);
+		if($product->offsetSize() <= 0)
 		{
 			$product->searchData($name);
 		}
@@ -103,7 +110,7 @@ class Controller_Products extends Controller_Main
 		{
 			$productsArr = $product->getOffsets();
 			$offsets = Arr::build_tree($productsArr, 'groupName');
-			
+
 			//$this->template->title = 'Детали двигателя';
 			$this->template->content->category_view = View::factory('search/product');
 			
