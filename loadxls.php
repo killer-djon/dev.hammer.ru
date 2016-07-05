@@ -71,7 +71,10 @@ if( !empty($arrExcel) )
 	foreach( $arrExcel as $index => $row )
 	{
 		if( $index == 0 ) continue;
-		
+
+		settype($row[0], 'string');
+		settype($row[1], 'string');
+
 		$prices[] = [
 			'article'	=> $row[0],
 			'clear_article' => preg_replace('/[^\w+]/is', '', $row[0]),

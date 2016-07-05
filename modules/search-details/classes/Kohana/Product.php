@@ -231,13 +231,14 @@ class Kohana_Product extends Kohana_Search
 	public function findData($name)
 	{
 		$this->createSearchIndex('products', 'article', 'search', $name, 'products/?search='.$name);
+		$clearArticle = preg_replace('/[^\w+]/is', '', $name);
 
 		$model = MongoModel::factory('Products');
 		$model->selectDB();
 
 		$rows = $model
 			//->where('search_article', '=', $name)
-			->where('clear_article', 'regex', "/{$name}/is")
+			->where('clear_article', 'regex', "/{$clearArticle}/is")
 			->sort('article')
 			->find_all();
 
@@ -249,7 +250,7 @@ class Kohana_Product extends Kohana_Search
 		$priceModel->selectDB();
 
 		$clearPriceRows = $priceModel
-			->where('clear_article', 'regex', "/{$name}/is")
+			->where('clear_article', 'regex', "/{$clearArticle}/is")
 			->sort('article')
 			->find_all();
 
@@ -267,17 +268,25 @@ class Kohana_Product extends Kohana_Search
 
 		if( !empty($rows) )
 		{
+
+
 			$this->clearOffsets();
 			$rows = $this->makePrice($rows);
+
 			foreach( $rows as $key => $item )
 			{
 				$this->offsetSet($key, $item);
 			}	
 			
 			$this->refreshData('article');
-			
 			$crosses = $this->collectCrossProducts('article');
-			$this->_cross_products = $this->makePrice($crosses);
+
+			foreach( $crosses as $index => $cross )
+			{
+				$this->_cross_products[$index] = $this->makePrice($cross);
+			}
+			
+
 		}
 		
 		return $this;

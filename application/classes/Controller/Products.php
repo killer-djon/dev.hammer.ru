@@ -101,15 +101,25 @@ class Controller_Products extends Controller_Main
 		}*/
 		
 		$product->findData($name);
+
 		if($product->offsetSize() <= 0)
 		{
 			$product->searchData($name);
 		}
-		
+
 		if( $product->offsetSize() > 0 )
 		{
 			$productsArr = $product->getOffsets();
-			$offsets = Arr::build_tree($productsArr, 'groupName');
+			if( count($productsArr) > 1 )
+			{
+				$offsets = Arr::build_tree($productsArr, 'groupName');
+			}else
+			{
+				$offsets[] = [
+					'group'	=> $productsArr[0]['groupName'],
+					'children'	=> $productsArr
+				];
+			}
 
 			//$this->template->title = 'Детали двигателя';
 			$this->template->content->category_view = View::factory('search/product');

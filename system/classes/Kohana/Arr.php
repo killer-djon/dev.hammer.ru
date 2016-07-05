@@ -643,6 +643,7 @@ class Kohana_Arr{
 	 *
 	 * @return (array) - Array of this object
 	 */
+	
 	public static function build_tree(&$tree, $parentId = 'parentId') {
 	
 	    $result = array();
@@ -652,11 +653,11 @@ class Kohana_Arr{
 			foreach( $tree as $key => &$item ){
 				
 				if( ! isset($item[$parentId]) || empty($item[$parentId]) ){		
-					$result[] =& $item;					
+					$result[] =& $item;
 				}else
 				{
 					$tree[ $item[$parentId] ]["group"] =& $item[$parentId];
-					$tree[ $item[$parentId] ]["children"][] = &$item;					
+					$tree[ $item[$parentId] ]["children"][] = &$item;
 				}
 			}
 		}
