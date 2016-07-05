@@ -317,10 +317,13 @@ abstract class Kohana_Search implements \ArrayAccess
 			}, $this->getOffsets());
 			
 			$model = MongoModel::factory('CrossProducts');
-			$model->selectDB();	
-			
+			$model->selectDB();
+
 			$rows = $model
-				->where('cross_article', 'in', array_unique($keys))
+				->where('cross_article', 'in', array_map(function($item){
+					settype($item, 'string');
+					return $item;
+				}, array_unique($keys)))
 				->sort('article')
 				->find_all();
 			$data = [];

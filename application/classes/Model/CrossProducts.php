@@ -4,7 +4,7 @@ class Model_CrossProducts extends MongoModel
 {
 	protected $_collection_name = 'cross_products';
 	
-	
+
 	protected $_schema = [
 		"identifier" => 'string',
         "article" => 'string',
@@ -18,8 +18,8 @@ class Model_CrossProducts extends MongoModel
         "link" => 'string',
         "date_create" => 'date',
         "cross_article" => [
-	        '_keys'	=> 'string'
+			'_keys' => 'string'
         ],
-	];	
-	
+	];
+
 }
