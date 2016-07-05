@@ -285,7 +285,6 @@ class Kohana_Product extends Kohana_Search
 			{
 				$this->_cross_products[$index] = $this->makePrice($cross);
 			}
-			
 
 		}
 		
