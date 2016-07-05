@@ -18,7 +18,7 @@ class Controller_Main extends Controller_Template
 			$this->template->breadcrumbs      = '';
 	        $this->template->meta_keywords    = '';
 	        $this->template->meta_description = '';
-	        $this->template->meta_copywrite   = '';
+	        $this->template->meta_copywrite   = 'Интернет-магазин автодеталей ФКТ-Автомотив';
 	        $this->template->header           = '';
 	        $this->template->content          = '';
 	        $this->template->footer           = '';

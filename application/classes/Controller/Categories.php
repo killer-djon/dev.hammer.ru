@@ -117,6 +117,11 @@ class Controller_Categories extends Controller_Main
         $this->template->content->category_view = View::factory('categories/parts');
         $this->template->content->breadcrumbs = View::factory('templates/breadcrumbs');
 
+		$meta_keywords = [
+			"детали двигателя {$current['name']}",
+			"производитель деталей {$current['auto']}",
+		];
+
         Breadcrumbs::set([
             URL::base() => 'Главная',
             '/categories' => 'Каталог производителей',
@@ -131,6 +136,14 @@ class Controller_Categories extends Controller_Main
 			$productsArr = $product->getOffsets();
 			$offsets = Arr::build_tree($productsArr, 'groupName');
 
+			$article_keywords = array_combine(array_column($productsArr, 'article'), array_column($productsArr, 'name'));
+			$article_description = implode(', ', array_unique(array_values($article_keywords)));
+
+			array_walk($article_keywords, function(&$item, $key){
+				$item = $item . ' ' . $key;
+			});
+			$meta_keywords = array_merge($meta_keywords, $article_keywords);
+
             $this->template->content->category_view->current = $current;
             $this->template->content->category_view->parts = $offsets;
             $this->template->content->category_view->cross_products = $product->getCrossProductsData();
@@ -140,6 +153,9 @@ class Controller_Categories extends Controller_Main
             $this->template->content->category_view->current = $current;
             $this->template->content->category_view->empty_parts = 'По вашему запросу ничего не найдено, попробуйте ввести еще раз';
 		}
+
+		$this->template->meta_keywords = implode(',', $meta_keywords);
+		$this->template->meta_description = "Интернет-магазин ФКТ-Автомотив представляет Вам список деталей двигателя {$current['name']} производителя {$current['auto']}. Представлен наиболее полный набор деталей таких как: {$article_description}";
 	}
 
 	public function action_singleCategory()
@@ -211,6 +227,7 @@ class Controller_Categories extends Controller_Main
         $this->template->content->breadcrumbs = View::factory('templates/breadcrumbs');
 
         $current = $category->getCurrent();
+		$offsets = $category->getOffsets();
 		if( $type == 'view' )
 		{
             Breadcrumbs::set([
@@ -220,6 +237,16 @@ class Controller_Categories extends Controller_Main
             
             $this->template->content->category_view = View::factory('categories/category_view');
             $this->template->content->category_view->title = 'Каталог производителей';
+			$meta_keywords = [
+				'производители деталей',
+				'производители автозапчастей',
+				'автозапчасти',
+				'детали двигателей всех производителей',
+			];
+
+			$this->template->meta_keywords = implode(',', array_merge($meta_keywords, array_column($offsets, 'name')));
+			$this->template->meta_description = 'Интернет-магазин автозапчастей и деталей ФКТ-Автомотив предлагает приобрести детали всех известных производителей '.implode(', ', array_column($offsets, 'name'));
+
 		}else if( $type == 'generic' )
 		{
             Breadcrumbs::set([
@@ -232,6 +259,18 @@ class Controller_Categories extends Controller_Main
             $this->template->content->title = 'Производитель '.$current['name'];
 			$this->template->content->category_view = View::factory('categories/category_generic');
 			$this->template->content->category_view->title = 'Производитель '.$current['name'];
+
+			$meta_keywords = [
+				'производители деталей',
+				'производители автозапчастей',
+				'автозапчасти',
+				'детали двигателей всех производителей',
+				'производитель деталей '.$current['name'],
+				'модели производителя '.$current['name'],
+			];
+
+			$this->template->meta_keywords = implode(',', array_merge($meta_keywords, array_column($offsets, 'name')));
+			$this->template->meta_description = 'Производитель автозапчастей и деталей '.$current['name'].' представляет полный набор моделей, от '.current(array_column($offsets, 'name')).' до '.current(array_reverse(array_column($offsets, 'name'), 1));
 		}else if( $type == 'engine' )
 		{
             Breadcrumbs::set([
@@ -245,10 +284,21 @@ class Controller_Categories extends Controller_Main
             $this->template->content->title = 'Модель '.$current['name'];
 			$this->template->content->category_view = View::factory('categories/category_engine');
 			$this->template->content->category_view->title = 'Модель '.$current['name'];
+
+			$meta_keywords = [
+				'производители деталей',
+				'производители автозапчастей',
+				'автозапчасти',
+				'детали двигателей всех производителей',
+				'производитель двигателей двигателя '.$current['parentName'],
+				'коды двигателей модели '.$current['name']
+			];
+			$this->template->meta_keywords = implode(',', array_merge($meta_keywords, array_column($offsets, 'name')));
+			$this->template->meta_description = 'Производитель автозапчастей и деталей '.$current['parentName'].' предлагает набор кодов двигателя '.implode(', ',array_column($offsets, 'name')).' модели '.$current['name'];
 		}
 		
         $this->template->content->category_view->current = $current;
-        $this->template->content->category_view->categories = $category->getOffsets();
+        $this->template->content->category_view->categories = $offsets;
 	}
 	
 	public function filter_categories($type = 'view', $name = NULL)
