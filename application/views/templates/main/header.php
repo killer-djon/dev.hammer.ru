@@ -7,7 +7,8 @@
 				<nav class="navbar nav-bar">
 					<div class="container-fluid">
 					    <div class="row row-centered main-top-header">
-						    <div class="col-md-10 col-sm-12 col-xs-12 col-centered top-logo">
+
+						    <div class="col-md-12 col-sm-12 col-xs-12 col-centered top-logo">
 							    <div class="navbar-header text-center">
 								    
 								    <!-- user toggle menu -->
@@ -127,6 +128,18 @@
 					            </div>
 					        </div>
 						    <!-- search forms -->
+
+							<!-- навигация при scroll -->
+							<!--noindex-->
+							<div class="col-centered col-xs-12 col-sm-12 col-md-12 text-center hidden-xs" id="header-btn-navigation" role="navigation">
+								<a class="btn btn-primary zoomIn animated" href="/categories">каталог производителей</a>
+								<a class="btn btn-default zoomIn animated" href="/delivery">доставка деталей</a>
+								<a class="btn btn-default zoomIn animated" href="/questions">вопрос-ответ</a>
+								<a class="btn btn-default zoomIn animated" href="/contacts">контакты</a>
+							</div>
+							<!--/noindex-->
+							<!-- навигация при scroll -->
+
 					    </div>
 					</div>
 				</nav>

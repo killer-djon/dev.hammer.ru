@@ -438,21 +438,25 @@ abstract class Kohana_Search implements \ArrayAccess
 	{
 		if( empty($rows) )
 			return;
-		
+
 		$articles = array_column($rows, 'article');
 		
 		$articles = array_map(function($item){
 			settype($item, 'string');
-			return $item;
+			return preg_replace('/[^\w+]/is', '', $item);
 		}, $articles);
-		
+
 		$model = MongoModel::factory('Prices');
-		$model->selectDB();	
-		
+		$model->selectDB();
+
+		$articles = array_unique($articles);
+		array_reverse($articles, 1);
+		$articles = array_reverse($articles);
+
 		$priceRows = $model
-			->where('article', 'in', $articles)
+			->where('clear_article', 'in', $articles)
 			->find_all();
-			
+
 		if( empty($priceRows) )
 		{
 			foreach( $rows as $key =>& $item )
@@ -463,16 +467,15 @@ abstract class Kohana_Search implements \ArrayAccess
 			
 			return $rows;
 		}
-		
-		
-		$priceRows = array_combine(array_column($priceRows, 'article'), $priceRows);
+
+		$priceRows = array_combine(array_column($priceRows, 'clear_article'), $priceRows);
 
 		foreach( $rows as $key =>& $item )
 		{
-			$item['qty'] = ( isset($priceRows[$item['article']]['qty']) ? $priceRows[$item['article']]['qty'] : 0 ); 
-			$item['price'] = ( isset($priceRows[$item['article']]['price']) ? $priceRows[$item['article']]['price'] : 0 ); 
+			$item['qty'] = ( isset($priceRows[$item['clear_article']]['qty']) ? $priceRows[$item['clear_article']]['qty'] : 0 );
+			$item['price'] = ( isset($priceRows[$item['clear_article']]['price']) ? $priceRows[$item['clear_article']]['price'] : 0 );
 		}
-		
+
 		return $rows;
 		
 	}

@@ -80,6 +80,17 @@ jQuery(document).ready(function() {
      
      function doScrollContent(scrollTop)
      {
+         console.log( scrollTop )
+         
+         if( scrollTop >= 525 )
+         {
+             jQuery("#header-btn-navigation").show();
+         }else
+         {
+             jQuery("#header-btn-navigation").hide();
+         }
+
+
 	     if(scrollTop >= 50) {
 	          jQuery(".top-header").css({"background": "#18171D",});
 	          //jQuery(".top-header img.logo").css({"margin-top": "-30px", "margin-bottom": "15px"});

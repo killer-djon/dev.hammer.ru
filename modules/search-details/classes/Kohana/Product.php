@@ -256,7 +256,7 @@ class Kohana_Product extends Kohana_Search
 
 		$clearPriceRows = array_map(function(&$item)
 		{
-			$item['groupName'] = '<span class="text-success">Детали HAMMERSCHMIDT / Takoma</span>';
+			$item['groupName'] = '<span class="text-success">Детали в наличии</span>';
 			return $item;
 		}, $clearPriceRows);
 
@@ -436,7 +436,7 @@ class Kohana_Product extends Kohana_Search
 
 		$clearPriceRows = array_map(function(&$item)
 		{
-			$item['groupName'] = '<span class="text-success">Детали HAMMERSCHMIDT / Takoma</span>';
+			$item['groupName'] = '<span class="text-success">Детали в наличии</span>';
 			return $item;
 		}, $clearPriceRows);
 
