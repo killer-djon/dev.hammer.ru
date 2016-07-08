@@ -91,17 +91,17 @@ class Controller_Categories extends Controller_Main
 	{
 		$this->setScript('assets/js/second.js', 'footer');
 		$product = Product::getInstance($this->_cache);
-		
+
 		$model = MongoModel::factory('SearchIndex');
 		$model->selectDB();
-		
+
 		$searchRow = $model
 			->where('collection', '=', 'products')
 			->where('field', '=', 'name')
 			->where('value', '=', $partsName)
 			->where('search_page', '=', 'categories/'.$categoryName.'/'.$partsName)
 			->find();
-			
+
 		if( $searchRow->loaded() )
 		{
 			$product->loadProducts($categoryName, $partsName);
@@ -109,9 +109,9 @@ class Controller_Categories extends Controller_Main
 		{
 			$product->getProducts($categoryName, $partsName);
 		}
-		
+
         $current = $product->getCurrent();
-        
+
 		$this->template->title = "Детали двигателя {$current['name']} и возможные замены";
         $this->template->content = View::factory('templates/second/parts_content');
         $this->template->content->category_view = View::factory('categories/parts');
@@ -130,6 +130,8 @@ class Controller_Categories extends Controller_Main
             "/categories/{$current['auto']}/{$current['name']}" => $current['name'],
         ]);
 
+
+
         $this->template->content->title = 'Детали двигателя: '.$current['name'];
 		if( $product->offsetSize() > 0 )
 		{
@@ -147,6 +149,8 @@ class Controller_Categories extends Controller_Main
             $this->template->content->category_view->current = $current;
             $this->template->content->category_view->parts = $offsets;
             $this->template->content->category_view->cross_products = $product->getCrossProductsData();
+
+
 		}else
 		{
             $this->template->content->category_view->title = 'Детали двигателя';
