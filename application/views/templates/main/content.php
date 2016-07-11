@@ -48,7 +48,7 @@
 					</div>
 					<div class="col-centered col-xs-12 col-sm-12 col-md-12 text-center btn-group-horizontal">
 						<a class="btn btn-primary" href="/categories">каталог производителей</a>
-						<a class="btn btn-default" href="/delivery">доставка деталей</a>
+						<a class="btn btn-default" href="/delivery">оплата и доставка</a>
 						<a class="btn btn-default" href="/questions">вопрос-ответ</a>
 						<a class="btn btn-default" href="/contacts">контакты</a>
 					</div>

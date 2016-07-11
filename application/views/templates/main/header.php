@@ -133,7 +133,7 @@
 							<!--noindex-->
 							<div class="col-centered col-xs-12 col-sm-12 col-md-12 text-center hidden-xs" id="header-btn-navigation" role="navigation">
 								<a class="btn btn-primary zoomIn animated" href="/categories">каталог производителей</a>
-								<a class="btn btn-default zoomIn animated" href="/delivery">доставка деталей</a>
+								<a class="btn btn-default zoomIn animated" href="/delivery">оплата и доставка</a>
 								<a class="btn btn-default zoomIn animated" href="/questions">вопрос-ответ</a>
 								<a class="btn btn-default zoomIn animated" href="/contacts">контакты</a>
 							</div>

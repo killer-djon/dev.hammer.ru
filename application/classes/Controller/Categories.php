@@ -225,7 +225,7 @@ class Controller_Categories extends Controller_Main
 		$category = Category::getInstance();
 		$category->getCategories($type, $name); // get default view categories - first levent
 
-		$this->template->title = "Каталог производителей деталей";
+		$this->template->title = "Каталог производителей";
         $this->template->content = View::factory('templates/second/content');
         $this->template->content->title = 'Каталог производителей';
         $this->template->content->breadcrumbs = View::factory('templates/breadcrumbs');
