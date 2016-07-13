@@ -39,6 +39,8 @@ class Controller_Statics extends Controller_Main
 			
 			$this->template->content = View::factory('templates/main/content');
 			$this->template->title = 'Интернет-магазин деталей всех производителей';
+			$this->template->meta_description = 'Интернет-магазин ФКТ Автомотив, занимается продажей автозапчастей и деталей всех производителей на моторную группу.';
+			$this->template->meta_keywords    = 'интернет-магазин деталей, интернет магазин автозапчастей, автозапчасти, детали авто, производители деталей,детали моторной группы';
 
 			$this->template->content->categories = $category->getOffsets();
 			return $this->response->body($this->template);
