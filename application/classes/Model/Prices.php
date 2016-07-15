@@ -13,6 +13,7 @@ class Model_Prices extends MongoModel
 		'clear_article'	=> 'string',
 		'manufacture'	=> 'string',
 		'qty'	=> 'int',
-		'price'	=> 'double'
+		'price'	=> 'double',
+		'date_update'	=> 'date'
 	);
 }
