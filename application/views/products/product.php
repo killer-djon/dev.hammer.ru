@@ -98,7 +98,7 @@
 										<?$crossPrice = (isset($crossItem['price']) && 0!==$crossItem['price'] ? $crossItem['price'].' руб.' : 0);?>
 
 										<tr class="detail-row <?=($crossPrice!==0?'bg-success':'bg-danger')?>">
-											<td><?=($crossKey+1);?></td>
+											<td><?=$i;?></td>
 											<td>
 												<?=(!empty($crossItem['name'])?$crossItem['name']:'<img alt="" src="/assets/img/daag.png">')?>
 											</td>
@@ -156,11 +156,12 @@
 												</div>
 											</td>
 										</tr>
+										<? $i++; ?>
 									<? endforeach; ?>
 								<?endif;?>
 							<?endif;?>
 
-							<? $i++; ?>
+
 						<? endforeach; ?>
 						</tbody>
 					</table>
