@@ -44,14 +44,7 @@
 									<tr class="detail-row <?=($price!==0?'bg-success':'bg-danger')?> collapsed">
 										<td><?=$i;?></td>
 										<td>
-											<a rel="nofollow" href="#" data-toggle="collapse" data-target="#<?=preg_replace('/[^\w+]/is', '_', $detail['article'])?>">
-												<?=(!empty($detail['name'])?$detail['name']:'<img alt="" src="/assets/img/daag.png">')?>
-												<? if( !empty($cross_products) ): ?>
-													<? if( isset($cross_products[$detail['article']]) ): ?>
-														<small class="clearfix text-info">аналоги детали</small>
-													<?endif?>
-												<?endif?>
-											</a>
+											<?=(!empty($detail['name'])?$detail['name']:'<img alt="" src="/assets/img/daag.png">')?>
 										</td>
 										<td>
 											<a href="/products/?type=products&article=<?=$detail['article']?>"><?=$detail['article']?></a>
@@ -110,68 +103,45 @@
 									</tr>
 									<? if( !empty($cross_products) ): ?>
 										<? if( isset($cross_products[$detail['article']]) ): ?>
-											<tr class="collapse" id="<?=preg_replace('/[^\w+]/is', '_', $detail['article'])?>">
-												<td colspan="6" class="well">
-													<div class="panel panel-default col-md-offset-1 col-sm-offset-1">
-														<div class="panel-heading"><h5>Подходящие замены детали</h5></div>
-														<div class="panel-body">
-															<table class="table table-hover table-bordered">
-																<col width="50px"/>
-																<col/>
-																<col/>
-																<col/>
-																<col/>
-																<col width="100px"/>
-																<thead>
-																<tr>
-																	<th>№</th>
-																	<th>Наименование</th>
-																	<th>Код детали</th>
-																	<th>Производитель</th>
-																	<th>Цена</th>
-																	<th></th>
-																</tr>
-																</thead>
-																<tbody>
-																<? foreach($cross_products[$detail['article']] as $crossKey => $crossItem): ?>
-																	<? if( empty($crossItem['article']) ) continue; ?>
+											<? foreach($cross_products[$detail['article']] as $crossKey => $crossItem): ?>
+												<? if( empty($crossItem['article']) || $crossItem['article'] == $detail['article'] ) continue; ?>
 
-																	<?$crossPrice = (isset($crossItem['price']) && 0!==$crossItem['price'] ? $crossItem['price'].' руб.' : 0);?>
+												<?$crossPrice = (isset($crossItem['price']) && 0!==$crossItem['price'] ? $crossItem['price'].' руб.' : 0);?>
 
-																	<tr class="detail-row <?=($crossPrice!==0?'bg-success':'bg-danger')?>">
-																		<td><?=($crossKey+1);?></td>
-																		<td>
-																			<?=(!empty($crossItem['name'])?$crossItem['name']:'<img alt="" src="/assets/img/daag.png">')?>
-																		</td>
-																		<td>
-																			<a href="/products/?type=products&article=<?=$crossItem['article']?>"><?=$crossItem['article']?></a>
-																		</td>
-																		<td><?=strtoupper($crossItem['manufacture'])?></td>
-																		<td class="text-right">
-																			<?=($crossPrice!==0 ? $crossPrice : '<img alt="" src="/assets/img/daag.png">')?>
-																		</td>
-																		<td>
-																			<div class="btn-group dropdown">
-																				<button href="#" class="btn btn-info no-anchor dropdown-toggle" data-toggle="dropdown">
-																					<i class="fa fa-cart-plus"></i>
-																				</button>
-																				<ul class="dropdown-menu dropdown-menu-right" role="menu">
-																					<li role="menuitem">
-																						<div class="row">
-																							<div class="col-md-12">
-																								<form role="form" class="form product-qty">
-																									<input type="hidden" name="id" value="<?=$crossItem['_id']['$id']?>">
-																									<input type="hidden" name="article" value="<?=$crossItem['article']?>">
-																									<input type="hidden" name="name" value="<?=(!empty($crossItem['name'])?$crossItem['name']:'--')?>">
-																									<input type="hidden" name="price" value="<?=($crossPrice!==0 ? $crossPrice : 0)?>">
+												<tr class="detail-row <?=($crossPrice!==0?'bg-success':'bg-danger')?> collapsed">
+													<td><?=($crossKey+1);?></td>
+													<td>
+														<?=(!empty($crossItem['name'])?$crossItem['name']:'<img alt="" src="/assets/img/daag.png">')?>
+													</td>
+													<td>
+														<a href="/products/?type=products&article=<?=$crossItem['article']?>"><?=$crossItem['article']?></a>
+													</td>
+													<td><?=strtoupper($crossItem['manufacture'])?></td>
+													<td class="text-right">
+														<?=($crossPrice!==0 ? $crossPrice : '<img alt="" src="/assets/img/daag.png">')?>
+													</td>
+													<td>
+														<div class="btn-group dropdown">
+															<button href="#" class="btn btn-info no-anchor dropdown-toggle" data-toggle="dropdown">
+																<i class="fa fa-cart-plus"></i>
+															</button>
+															<ul class="dropdown-menu dropdown-menu-right" role="menu">
+																<li role="menuitem">
+																	<div class="row">
+																		<div class="col-md-12">
+																			<form role="form" class="form product-qty">
+																				<input type="hidden" name="id" value="<?=$crossItem['_id']['$id']?>">
+																				<input type="hidden" name="article" value="<?=$crossItem['article']?>">
+																				<input type="hidden" name="name" value="<?=(!empty($crossItem['name'])?$crossItem['name']:'--')?>">
+																				<input type="hidden" name="price" value="<?=($crossPrice!==0 ? $crossPrice : 0)?>">
 
-																									<div class="form-group">
-																										<label for="qty">Выберите кол-во</label>
-																										<div class="input-group count-detail">
+																				<div class="form-group">
+																					<label for="qty">Выберите кол-во</label>
+																					<div class="input-group count-detail">
 																				<span class="input-group-addon cart-qty cart-minus">
 																					<i class="fa fa-minus"></i>
 																				</span>
-																											<input name="qty" type="text" class="form-control text-right btn-number" placeholder="1" value="1">
+																						<input name="qty" type="text" class="form-control text-right btn-number" placeholder="1" value="1">
 																				<span class="input-group-addon cart-qty cart-plus">
 																					<i class="fa fa-plus"></i>
 																				</span>
@@ -179,31 +149,25 @@
 																					<i class="fa fa-refresh"></i>
 																				</span>
 
-																										</div>
+																					</div>
 
-																									</div>
+																				</div>
 
-																									<div class="form-group text-right">
-																										<a role="button" class="btn btn-primary add_to_cart">Добавить в корзину</a>
-																									</div>
-																								</form>
-																							</div>
-																						</div>
-																					</li>
-																				</ul>
-																				<a href="#" rel="nofollow" class="btn btn-info no-anchor" data-toggle="modal" data-target="#sendMessage">
-																					<i class="fa fa-envelope"></i>
-																				</a>
-																			</div>
-																		</td>
-																	</tr>
-																<? endforeach; ?>
-																</tbody>
-															</table>
+																				<div class="form-group text-right">
+																					<a role="button" class="btn btn-primary add_to_cart">Добавить в корзину</a>
+																				</div>
+																			</form>
+																		</div>
+																	</div>
+																</li>
+															</ul>
+															<a href="#" rel="nofollow" class="btn btn-info no-anchor" data-toggle="modal" data-target="#sendMessage">
+																<i class="fa fa-envelope"></i>
+															</a>
 														</div>
-													</div>
-												</td>
-											</tr>
+													</td>
+												</tr>
+											<? endforeach; ?>
 										<?endif;?>
 									<?endif;?>
 

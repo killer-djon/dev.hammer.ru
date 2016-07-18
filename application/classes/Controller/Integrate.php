@@ -40,48 +40,61 @@ class Controller_Integrate extends Controller
         }
 
         $headers = $this->request->headers();
-        $uploadedFile = $this->getExportDir() . $headers['FileName'];
 
-        if( file_exists( $uploadedFile ) )
+        if( isset( $headers['FileName'] ) && !empty($headers) )
         {
-            $fileModel = MongoModel::factory('Exports1C');
-            $fileModel->selectDB();
+            $uploadedFile = $this->getExportDir() . $headers['FileName'];
 
-            $newFile = $this->getUploadDir() . $headers['FileName'];
-            $newFile = preg_replace('/ /is', '_', $newFile);
-
-            if( copy($uploadedFile, $newFile ) )
+            if( file_exists( $uploadedFile ) )
             {
-                @unlink($uploadedFile);
+                $fileModel = MongoModel::factory('Exports1C');
+                $fileModel->selectDB();
 
-                $fileModel->values([
-                    'file_format'   => $headers['FileFormat'],
-                    'file_size' => filesize($newFile),
-                    'file_name' => $headers['FileName'],
-                    'file_path' => $this->getUploadDir(),
-                    'date_upload'   => new \MongoDate(),
-                ]);
+                $newFile = $this->getUploadDir() . $headers['FileName'];
+                $newFile = preg_replace('/ /is', '_', $newFile);
 
-                $fileModel->save();
-                $this->analizeFile($this->getUploadDir() . $headers['FileName']);
+                if( copy($uploadedFile, $newFile ) )
+                {
+                    @unlink($uploadedFile);
 
-                echo Response::factory()
-                    ->status(200)
-                    ->body('Файл успешно был загружен на сервер')
-                    ->render();
+                    $fileModel->values([
+                        'file_format'   => $headers['FileFormat'],
+                        'file_size' => filesize($newFile),
+                        'file_name' => $headers['FileName'],
+                        'file_path' => $this->getUploadDir(),
+                        'date_upload'   => new \MongoDate(),
+                    ]);
+
+                    $fileModel->save();
+                    $this->analizeFile('/home/hammer/htdocs/catalogs/FKT-AVTO.csv');
+
+                    echo Response::factory()
+                        ->status(200)
+                        ->body('Файл успешно был загружен на сервер')
+                        ->render();
+                }else
+                {
+                    echo Response::factory()
+                        ->status(500)
+                        ->body('Не удалось переместить файл на сервере')
+                        ->render();
+                }
             }else
             {
                 echo Response::factory()
                     ->status(500)
-                    ->body('Не удалось переместить файл на сервере')
+                    ->body('Файл не был загружен или не верно указано имя файла в заголовке')
                     ->render();
             }
         }else
         {
+            $this->analizeFile('/home/hammer/htdocs/catalogs/FKT-AVTO.csv');
+            /*
             echo Response::factory()
-                ->status(500)
-                ->body('Файл не был загружен или не верно указано имя файла в заголовке')
+                ->status(403)
+                ->body('Заголовки пустые')
                 ->render();
+            */
         }
 
     }
@@ -121,9 +134,18 @@ class Controller_Integrate extends Controller
                 switch (strtolower($fileInfo->getExtension()))
                 {
                     case 'csv':
+
                         $csv = CSV::factory($filename, [
                             'has_titles'    => false
-                        ])->parse();
+                        ]);
+
+                        if( mb_detect_encoding($filename) == 'ASCII' )
+                        {
+                            $csv->encode('CP1251', 'UTF-8');
+                        }
+
+                        $csv->parse();
+
                         $rows = $csv->rows();
 
 
