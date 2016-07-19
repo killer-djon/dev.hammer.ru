@@ -12,7 +12,6 @@
     
     <meta name="viewport" content="initial-scale=1.0" />
     <meta name='yandex-verification' content='579324aaff5279b8' />
-    <link rel="alternate" href="<?=URL::base(TRUE, FALSE)?>" hreflang="ru" />
     <link id="favicon" rel="shortcut icon" href="/favicon.ico" type="image/x-icon"/>
     
     <script type="text/javascript" charset="utf-8" src="//api-maps.yandex.ru/services/constructor/1.0/js/?sid=eFnBnTDCnz2AffGQJhpuTjBira_BWco9&height=450&id=map_canvas"></script>

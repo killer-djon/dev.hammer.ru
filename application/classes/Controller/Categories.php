@@ -131,7 +131,7 @@ class Controller_Categories extends Controller_Main
         ]);
 
 
-
+		$article_description = '';
         $this->template->content->title = 'Детали двигателя: '.$current['name'];
 		if( $product->offsetSize() > 0 )
 		{
