@@ -28,7 +28,7 @@
 						<tbody>
 						<? $i = 1; ?>
 						<? foreach($parts as $key => $detail): ?>
-							<?$price = (isset($detail['price']) && 0!==$detail['price'] ? $detail['price'].' руб.' : 0);?>
+							<?$price = (isset($detail['price']) && 0!=$detail['price'] ? '<b>'.$detail['price'].'</b> руб.' : 0);?>
 
 							<tr class="detail-row <?=($price!==0?'bg-success':'bg-danger')?>">
 								<td></td>
@@ -41,7 +41,8 @@
 								</td>
 								<td><?=strtoupper($detail['manufacture'])?></td>
 								<td class="text-right">
-									<?=($price!==0 ? $price : '<img alt="" src="/assets/img/daag.png">')?>
+									<?=($price!==0 ? $price
+										: '<span class="text-info">Под заказ</span>')?>
 								</td>
 								<td>
 									<div class="btn-group dropdown">
@@ -95,7 +96,7 @@
 									<? foreach($cross_products[$detail['article']] as $crossKey => $crossItem): ?>
 										<? if( empty($crossItem['article']) ) continue; ?>
 
-										<?$crossPrice = (isset($crossItem['price']) && 0!==$crossItem['price'] ? $crossItem['price'].' руб.' : 0);?>
+										<?$crossPrice = (isset($crossItem['price']) && 0!=$crossItem['price'] ? '<b>'.$crossItem['price'].'</b> руб.' : 0);?>
 
 										<tr class="detail-row <?=($crossPrice!==0?'bg-success':'bg-danger')?>">
 											<td></td>
@@ -107,7 +108,8 @@
 											</td>
 											<td><?=strtoupper($crossItem['manufacture'])?></td>
 											<td class="text-right">
-												<?=($crossPrice!==0 ? $crossPrice : '<img alt="" src="/assets/img/daag.png">')?>
+												<?=($crossPrice!==0 ? $crossPrice
+													: '<span class="text-info">Под заказ</span>')?>
 											</td>
 											<td>
 												<div class="btn-group dropdown">

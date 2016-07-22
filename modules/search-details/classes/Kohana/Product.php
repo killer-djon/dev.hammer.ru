@@ -78,7 +78,7 @@ class Kohana_Product extends Kohana_Search
 				
 			if( !empty($rowProducts) && count($rowProducts) > 0 )
 			{
-				$rowProducts = $this->makePrice($rowProducts);
+				//$rowProducts = $this->makePrice($rowProducts);
 				foreach( $rowProducts as $key => $item )
 				{
 					$this->offsetSet($key, $item);
@@ -87,7 +87,11 @@ class Kohana_Product extends Kohana_Search
 				$this->refreshData('link');
 				
 				$crosses = $this->collectCrossProducts('article');
-				$this->_cross_products = $this->makePrice($crosses);
+				//$this->_cross_products = $this->makePrice($crosses);
+				foreach( $crosses as $index => $cross )
+				{
+					$this->_cross_products[$index] = $this->makePrice($cross);
+				}
 				
 			}
 		}
@@ -177,7 +181,11 @@ class Kohana_Product extends Kohana_Search
 					$this->refreshData('link');
 					
 					$crosses = $this->collectCrossProducts('article');
-					$this->_cross_products = $this->makePrice($crosses);
+					//$this->_cross_products = $this->makePrice($crosses);
+					foreach( $crosses as $index => $cross )
+					{
+						$this->_cross_products[$index] = $this->makePrice($cross);
+					}
 				}
 			}
 		}
@@ -327,7 +335,11 @@ class Kohana_Product extends Kohana_Search
 			$this->refreshData('link');
 			
 			$crosses = $this->collectCrossProducts('article');
-			$this->_cross_products = $this->makePrice($crosses);
+			//$this->_cross_products = $this->makePrice($crosses);
+			foreach( $crosses as $index => $cross )
+			{
+				$this->_cross_products[$index] = $this->makePrice($cross);
+			}
 		}
 		
 		return $this;
@@ -412,7 +424,11 @@ class Kohana_Product extends Kohana_Search
 				$this->refreshData('link');
 				
 				$crosses = $this->collectCrossProducts('article');
-				$this->_cross_products = $this->makePrice($crosses);
+				//$this->_cross_products = $this->makePrice($crosses);
+				foreach( $crosses as $index => $cross )
+				{
+					$this->_cross_products[$index] = $this->makePrice($cross);
+				}
 			}
 		}
 		
@@ -504,7 +520,11 @@ class Kohana_Product extends Kohana_Search
 				$this->refreshData('link');
 				
 				$crosses = $this->collectCrossProducts('article');
-				$this->_cross_products = $this->makePrice($crosses);
+				//$this->_cross_products = $this->makePrice($crosses);
+				foreach( $crosses as $index => $cross )
+				{
+					$this->_cross_products[$index] = $this->makePrice($cross);
+				}
 			}
 			
 		}
