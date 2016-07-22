@@ -152,13 +152,15 @@ class Controller_Integrate extends Controller
                                 $clear_article = preg_replace('/[^\w+]/i', '', $row[2]);
                                 if( !empty($clear_article) )
                                 {
+                                    $qty = (!empty($row[4]) ? preg_replace('/[^\d+]/Uis', '', $row[4]) : 0);
+
                                     $price = [
                                         'article'   => $row[2],
                                         'clear_article' => preg_replace('/[^\w+]/i', '', $row[2]),
                                         'manufacture'   => preg_replace('/[^a-z0-9_\-\., +]/i', '', $row[6]),
                                         'name'  => $row[0],
                                         'qty'   => (!empty($row[4]) ? preg_replace('/[^\d+]/Uis', '', $row[4]) : 0),
-                                        'price' => (!empty($row[5]) ? sprintf("%01.2f", preg_replace('/ /s', '', $row[5])) : 0.00),
+                                        'price' => (!empty($row[5]) && $qty != 0 ? sprintf("%01.2f", preg_replace('/ /s', '', $row[5])) : 0.00),
                                         'date_create'   => new \MongoDate()
                                     ];
 

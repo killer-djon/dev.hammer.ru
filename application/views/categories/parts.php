@@ -14,7 +14,7 @@
 						<col/>
 						<col/>
 						<col/>
-						<col width="70px" class="text-center"/>
+						<col width="100px" class="text-center"/>
 						<thead>
 						<tr>
 							<th></th>
@@ -96,9 +96,9 @@
 														</div>
 													</li>
 												</ul>
-												<!--<a href="#" class="btn btn-info no-anchor" data-toggle="modal" data-target="#sendMessage">
+												<a href="#" class="btn btn-info no-anchor" data-toggle="modal" data-target="#sendMessage" data-article="<?=$detail['name'].': '.$detail['article']?>">
 													<i class="fa fa-envelope"></i>
-												</a>-->
+												</a>
 											</div>
 										</td>
 									</tr>
@@ -163,9 +163,9 @@
 																	</div>
 																</li>
 															</ul>
-															<!--<a href="#" rel="nofollow" class="btn btn-info no-anchor" data-toggle="modal" data-target="#sendMessage">
+															<a href="#" rel="nofollow" class="btn btn-info no-anchor" data-toggle="modal" data-target="#sendMessage" data-article="<?=$crossItem['name'].': '.$crossItem['article']?>">
 																<i class="fa fa-envelope"></i>
-															</a>-->
+															</a>
 														</div>
 													</td>
 												</tr>

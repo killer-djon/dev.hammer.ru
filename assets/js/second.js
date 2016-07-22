@@ -154,4 +154,34 @@ jQuery(document).ready(function() {
 	
 	resizeModal();
 	
+	function feedbackMessage(url, body, callbackSuccess, callbackError)
+	{
+		jQuery.ajax({
+			url: url,
+			type: 'POST',
+			data: body,
+			dataType: 'json',
+			success: jQuery.isFunction(callbackSuccess) && callbackSuccess,
+			failure: jQuery.isFunction(callbackError) && callbackError
+		});
+	}
+
+	jQuery('[data-toggle="modal"]').click(function(){
+		if( jQuery(this).attr('data-article') )
+		{
+			var modalId = jQuery(this).attr('data-target');
+			var article = jQuery(this).attr('data-article');
+
+			jQuery(modalId).find('[name="article"]').val(article);
+		}
+	});
+	
+	
+	jQuery("#sendMessage .submit-btn").click(function(){
+		var data = jQuery(this).closest('form').serializeArray();
+
+		console.log( data );
+		return false;
+	});
+	
 });

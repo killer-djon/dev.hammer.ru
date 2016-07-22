@@ -18,6 +18,17 @@ class Controller_Message extends Controller_Main
     {
 
     }
+
+    /**
+     * Уточнить наличие детали
+     * При отправке формы методом ajax
+     * мы сначала проверяем форму если все ОК кидаем на почту
+     * если нет то выдаем ошибки
+     */
+    public function action_detailFeedback()
+    {
+
+    }
     
     public function action_send()
     {

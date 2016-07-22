@@ -64,35 +64,44 @@
                 <h4 class="modal-title">Уточнить наличие детали</h4>
             </div>
             <div class="modal-body">
-                <form  class="form-horizontal">
+                <form  class="form-horizontal form" data-toggle="validator" action="message/detailFeedback">
+                    <input type="hidden" name="article" value="">
                     <div class="form-group">
-                        <label for="username" class="col-sm-3 control-label">Ваше имя</label>
+                        <label for="username" class="col-sm-3 control-label">Ваше имя:</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" id="username" placeholder="Введите свое имя">
+                            <input type="text" class="form-control" id="username" name="username" placeholder="Введите свое имя">
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label for="useremail" class="col-sm-3 control-label">Ваш Email</label>
+                        <label for="useremail" class="col-sm-3 control-label">Ваш Email:&nbsp;&nbsp;<span class="text-danger"><strong>*</strong></span></label>
                         <div class="col-sm-9">
-                            <input type="email" class="form-control" id="useremail" placeholder="Введите контактный Email">
+                            <input type="email" class="form-control" id="useremail" name="useremail" placeholder="Введите контактный Email" required>
                         </div>
+                        <div class="help-block with-errors"></div>
                     </div>
 
                     <div class="form-group">
-                        <label for="useremsg" class="col-sm-3 control-label">Коментарий</label>
+                        <label for="useremsg" class="col-sm-3 control-label">Коментарий:</label>
                         <div class="col-sm-9">
-                            <textarea rows="3" class="form-control" id="useremsg" placeholder="Введите контактный Email"></textarea>
+                            <textarea rows="3" class="form-control" id="useremsg" name="useremsg" placeholder="Введите контактный Email"></textarea>
                         </div>
+                    </div>
+
+                    <div class="form-group text-center">
+                        <button type="button" class="btn btn-primary submit-btn">Отправить</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
                     </div>
                 </form>
             </div>
+            <!--
             <div class="modal-footer">
                 <div class="text-center">
-                    <button type="button" class="btn btn-primary">Отправить</button>
+                    <button type="button" class="btn btn-primary submit-btn">Отправить</button>
                     <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
                 </div>
             </div>
+            -->
         </div>
 
     </div>
