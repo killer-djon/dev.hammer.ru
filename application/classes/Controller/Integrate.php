@@ -55,18 +55,18 @@ class Controller_Integrate extends Controller
 
                 if( copy($uploadedFile, $newFile ) )
                 {
-                    @unlink($uploadedFile);
+                    //@unlink($uploadedFile);
 
                     $fileModel->values([
                         'file_format'   => $headers['FileFormat'],
                         'file_size' => filesize($newFile),
-                        'file_name' => $headers['FileName'],
+                        'file_name' => $newFile,
                         'file_path' => $this->getUploadDir(),
                         'date_upload'   => new \MongoDate(),
                     ]);
 
                     $fileModel->save();
-                    $this->analizeFile('/home/hammer/htdocs/catalogs/FKT-AVTO.csv');
+                    $this->analizeFile($newFile);
 
                     echo Response::factory()
                         ->status(200)
@@ -88,13 +88,11 @@ class Controller_Integrate extends Controller
             }
         }else
         {
-            $this->analizeFile('/home/hammer/htdocs/catalogs/FKT-AVTO.csv');
-            /*
             echo Response::factory()
                 ->status(403)
                 ->body('Заголовки пустые')
                 ->render();
-            */
+
         }
 
     }
@@ -139,11 +137,7 @@ class Controller_Integrate extends Controller
                             'has_titles'    => false
                         ]);
 
-                        if( mb_detect_encoding($filename) == 'ASCII' )
-                        {
-                            $csv->encode('CP1251', 'UTF-8');
-                        }
-
+                        $encoding = mb_detect_encoding($filename);
                         $csv->parse();
 
                         $rows = $csv->rows();
@@ -167,12 +161,6 @@ class Controller_Integrate extends Controller
                                         'price' => (!empty($row[5]) ? sprintf("%01.2f", preg_replace('/ /s', '', $row[5])) : 0.00),
                                         'date_create'   => new \MongoDate()
                                     ];
-
-                                    $collection->update([
-                                        'article'	=> $price['article']
-                                    ], $price, [
-                                        'upsert'	=> true
-                                    ]);
 
                                     $prices[] = $collection->update([
                                         'article'	=> $price['article']

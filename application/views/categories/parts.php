@@ -17,7 +17,7 @@
 						<col width="100px"/>
 						<thead>
 						<tr>
-							<th>№</th>
+							<th></th>
 							<th>Наименование</th>
 							<th>Код детали</th>
 							<th>Производитель</th>
@@ -26,7 +26,7 @@
 						</tr>
 						</thead>
 						<tbody>
-						<? $i = 1; ?>
+						<? $a = 1; ?>
 						<? foreach($parts as $groupdetail): ?>
 							<? if( isset($groupdetail['children']) && !empty($groupdetail['children']) ): ?>
 								<tr class="info">
@@ -42,7 +42,7 @@
 									<?$price = (isset($detail['price']) && 0!==$detail['price'] ? $detail['price'].' руб.' : 0);?>
 
 									<tr class="detail-row <?=($price!==0?'bg-success':'bg-danger')?> collapsed">
-										<td><?=$i;?></td>
+										<td></td>
 										<td>
 											<?=(!empty($detail['name'])?$detail['name']:'<img alt="" src="/assets/img/daag.png">')?>
 										</td>
@@ -109,7 +109,7 @@
 												<?$crossPrice = (isset($crossItem['price']) && 0!==$crossItem['price'] ? $crossItem['price'].' руб.' : 0);?>
 
 												<tr class="detail-row <?=($crossPrice!==0?'bg-success':'bg-danger')?> collapsed">
-													<td><?=$i;?></td>
+													<td></td>
 													<td>
 														<?=(!empty($crossItem['name'])?$crossItem['name']:'<img alt="" src="/assets/img/daag.png">')?>
 													</td>
@@ -167,12 +167,10 @@
 														</div>
 													</td>
 												</tr>
-												<? $i++; ?>
+												<? $a++; ?>
 											<? endforeach; ?>
 										<?endif;?>
 									<?endif;?>
-
-
 								<? endforeach; ?>
 							<? endif; ?>
 						<? endforeach; ?>
