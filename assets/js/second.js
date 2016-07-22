@@ -154,15 +154,51 @@ jQuery(document).ready(function() {
 	
 	resizeModal();
 	
-	function feedbackMessage(url, body, callbackSuccess, callbackError)
+	function feedbackMessage(form, body)
 	{
+		var url = form.attr('action');
+
 		jQuery.ajax({
 			url: url,
 			type: 'POST',
 			data: body,
 			dataType: 'json',
-			success: jQuery.isFunction(callbackSuccess) && callbackSuccess,
-			failure: jQuery.isFunction(callbackError) && callbackError
+			success: function (response) {
+				if( response !== undefined )
+				{
+					if( response.success == true )
+					{
+						form.find('.close-btn').click();
+						jQuery.notify({
+							message: response.message,
+						}, {
+							placement: {
+								from: 'top',
+								align: 'center'
+							},
+							z_index: 10099,
+							delay: 2000
+						});
+					}else
+					{
+						jQuery.notify({
+							message: response.message,
+
+						}, {
+							type: 'danger',
+							placement: {
+								from: 'top',
+								align: 'center'
+							},
+							z_index: 10099,
+							delay: 2000
+						});
+					}
+				}
+			},
+			error: function (response) {
+
+			}
 		});
 	}
 
@@ -178,9 +214,15 @@ jQuery(document).ready(function() {
 	
 	
 	jQuery("#sendMessage .submit-btn").click(function(){
-		var data = jQuery(this).closest('form').serializeArray();
+		var form = jQuery(this).closest('form');
+		var data = form.serializeArray();
+		var obj = {};
 
-		console.log( data );
+		jQuery.each(data, function(key, item){
+			obj[item.name] = item.value;
+		});
+
+		feedbackMessage(form, obj);
 		return false;
 	});
 	

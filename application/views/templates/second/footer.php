@@ -64,7 +64,7 @@
                 <h4 class="modal-title">Уточнить наличие детали</h4>
             </div>
             <div class="modal-body">
-                <form  class="form-horizontal form" data-toggle="validator" action="message/detailFeedback">
+                <form  class="form-horizontal form" data-toggle="validator" action="/message/detailFeedback">
                     <input type="hidden" name="article" value="">
                     <div class="form-group">
                         <label for="username" class="col-sm-3 control-label">Ваше имя:</label>
@@ -90,7 +90,7 @@
 
                     <div class="form-group text-center">
                         <button type="button" class="btn btn-primary submit-btn">Отправить</button>
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+                        <button type="button" class="btn btn-default close-btn" data-dismiss="modal">Закрыть</button>
                     </div>
                 </form>
             </div>

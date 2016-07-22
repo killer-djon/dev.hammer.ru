@@ -27,6 +27,34 @@ class Controller_Message extends Controller_Main
      */
     public function action_detailFeedback()
     {
+        $params = $this->request->post();
+        $validation = Validation::factory($params);
+
+        $validation
+            ->rule('useremail', 'not_empty')
+            ->rule('useremail', 'regex', [':value', '/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$/is']);
+
+        if( $validation->check()  && $this->sendMessage($params) )
+        {
+
+            exit(Response::factory()
+                ->status(200)
+                ->body(json_encode([
+                    'success'   => true,
+                    'message'   => 'В ближайшее время с Вами свяжеться менеджер.'
+                ])));
+        }else
+        {
+            $errors = $validation->errors();
+
+            exit(Response::factory()
+                ->status(403)
+                ->body(json_encode([
+                    'success'   => false,
+                    //'errors'    => $errors,
+                    'message'   => 'Произошла ошибка при отправки письма'
+                ])));
+        }
 
     }
     
@@ -69,4 +97,62 @@ class Controller_Message extends Controller_Main
         }
 
     }
+
+    private function sendMessage($params)
+    {
+        $mailConfig = Kohana::$config->load('cart')->as_array();
+        $mailer = Email::instance('sendmail');
+
+        $message = Swift_Message::newInstance();
+
+        $message
+            ->setSubject('Поступил вопрос о наличии товара')
+            ->setTo('kil-djon@yandex.ru')
+            ->setFrom($params['useremail'])
+            ->setBody(
+                View::factory(
+                    'email/detailquestion',
+                    [
+                        'title'	=> 'Поступил вопрос о детали',
+                        'userdata'	=> $params,
+                        'base_url'	=> URL::base(),
+                    ]
+                )
+                    ->render(),
+                'text/html'
+            );
+
+        $clientMessage = Swift_Message::newInstance();
+        $clientMessage
+            ->setSubject('Вопрос о наличии детали в интернет-магазине HAMMERSCHMIDT')
+            ->setTo([$params['useremail']	=> $params['username']])
+            ->setFrom($mailConfig['emailFrom'])
+            ->setBody(
+                View::factory(
+                    'email/detailquestion',
+                    [
+                        'title'	=> 'Ваш вопрос о наличии детали успешно отправлен',
+                        'userdata'	=> $params,
+                        'base_url'	=> URL::base(),
+                        'thanks'	=> '
+							<h4>Спасибо что воспользовались нашими услугами.</h4> <p>Ждем Вас снова в нашем интернет-магазине деталей. 
+							Если появились вопросы или хотите поделиться своими впечатлениями пишитем нам на email: info@hammerschmidt.ru.</p>'
+                    ]
+                )
+                    ->render(),
+                'text/html'
+            );
+
+        $admin = $mailer->send($message);
+        $client = $mailer->send($clientMessage);
+
+        if( $admin > 0 && $client > 0 )
+        {
+            return true;
+        }
+
+        return false;
+
+    }
+
 }
