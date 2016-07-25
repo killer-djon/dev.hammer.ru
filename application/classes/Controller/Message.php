@@ -34,7 +34,7 @@ class Controller_Message extends Controller_Main
             ->rule('useremail', 'not_empty')
             ->rule('useremail', 'regex', [':value', '/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$/is']);
 
-        if( $validation->check()  && $this->sendMessage($params) )
+        if( $validation->check()  && $this->sendAdminMessage($params) && $this->sendClientMessage($params) )
         {
 
             exit(Response::factory()
@@ -98,29 +98,10 @@ class Controller_Message extends Controller_Main
 
     }
 
-    private function sendMessage($params)
+    private function sendClientMessage($params)
     {
         $mailConfig = Kohana::$config->load('cart')->as_array();
         $mailer = Email::instance('sendmail');
-
-        $message = Swift_Message::newInstance();
-
-        $message
-            ->setSubject('Поступил вопрос о наличии товара')
-            ->setTo('kil-djon@yandex.ru')
-            ->setFrom($params['useremail'])
-            ->setBody(
-                View::factory(
-                    'email/detailquestion',
-                    [
-                        'title'	=> 'Поступил вопрос о детали',
-                        'userdata'	=> $params,
-                        'base_url'	=> URL::base(),
-                    ]
-                )
-                    ->render(),
-                'text/html'
-            );
 
         $clientMessage = Swift_Message::newInstance();
         $clientMessage
@@ -143,10 +124,46 @@ class Controller_Message extends Controller_Main
                 'text/html'
             );
 
-        $admin = $mailer->send($message);
+
         $client = $mailer->send($clientMessage);
 
-        if( $admin > 0 && $client > 0 )
+        if( $client > 0 )
+        {
+            return true;
+        }
+
+        return false;
+    }
+
+    private function sendAdminMessage($params)
+    {
+        $mailConfig = Kohana::$config->load('cart')->as_array();
+        $mailer = Email::instance('sendmail');
+
+        $message = Swift_Message::newInstance();
+
+        $message
+            ->setSubject('Поступил вопрос о наличии товара')
+            ->setTo($mailConfig['emailTo'])
+            ->setFrom($mailConfig['emailFrom'])
+            ->setBody(
+                View::factory(
+                    'email/detailquestion',
+                    [
+                        'title'	=> 'Поступил вопрос о детали',
+                        'userdata'	=> $params,
+                        'base_url'	=> URL::base(),
+                    ]
+                )
+                    ->render(),
+                'text/html'
+            );
+
+
+
+        $admin = $mailer->send($message);
+
+        if( $admin > 0 )
         {
             return true;
         }
