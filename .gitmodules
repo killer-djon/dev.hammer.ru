@@ -19,3 +19,6 @@
 [submodule "modules/sitemap"]
 	path = modules/sitemap
 	url = git://github.com/ThePixelDeveloper/kohana-sitemap.git
+[submodule "modules/sitemap-generator"]
+	path = modules/sitemap-generator
+	url = git@github.com:vasiatka/sitemap.git
