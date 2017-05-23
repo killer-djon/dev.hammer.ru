@@ -128,21 +128,32 @@ abstract class Kohana_Search implements \ArrayAccess
 	{
 		if( !empty( $url ) )
 		{
-			$client = Request_Client_Curl::factory();
-			$client->options(array(
-				CURLOPT_URL	=> trim($url),
-				CURLOPT_PROXY	=> self::PROXY_ADDRESS.':'.self::PROXY_PORT,
-				CURLOPT_PROXYTYPE	=> CURLPROXY_SOCKS5,
-				CURLOPT_FOLLOWLOCATION => TRUE,
-				CURLOPT_RETURNTRANSFER => TRUE,
-			));
-			
-			$request = Request::factory();
-			$request->client($client);
-			
-			$response = $request->execute();
-			
-			return iconv($fromEncoding, $toEncoding."//IGNORE", $response->body());
+            $response = null;
+			try{
+                $client = Request_Client_Curl::factory();
+                $client->options(array(
+                    CURLOPT_URL	=> trim($url),
+                    CURLOPT_PROXY	=> self::PROXY_ADDRESS.':'.self::PROXY_PORT,
+                    CURLOPT_PROXYTYPE	=> CURLPROXY_SOCKS5,
+                    CURLOPT_FOLLOWLOCATION => TRUE,
+                    CURLOPT_RETURNTRANSFER => TRUE,
+                ));
+
+                $request = Request::factory();
+                $request->client($client);
+
+                $response = $request->execute();
+
+            }catch(\Exception $e){
+
+            }
+
+            if( is_null($response) )
+            {
+                return "";
+            }
+
+            return iconv($fromEncoding, $toEncoding."//IGNORE", $response->body());
 		}
 		
 		return NULL;

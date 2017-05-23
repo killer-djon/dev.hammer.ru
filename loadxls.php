@@ -85,8 +85,6 @@ if( !empty($arrExcel) )
 			'date_create'	=> new MongoDate()
 		];
 	}
-	
-
 	$options = [
 		'authMechanism' => 'SCRAM-SHA-1',
 		'db'		=> 'dev_hammer_v3',

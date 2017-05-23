@@ -17,7 +17,6 @@
 							<span class="extended-address">ТК "Автомолл", Южная сторона, пав. 1/46</span>
 						</div>
 						<div class="tel">Телефон: 
-							<abbr class="value" title="+7 (495) 748-70-28">(495) 748-70-28</abbr>
 							<abbr class="value" title="+7 (495) 799-00-21">(495) 799-00-21</abbr>
 						</div>
 						<div>Электронная почта:
