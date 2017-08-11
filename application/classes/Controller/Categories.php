@@ -29,6 +29,11 @@ class Controller_Categories extends Controller_Main
 
     }
 
+    public function before()
+    {
+        parent::before();
+    }
+
     public function action_index()
 	{
         $this->setScript('assets/js/second.js', 'footer');
@@ -195,6 +200,7 @@ class Controller_Categories extends Controller_Main
         
 		if( $searchRow->loaded() )
 		{
+
 			$category->findData($name);
 
 		}else

@@ -144,8 +144,9 @@ abstract class Kohana_Search implements \ArrayAccess
 
                 $response = $request->execute();
 
-            }catch(\Exception $e){
 
+            }catch(\Exception $e){
+			    //throw new \Exception($e);
             }
 
             if( is_null($response) )

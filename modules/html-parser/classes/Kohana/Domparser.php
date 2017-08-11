@@ -396,14 +396,18 @@ class Kohana_Domparser
 			{
 				if( !empty( $row ) )
 				{
+				    $view_name = $row[0]->text();
+				    $clear_name = preg_replace('/[^\w+]/', '', $view_name);
+
 					$href = preg_match('/([\d]+)\);/m', pq($row[0])->find('a')->attr('onclick'), $mathes);
 					$data = array(
 						'auto'	=> $row[0]->text(),
-						'name'	=> $row[0]->text(),
+						'name'	=> $view_name,
 						'link'	=> ( isset($mathes[1]) && !empty($mathes[1]) ? $mathes[1] : '' ),
 						'param'	=> $param,
 						'parentId'	=> $parentId,
-						'parentName'	=> $parentName
+						'parentName'	=> $parentName,
+                        'clear_name'    => strtolower($clear_name)
 					);
 					
 					$this->_data[] = $data;
@@ -428,13 +432,16 @@ class Kohana_Domparser
 			{
 				if( !empty( $row ) )
 				{
+				    $engine_name = $row[1]->text();
+                    $clear_name = preg_replace('/[^\w+]/', '', $engine_name);
 					$data = array(
 						'auto'	=> $categoryName,
-						'name'	=> $row[1]->text(),
+						'name'	=> $engine_name,
 						'link'	=> pq($row[1])->find('a')->attr('href'),
 						'param'	=> $param,
 						'parentId'	=> $parentId,
-						'parentName'	=> $parentName
+						'parentName'	=> $parentName,
+                        'clear_name'    => strtolower($clear_name)
 					);
 					
 					$this->_data[] = $data;
@@ -466,10 +473,11 @@ class Kohana_Domparser
 			{
 				if( !empty( $row ) )
 				{
-					
+					$category_name = $row[2]->text();
+					$clear_name = preg_replace('/[^\w+]/', '', $category_name);
 					$data = array(
 						'auto'	=> $row[1]->text(),
-						'name'	=> $row[2]->text(),
+						'name'	=> $category_name,
 						'link'	=> pq($row[2])->find('a')->attr('href'),
 						'fluent'=> trim($row[4]->html()),
 						'cilinder'	=> (int)$row[5]->text(),
@@ -478,7 +486,8 @@ class Kohana_Domparser
 						'hod_porshen'	=> floatval($row[8]->text()),
 						'work_obiem'	=> (int)$row[9]->text(),
 						'param'	=> 'parts',
-						'date_create'	=> new MongoDate()
+						'date_create'	=> new MongoDate(),
+                        'clear_name'    => strtolower($clear_name)
 					);
 					
 					$this->_data[] = $data;

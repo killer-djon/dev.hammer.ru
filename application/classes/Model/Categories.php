@@ -8,6 +8,7 @@ class Model_Categories extends MongoModel
 	protected $_schema = array(
 		'auto'	=> 'string',
 		'name'	=> 'string',
+		'clear_name' => 'string',
 		'link'	=> 'string',
 		'cilinder' => 'int',
         'clapan_per_cilinder' => 'int',
