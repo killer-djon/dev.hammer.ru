@@ -1,0 +1,189 @@
+{
+    "text": ".",
+    "children": [
+        {
+            "task": "Project: Shopping",
+            "duration": new Date(),
+            "user": "Tommy Maintz",
+            "iconCls": "fa fa-folder",
+            "expanded": true,
+            "children": [
+                {
+                    "task": "Housewares",
+                    "duration": new Date(),
+                    "user": "Tommy Maintz",
+                    "iconCls": "fa fa-folder",
+                    "children": [
+                        {
+                            "task": "Kitchen supplies",
+                            "duration": new Date(),
+                            "user": "Tommy Maintz",
+                            "leaf": true,
+                            "iconCls": "fa fa-user"
+                        }, {
+                            "task": "Groceries",
+                            "duration": new Date(),
+                            "user": "Tommy Maintz",
+                            "leaf": true,
+                            "iconCls": "fa fa-user",
+                            "done": true
+                        }, {
+                            "task": "Cleaning supplies",
+                            "duration": new Date(),
+                            "user": "Tommy Maintz",
+                            "leaf": true,
+                            "iconCls": "fa fa-user"
+                        }, {
+                            "task": "Office supplies",
+                            "duration": new Date(),
+                            "user": "Tommy Maintz",
+                            "leaf": true,
+                            "iconCls": "fa fa-user"
+                        }
+                    ]
+                }, {
+                    "task": "Remodeling",
+                    "duration": new Date(),
+                    "user": "Tommy Maintz",
+                    "iconCls": "fa fa-folder",
+                    "expanded": true,
+                    "children": [
+                        {
+                            "task": "Retile kitchen",
+                            "duration": new Date(),
+                            "user": "Tommy Maintz",
+                            "leaf": true,
+                            "iconCls": "fa fa-user"
+                        }, {
+                            "task": "Paint bedroom",
+                            "duration": new Date(),
+                            "user": "Tommy Maintz",
+                            "iconCls": "fa fa-folder",
+                            "children": [
+                                {
+                                    "task": "Ceiling",
+                                    "duration": new Date(),
+                                    "user": "Tommy Maintz",
+                                    "iconCls": "fa fa-user",
+                                    "leaf": true
+                                }, {
+                                    "task": "Walls",
+                                    "duration": new Date(),
+                                    "user": "Tommy Maintz",
+                                    "iconCls": "fa fa-user",
+                                    "leaf": true
+                                }
+                            ]
+                        }, {
+                            "task": "Decorate living room",
+                            "duration": new Date(),
+                            "user": "Tommy Maintz",
+                            "leaf": true,
+                            "iconCls": "fa fa-user",
+                            "done": true
+                        }, {
+                            "task": "Fix lights",
+                            "duration": new Date(),
+                            "user": "Tommy Maintz",
+                            "leaf": true,
+                            "iconCls": "fa fa-user",
+                            "done": true
+                        }, {
+                            "task": "Reattach screen door",
+                            "duration": new Date(),
+                            "user": "Tommy Maintz",
+                            "leaf": true,
+                            "iconCls": "fa fa-user"
+                        }
+                    ]
+                }
+            ]
+        }, {
+            "task": "Project: Testing",
+            "duration": new Date(),
+            "user": "Core Team",
+            "iconCls": "fa fa-folder",
+            "children": [
+                {
+                    "task": "Mac OSX",
+                    "duration": new Date(),
+                    "user": "Tommy Maintz",
+                    "iconCls": "fa fa-folder",
+                    "children": [
+                        {
+                            "task": "FireFox",
+                            "duration": new Date(),
+                            "user": "Tommy Maintz",
+                            "iconCls": "fa fa-user",
+                            "leaf": true
+                        }, {
+                            "task": "Safari",
+                            "duration": new Date(),
+                            "user": "Tommy Maintz",
+                            "iconCls": "fa fa-user",
+                            "leaf": true
+                        }, {
+                            "task": "Chrome",
+                            "duration": new Date(),
+                            "user": "Tommy Maintz",
+                            "iconCls": "fa fa-user",
+                            "leaf": true
+                        }
+                    ]
+                }, {
+                    "task": "Windows",
+                    "duration": new Date(),
+                    "user": "Darrell Meyer",
+                    "iconCls": "fa fa-folder",
+                    "children": [
+                        {
+                            "task": "FireFox",
+                            "duration": new Date(),
+                            "user": "Darrell Meyer",
+                            "iconCls": "fa fa-user",
+                            "leaf": true
+                        }, {
+                            "task": "Safari",
+                            "duration": new Date(),
+                            "user": "Darrell Meyer",
+                            "iconCls": "fa fa-user",
+                            "leaf": true
+                        }, {
+                            "task": "Chrome",
+                            "duration": new Date(),
+                            "user": "Darrell Meyer",
+                            "iconCls": "fa fa-user",
+                            "leaf": true
+                        }, {
+                            "task": "Internet Explorer",
+                            "duration": new Date(),
+                            "user": "Darrell Meyer",
+                            "iconCls": "fa fa-user",
+                            "leaf": true
+                        }
+                    ]
+                }, {
+                    "task": "Linux",
+                    "duration": new Date(),
+                    "user": "Aaron Conran",
+                    "iconCls": "fa fa-folder",
+                    "children": [
+                        {
+                            "task": "FireFox",
+                            "duration": new Date(),
+                            "user": "Aaron Conran",
+                            "iconCls": "fa fa-user",
+                            "leaf": true
+                        }, {
+                            "task": "Chrome",
+                            "duration": new Date(),
+                            "user": "Aaron Conran",
+                            "iconCls": "fa fa-user",
+                            "leaf": true
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
