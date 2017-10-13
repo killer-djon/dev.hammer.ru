@@ -24,6 +24,7 @@ favicon.ico
 robots.txt
 
 /*.html
+/application/cache
 application/bootstrap.php
 /.idea
 **/*.log
