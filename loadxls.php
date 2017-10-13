@@ -67,6 +67,73 @@ $arrExcel = $objWorksheet->toArray();
 
 if( !empty($arrExcel) )
 {
+    $options = [
+        'authMechanism' => 'SCRAM-SHA-1',
+        'db'		=> 'dev_hammer_v3',
+        'username'	=> 'hammer',
+        'password'	=> 'nyFFqv2015',
+    ];
+    $m = new MongoClient("mongodb://localhost:27017", $options);
+    $collection = $m->selectCollection('dev_hammer_v3', 'cross_products');
+
+    // загружаем кросссы
+    $crosses = $initial = $finded = [];
+    $resUpdate = [];
+    $resInsert = [];
+    foreach( $arrExcel as $index => $row )
+    {
+        if( $index == 0 ) continue;
+
+        $article = $row[1]; // оригинал артикул детали
+        $cross_article = $row[2]; // кросс-артикул
+        $manufacture = $row[3]; // производитель детали
+        $name = $row[4]; // название детали
+        $qty = $row[5]; // кол-во
+        $price = $row[6]; // цена одной штуки
+
+        if( empty($article) ) continue;
+
+        $initial = [
+            'article'	=> $article,
+            'manufacture'	=> $manufacture,
+            'name'	=> $name,
+            "clear_article" => preg_replace('/[^\w+]/is', '', $article),
+            "parentName" => "",
+            "parentId" => "",
+            "groupName" => "",
+            "category" => "",
+            "link" => "",
+            "date_create" => new MongoDate(),
+            "cross_article" => [$cross_article]
+        ];
+
+        $finded = $collection->findOne(['article' => $article]);
+        if( !empty($finded) )
+        {
+            $cross = !empty($finded['cross_article']) ? array_unique($finded['cross_article']) : [];
+            $cross = array_unique(array_merge($cross, [$cross_article]));
+
+            $resUpdate[] = $collection->update(['article' => $article], [
+                '$set' => [
+                    'cross_article' => $cross
+                ]
+            ]);
+        }else{
+            $resInsert[] = $collection->insert($initial, ['w' => 1]);
+        }
+
+        $articles[] = $article;
+    }
+
+    print_r( $resInsert );
+
+    die();
+
+
+
+
+	/*
+	// загружаем наличие
 	$prices = [];
 	foreach( $arrExcel as $index => $row )
 	{
@@ -76,13 +143,13 @@ if( !empty($arrExcel) )
 		settype($row[1], 'string');
 
 		$prices[] = [
-			'article'	=> $row[0],
-			'clear_article' => preg_replace('/[^\w+]/is', '', $row[0]),
-			'manufacture'	=> $row[1],
-			'name'	=> $row[2],
-			'qty'	=> preg_replace('/[^\d+]/U', '', $row[3]),
-			'price'	=> sprintf("%01.2f", preg_replace('/ /s', '', $row[4])),
-			'date_create'	=> new MongoDate()
+			'article'	=> $row[0], // артикул существующей записи
+			'clear_article' => preg_replace('/[^\w+]/is', '', $row[0]), // очищенный артикул существующей записи
+			'manufacture'	=> $row[1], // производитель
+			'name'	=> $row[2], // название детали
+			'qty'	=> preg_replace('/[^\d+]/U', '', $row[3]), // кол-во на складе
+			'price'	=> sprintf("%01.2f", preg_replace('/ /s', '', $row[4])), // цена шт. детали
+			'date_create'	=> new MongoDate() // дата загрузки
 		];
 	}
 	$options = [
@@ -112,7 +179,7 @@ if( !empty($arrExcel) )
 		}
 
 
-	}
+	}*/
 
 	
 	//print_r( $prices );
@@ -121,7 +188,7 @@ if( !empty($arrExcel) )
 	$result = array();
 	$result2 = array();
 	$result3 = array();
-	
+
 	foreach( $arrExcel as $index => $row )
 	{
 		if( $index == 0 ) continue;
