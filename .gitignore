@@ -25,3 +25,5 @@ robots.txt
 
 /*.html
 application/bootstrap.php
+/.idea
+**/*.log
