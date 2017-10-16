@@ -28,3 +28,5 @@ robots.txt
 application/bootstrap.php
 /.idea
 **/*.log
+*.log
+/admin/*.log
