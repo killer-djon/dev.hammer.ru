@@ -82,7 +82,7 @@ Ext.define('HM.view.main.MainController', {
 	 *
 	 * @return void Only show toast window
 	 */
-	showToast: function(title, _items) {
+	showToast: function(title, _items, callback) {
 		var _items = (Ext.isObject(_items) ? [_items] : _items) || [];
 		
         Ext.toast({
@@ -95,7 +95,12 @@ Ext.define('HM.view.main.MainController', {
             autoClose: false,
             layout: 'fit',
             height: 350,
-            items: _items
+            items: _items,
+			listeners: {
+            	close: callback || function () {
+					
+                }
+			}
         });
     },
 });

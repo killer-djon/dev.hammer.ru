@@ -78,7 +78,7 @@ class Controller_Api_Crosses extends Controller_Rest
      */
     public function before()
     {
-        echo '<pre>';
+        //echo '<pre>';
         parent::before();
 
         $this->reflection = new ReflectionClass($this->request);
@@ -100,25 +100,190 @@ class Controller_Api_Crosses extends Controller_Rest
         }
     }
 
+    /**
+     * Загружаем файл на сервак
+     *
+     * @throws Kohana_HTTP_Exception
+     * @throws Kohana_Exception
+     */
     public function action_upload()
     {
-        $requestMethod = $this->request->method();
-        if ($requestMethod != 'POST') {
-            return false;
+        try {
+            $requestMethod = $this->request->method();
+            if (in_array($requestMethod, ['POST', 'OPTIONS'])) {
+                $countUploadFiles = [];
+                $file = Validation::factory($_FILES);
+                $file->rules(
+                    'file',
+                    [
+                        [['Upload', 'valid']],
+                        [['Upload', 'not_empty']],
+                        ['Upload::type', [':value', ['xls', 'xlsx', 'csv']]]
+                    ]
+                );
+
+                if ($file->check()) {
+                    $filename = explode('.', $_FILES['file']['name']);
+
+                    $crossFile = MongoModel::factory('CrossFile');
+                    $crossFile->selectDB();
+
+                    $crossFile->set('name', $_FILES['file']['name'])
+                        ->set('size', $_FILES['file']['size'])
+                        ->set('type', $_FILES['file']['type'])
+                        ->set('leaf', true)
+                        ->set('createdAt', new MongoDate());
+
+                    $crossFile->save();
+                    $lastDocument = $crossFile->lastDocument();
+                    if ($lastDocument) {
+                        $uploaded = Upload::save(
+                            $_FILES['file'],
+                            $lastDocument['_id']['$id'] . '.' . $filename[1],
+                            DOCROOT . 'upload/',
+                            0775
+                        );
+
+                        if ($uploaded) {
+                            $this->rest_output([
+                                'items'   => $crossFile->lastDocument(),
+                                'success' => true
+                            ]);
+
+                        } else {
+                            $this->rest_output([
+                                'success' => false,
+                                'error'   => $uploaded
+                            ]);
+                        }
+                    }
+                }
+            }
+        } catch (Kohana_HTTP_Exception $khe) {
+            $this->_error($khe);
+        } catch (Kohana_Exception $e) {
+            $this->_error($e);
         }
-
-        print_r( $this->request );
     }
 
-    public function action_update()
+
+    /**
+     * Получаем список файлов
+     * загруженных ранее на сервак
+     *
+     */
+    public function action_listFiles()
     {
+        $crossFile = MongoModel::factory('CrossFile');
+        $crossFile->selectDB();
 
+        $items = $crossFile->find_all();
+        $countItems = $crossFile->count();
+
+        array_walk($items, function (&$item) {
+            $item['createdAt'] = strftime('%Y-%m-%d %H:%M:%S', $item['createdAt']['sec']);
+        });
+
+        $this->rest_output([
+            'items'      => $items,
+            'pagination' => [
+                'item_per_page' => ('all' != $this->_limit ? (int)$this->_limit : count($items)),
+                'total_items'   => $countItems,
+                'current_page'  => $this->_page
+            ]
+        ]);
     }
 
-    public function action_delete()
+    public function action_removeFile()
     {
+        $id = isset($this->_params['id']) && !is_null($this->_params['id']) ? $this->_params['id'] : null;
+        if (!is_null($id)) {
+            try {
 
+                $crossFile = MongoModel::factory('CrossFile');
+                $crossFile->selectDB();
+
+                $record = $crossFile->where('_id', '=', new MongoId($id))->find();
+
+                $filename = DOCROOT . 'upload/' . $id . '.' . File::ext_by_mime($record->get('type'));
+
+                if (file_exists($filename)) {
+                    unlink($filename);
+                    $record->remove();
+
+                    $this->rest_output([
+                        'success'  => true,
+                        'message'  => "Record with ID: {$id} was succefull deleted",
+                        'filename' => $filename
+                    ]);
+                }
+
+            } catch (Kohana_Exception $e) {
+                $this->rest_output([
+                    'success' => false,
+                    'error'   => $e->getMessage()
+                ]);
+            }
+
+        }
     }
+
+    /**
+     * АНализируем структуру файла
+     * для получения и создания сапостовления колонок
+     */
+    public function action_fileStructure()
+    {
+        try {
+            $id = $this->_params['file_id'];
+            $crossFile = MongoModel::factory('CrossFile');
+            $crossFile->selectDB();
+
+            $record = $crossFile->where('_id', '=', new MongoId($id))->find();
+
+            if( $record->loaded() )
+            {
+                $fileExt = File::ext_by_mime($record->get('type'));
+                $filename = DOCROOT . 'upload/' . $id . '.' . $fileExt;
+
+                if( $filename )
+                {
+                    if( in_array( $fileExt, ['xlsx', 'xls'] ) )
+                    {
+
+                        require DOCROOT . '/Classes/PHPExcel.php';
+                        $objPHPExcel = PHPExcel_IOFactory::load($filename);
+                        $worksheet = $objPHPExcel->getActiveSheet();
+
+                        $header = [];
+                        $row = $worksheet->getRowIterator();
+                        foreach ($row->current()->getCellIterator() as $cell)
+                        {
+                            $header[] = $cell->getValue();
+                        }
+
+                        $this->rest_output([
+                            'success' => true,
+                            'headers' => $header
+                        ]);
+                    }
+                }else
+                {
+                    $this->rest_output([
+                        'success' => false,
+                        'error' => 'File not exists with name: '.$filename
+                    ]);
+                }
+            }
+        } catch (Kohana_HTTP_Exception $e) {
+            $this->rest_output([
+                'success' => false,
+                'error'   => $e->getMessage(),
+                'code'    => $e->getCode()
+            ]);
+        }
+    }
+
 }
 
     

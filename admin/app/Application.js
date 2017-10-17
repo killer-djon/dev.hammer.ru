@@ -17,7 +17,8 @@ Ext.define('HM.Application', {
 
     stores: [
         'users.UsersStore',
-        'details.DetailsListStore'
+        'details.DetailsListStore',
+        'catalogs.CatalogFilesStore'
     ],
     
     launch: function () {

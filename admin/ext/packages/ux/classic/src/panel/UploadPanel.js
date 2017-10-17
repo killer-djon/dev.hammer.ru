@@ -248,6 +248,9 @@ Ext.define('Ext.ux.panel.UploadPanel', {
 			
 		}
 	},
+
+	success: [],
+	failed: [],
 	
 	initComponent: function(config){
 	    var me = this;
