@@ -9,19 +9,15 @@ class Model_HammerCrosses extends MongoModel
         'date_create'	=> 'date',
         'article'	=> 'string',
         'clear_article'	=> 'string',
-        'category'	=> 'string',
-
-        'parentName'	=> 'string',
-        'cross_article'	=> 'string',
-        'name'	=> 'string',
-        'parentId'	=> 'string',
-        'manufacture'	=> 'string',
-        'groupName'	=> 'string',
-        'groupId'	=> 'string',
-        'search_article'	=> array(
-            '_keys'	=> 'string'
-        ),
-        'link'	=> 'string'
+        'hash_article' => 'string',
+        'name' => 'string',
+        'cross_article' => [
+            '_keys' => 'string'
+        ],
+        'manufacture' => 'string',
+        'file_id' => 'string',
+        'qty' => 'int',
+        'price' => 'double'
     );
 
 

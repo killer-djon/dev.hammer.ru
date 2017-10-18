@@ -93,7 +93,8 @@ Ext.define('HM.view.main.Main', {
 	    {
 		    title: 'Каталоги/Кроссы',
 		    xtype: 'catalogview',
-		    glyph: 0xf187
+		    glyph: 0xf187,
+            reference: 'catalogCrossDetails'
 	    },
 	    {
 		    title: 'Пользователи',

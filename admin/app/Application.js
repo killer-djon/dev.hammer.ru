@@ -18,7 +18,8 @@ Ext.define('HM.Application', {
     stores: [
         'users.UsersStore',
         'details.DetailsListStore',
-        'catalogs.CatalogFilesStore'
+        'catalogs.CatalogFilesStore',
+        'catalogs.CatalogCrossHammerStore'
     ],
     
     launch: function () {

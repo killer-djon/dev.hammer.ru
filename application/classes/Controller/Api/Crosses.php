@@ -241,15 +241,12 @@ class Controller_Api_Crosses extends Controller_Rest
 
             $record = $crossFile->where('_id', '=', new MongoId($id))->find();
 
-            if( $record->loaded() )
-            {
+            if ($record->loaded()) {
                 $fileExt = File::ext_by_mime($record->get('type'));
                 $filename = DOCROOT . 'upload/' . $id . '.' . $fileExt;
 
-                if( $filename )
-                {
-                    if( in_array( $fileExt, ['xlsx', 'xls'] ) )
-                    {
+                if ($filename) {
+                    if (in_array($fileExt, ['xlsx', 'xls'])) {
 
                         require DOCROOT . '/Classes/PHPExcel.php';
                         $objPHPExcel = PHPExcel_IOFactory::load($filename);
@@ -257,21 +254,24 @@ class Controller_Api_Crosses extends Controller_Rest
 
                         $header = [];
                         $row = $worksheet->getRowIterator();
-                        foreach ($row->current()->getCellIterator() as $cell)
-                        {
+                        foreach ($row->current()->getCellIterator() as $cell) {
                             $header[] = $cell->getValue();
                         }
 
                         $this->rest_output([
-                            'success' => true,
-                            'headers' => $header
+                            'success'  => true,
+                            'headers'  => $header,
+                            'filename' => $id . '.' . $fileExt
                         ]);
+                    } else {
+                        if ('csv' == $fileExt) {
+                            // тут будем обрабатываеть csv файлы
+                        }
                     }
-                }else
-                {
+                } else {
                     $this->rest_output([
                         'success' => false,
-                        'error' => 'File not exists with name: '.$filename
+                        'error'   => 'File not exists with name: ' . $filename
                     ]);
                 }
             }
@@ -281,6 +281,88 @@ class Controller_Api_Crosses extends Controller_Rest
                 'error'   => $e->getMessage(),
                 'code'    => $e->getCode()
             ]);
+        }
+    }
+
+    /**
+     * Получаем анализированные поля
+     * по которым надо выбрать все данные из файла
+     */
+    public function action_fileAnalyzeData()
+    {
+        $file_rows = json_decode($this->_params['file_rows'], true);
+        $filename = $this->_params['filename'];
+
+        $file = explode('.', $filename);
+        if (empty($filename)) {
+            $this->rest_output([
+                'success' => false,
+                'error'   => 'File extension is not set, check file in path'
+            ]);
+        }
+        $crossFile = DOCROOT . 'upload/' . $filename;
+
+        if (!empty($file_rows)) {
+            $result = [];
+            if (in_array($file[1], ['xls', 'xlsx'])) {
+                require DOCROOT . '/Classes/PHPExcel.php';
+                $objPHPExcel = PHPExcel_IOFactory::load($crossFile);
+                $worksheet = $objPHPExcel->getActiveSheet();
+
+                $rows = $worksheet->toArray();
+                foreach ($rows as $index => $row) {
+                    if ($index == 0) {
+                        continue;
+                    }
+
+
+                    $rowItem = [];
+                    foreach ($file_rows as $value) {
+                        $rowName = $value['value'];
+                        $rowIndex = $value['id'];
+
+                        if (!empty($row[$rowIndex])) {
+                            $rowItem[$rowName] = $row[$rowIndex];
+                        }
+
+                    }
+
+                    $result[] = $rowItem;
+                }
+            } else {
+                if ('csv' == $file[1]) {
+
+                }
+            }
+
+            if (!empty($result)) {
+                $insertDocuments = [];
+                $crossHammer = MongoModel::factory('HammerCrosses');
+                $crossHammer->selectDB();
+                $crossHammer->where('file_id', '=', $file[0])->remove_all();
+
+                foreach ($result as $rowData) {
+
+                    $crossHammer = MongoModel::factory('HammerCrosses');
+                    $crossHammer->selectDB();
+
+                    if (!empty($rowData)) {
+                        $rowData['file_id'] = $file[0];
+
+                        $crossHammer->values($rowData);
+                        $doc = $crossHammer->save();
+                        $insertDocuments[] = $doc->get('_id');
+                    }
+                }
+
+                if(!empty($insertDocuments))
+                {
+                    $this->rest_output([
+                        'success' => true,
+                        'count' => count($insertDocuments)
+                    ]);
+                }
+            }
         }
     }
 

@@ -62,14 +62,14 @@ Ext.define('HM.view.main.MainController', {
 			{
 				currentRefs[currentPanel.getReference()] = currentPanel;	
 			}
-			
+
 			var childController = currentPanel.getController();
 			var refs = Ext.Object.merge(
 				currentRefs || {}, 
 				childController && childController.getReferences()
 			);
 			HM.lib.ReferenceManager.register(refs);
-			
+
 		}
 	},
 	
@@ -96,6 +96,8 @@ Ext.define('HM.view.main.MainController', {
             layout: 'fit',
             height: 350,
             items: _items,
+            resizable: true,
+			draggable: true,
 			listeners: {
             	close: callback || function () {
 					
