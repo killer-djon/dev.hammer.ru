@@ -5,7 +5,7 @@ Ext.define('HM.model.catalogs.CatalogCrossHammerModel', {
         'HM.model.catalogs.CatalogFilesModel'
     ],
 
-
+    idProperty: 'id',
 
     fields: [
         {name: 'id', mapping: '_id.$id'},

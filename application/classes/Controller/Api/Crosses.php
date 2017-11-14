@@ -86,6 +86,7 @@ class Controller_Api_Crosses extends Controller_Rest
         $this->_model = MongoModel::factory('HammerCrosses');
         $this->_model->selectDB();
 
+        require DOCROOT . '/Classes/PHPExcel.php';
     }
 
     /**
@@ -151,6 +152,7 @@ class Controller_Api_Crosses extends Controller_Rest
                             ]);
 
                         } else {
+                            $crossFile->remove();
                             $this->rest_output([
                                 'success' => false,
                                 'error'   => $uploaded
@@ -194,8 +196,12 @@ class Controller_Api_Crosses extends Controller_Rest
         ]);
     }
 
+    /**
+     * Удаляем файл и все ранее загруженные детали
+     */
     public function action_removeFile()
     {
+
         $id = isset($this->_params['id']) && !is_null($this->_params['id']) ? $this->_params['id'] : null;
         if (!is_null($id)) {
             try {
@@ -204,12 +210,19 @@ class Controller_Api_Crosses extends Controller_Rest
                 $crossFile->selectDB();
 
                 $record = $crossFile->where('_id', '=', new MongoId($id))->find();
+                $fileExt = preg_replace('/^(.*)\./isu', '', $record->get('name'));
 
-                $filename = DOCROOT . 'upload/' . $id . '.' . File::ext_by_mime($record->get('type'));
+                $filename = DOCROOT . 'upload/' . $id . '.' . $fileExt;
 
                 if (file_exists($filename)) {
                     unlink($filename);
                     $record->remove();
+
+                    $hammerCrosses = MongoModel::factory('HammerCrosses');
+                    $hammerCrosses->selectDB();
+
+
+                    $hammerCrosses->where('file_id', '=', $id)->remove_all();
 
                     $this->rest_output([
                         'success'  => true,
@@ -228,6 +241,7 @@ class Controller_Api_Crosses extends Controller_Rest
         }
     }
 
+
     /**
      * АНализируем структуру файла
      * для получения и создания сапостовления колонок
@@ -242,21 +256,25 @@ class Controller_Api_Crosses extends Controller_Rest
             $record = $crossFile->where('_id', '=', new MongoId($id))->find();
 
             if ($record->loaded()) {
-                $fileExt = File::ext_by_mime($record->get('type'));
-                $filename = DOCROOT . 'upload/' . $id . '.' . $fileExt;
+                $filename = $fileExt = null;
+                $Directory = new RecursiveDirectoryIterator(DOCROOT . 'upload/');
+
+                foreach ($Directory as $file) {
+                    if ($file->isDir()) {
+                        continue;
+                    }
+
+                    if (preg_match("/^$id/i", $file->getFilename())) {
+                        $filename = $file->getPathname();
+                        $fileExt = $file->getExtension();
+                        break;
+                    }
+                }
 
                 if ($filename) {
                     if (in_array($fileExt, ['xlsx', 'xls'])) {
 
-                        require DOCROOT . '/Classes/PHPExcel.php';
-                        $objPHPExcel = PHPExcel_IOFactory::load($filename);
-                        $worksheet = $objPHPExcel->getActiveSheet();
-
-                        $header = [];
-                        $row = $worksheet->getRowIterator();
-                        foreach ($row->current()->getCellIterator() as $cell) {
-                            $header[] = $cell->getValue();
-                        }
+                        $header = $this->getExcelHeader($filename);
 
                         $this->rest_output([
                             'success'  => true,
@@ -266,6 +284,18 @@ class Controller_Api_Crosses extends Controller_Rest
                     } else {
                         if ('csv' == $fileExt) {
                             // тут будем обрабатываеть csv файлы
+                            $header = $this->getCsvHeader($filename);
+
+                            $this->rest_output([
+                                'success'  => true,
+                                'headers'  => $header,
+                                'filename' => $id . '.' . $fileExt
+                            ]);
+                        } else {
+                            $this->rest_output([
+                                'success' => false,
+                                'code'    => 'Cant detect file extension'
+                            ]);
                         }
                     }
                 } else {
@@ -305,30 +335,7 @@ class Controller_Api_Crosses extends Controller_Rest
         if (!empty($file_rows)) {
             $result = [];
             if (in_array($file[1], ['xls', 'xlsx'])) {
-                require DOCROOT . '/Classes/PHPExcel.php';
-                $objPHPExcel = PHPExcel_IOFactory::load($crossFile);
-                $worksheet = $objPHPExcel->getActiveSheet();
-
-                $rows = $worksheet->toArray();
-                foreach ($rows as $index => $row) {
-                    if ($index == 0) {
-                        continue;
-                    }
-
-
-                    $rowItem = [];
-                    foreach ($file_rows as $value) {
-                        $rowName = $value['value'];
-                        $rowIndex = $value['id'];
-
-                        if (!empty($row[$rowIndex])) {
-                            $rowItem[$rowName] = $row[$rowIndex];
-                        }
-
-                    }
-
-                    $result[] = $rowItem;
-                }
+                $result = $this->getExcelRowData($crossFile, $file_rows);
             } else {
                 if ('csv' == $file[1]) {
 
@@ -348,6 +355,9 @@ class Controller_Api_Crosses extends Controller_Rest
 
                     if (!empty($rowData)) {
                         $rowData['file_id'] = $file[0];
+                        if (isset($rowData['article']) && !empty($rowData['article'])) {
+                            $rowData['clear_article'] = preg_replace('/[^\w+]/', '', $rowData['article']);
+                        }
 
                         $crossHammer->values($rowData);
                         $doc = $crossHammer->save();
@@ -355,15 +365,118 @@ class Controller_Api_Crosses extends Controller_Rest
                     }
                 }
 
-                if(!empty($insertDocuments))
-                {
+                if (!empty($insertDocuments)) {
                     $this->rest_output([
                         'success' => true,
-                        'count' => count($insertDocuments)
+                        'count'   => count($insertDocuments)
                     ]);
                 }
             }
         }
+    }
+
+    /**
+     * Получаем структуре заголовков файла excel
+     * необходимо для сопоставления структуры
+     *
+     * @param string $filename
+     * @return array
+     * @throws Kohana_Exception
+     */
+    private function getExcelHeader($filename)
+    {
+        $header = [];
+        try {
+            $objPHPExcel = PHPExcel_IOFactory::load($filename);
+            $worksheet = $objPHPExcel->getActiveSheet();
+
+            $row = $worksheet->getRowIterator(1)->current();
+            $cellIterator = $row->getCellIterator();
+            $cellIterator->setIterateOnlyExistingCells(false);
+
+            foreach ($cellIterator as $cell) {
+                $header[] = $cell->getValue();
+            }
+        } catch (Kohana_Exception $e) {
+            throw new Kohana_Exception($e);
+        }
+
+        return $header;
+    }
+
+    /**
+     * Получаем данные из таблицы excel
+     * и кидаем их в коллекцию монги
+     *
+     * @param string $filename
+     * @param array $file_rows Набор полей соответствия
+     * @return array
+     * @throws Kohana_Exception
+     */
+    public function getExcelRowData($filename, array $file_rows)
+    {
+        $result = [];
+        try {
+            $objPHPExcel = PHPExcel_IOFactory::load($filename);
+            $worksheet = $objPHPExcel->getActiveSheet();
+
+            $rows = $worksheet->toArray();
+            foreach ($rows as $index => $row) {
+                if ($index == 0) {
+                    continue;
+                }
+
+                $rowItem = [];
+                foreach ($file_rows as $value) {
+                    $rowName = $value['value'];
+                    $rowIndex = $value['id'];
+
+                    if (!empty($row[$rowIndex])) {
+                        $rowItem[$rowName] = $row[$rowIndex];
+                    }
+                }
+
+                $result[] = $rowItem;
+            }
+
+
+        } catch (Kohana_Exception $e) {
+            throw new Kohana_Exception($e);
+        }
+
+        return $result;
+    }
+
+    /**
+     * Получаем структуре заголовков файла csv
+     * необходимо для сопоставления структуры
+     *
+     * @param string $filename
+     * @return array
+     * @throws Kohana_Exception
+     */
+    private function getCsvHeader($filename)
+    {
+        $header = [];
+        try {
+            $csv = CSV::factory($filename, [
+                'has_titles' => true
+            ]);
+
+            $encoding = mb_detect_encoding($filename);
+            $csv->parse();
+            $headerData = $csv->titles();
+            if (!empty($headerData)) {
+                foreach ($headerData as $item) {
+                    $header[] = mb_convert_encoding($item, 'UTF-8',
+                        ($encoding == 'ASCII' ? 'CP-1251' : $encoding));
+                }
+            }
+        } catch (Kohana_Exception $e) {
+
+        }
+
+        return $header;
     }
 
 }

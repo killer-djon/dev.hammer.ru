@@ -33,3 +33,5 @@ application/bootstrap.php
 Dockerfile
 **/application/bootstrap.php
 **/application/config/database.php
+/upload/
+/admin/

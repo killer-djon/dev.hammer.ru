@@ -6,7 +6,7 @@ Ext.define('Ext.ux.panel.UploadPanel', {
 		'Ext.grid.Panel'
 	],
 	url: '', 
-	chunk_size: '512kb', 
+	chunk_size: '100mb',
 	max_file_size: '1024mb', 
 	unique_names: true, 
 	multipart: true,

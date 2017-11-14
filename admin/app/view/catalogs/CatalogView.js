@@ -110,12 +110,13 @@ Ext.define('HM.view.catalogs.CatalogView', {
 			title: 'Загруженные детали кроссов',
 			region: 'center',
 			reference: 'catalogViewPanel',
-			store: 'catalogs.CatalogCrossHammerStore',
-
+			store: {
+				type: 'catalogs.CatalogCrossHammerStore'
+			},
             columns: [
                 { text: 'Артикул детали', dataIndex: 'article' },
-                { text: 'Кроссированный артикул', dataIndex: 'cross_article', flex: 1 },
-                { text: 'Наименование', dataIndex: 'name' },
+                { text: 'Наименование', dataIndex: 'name', flex: 1 },
+                { text: 'Кроссированный артикул', dataIndex: 'identifier', flex: 2 },
                 { text: 'Производитель', dataIndex: 'manufacture' },
                 { text: 'Кол-во на складе', dataIndex: 'qty',
                     editor: {
@@ -160,12 +161,19 @@ Ext.define('HM.view.catalogs.CatalogView', {
             },
             disableSelection: true,
             loadMask: true,
+
             bbar: {
                 xtype: 'pagingtoolbar',
-                store: 'catalogs.CatalogCrossHammerStore',
+
+                bind:{
+                    store: 'catalogs.CatalogCrossHammerStore',
+                },
                 displayInfo: true,
                 displayMsg: 'Displaying topics {0} - {1} of {2}',
-                emptyMsg: "No topics to display"
+                emptyMsg: "No topics to display",
+				listeners: {
+                	change: 'onToolbarPagingClick'
+				}
             }
 		}
 	]

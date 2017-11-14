@@ -9,6 +9,9 @@ Ext.define('HM.view.main.MainController', {
 
     alias: 'controller.main',
 
+    requires: [
+        'Ext.window.Toast'
+	],
 
 	config: {
 		

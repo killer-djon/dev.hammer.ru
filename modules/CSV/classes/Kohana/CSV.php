@@ -20,7 +20,8 @@ class Kohana_CSV {
     // Load config
     $this->_config = $config + (array) Kohana::$config->load('csv');
 
-    require_once Kohana::find_file('vendor/parsecsv', 'parsecsv.lib');
+    //require_once Kohana::find_file('vendor/parsecsv/php-parsecsv', 'parsecsv.lib');
+    require_once DOCROOT . 'vendor/parsecsv/php-parsecsv/parsecsv.lib.php';
 
     $this->_csv = new parseCSV();
     $this->_csv->delimiter = $this->_config['delimiter'];

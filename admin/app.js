@@ -13,7 +13,7 @@ Ext.application({
         'HM.*',
         'Ext.plugin.Viewport',
         'HM.lib.ReferenceManager',
-        'Ext.ux.panel.UploadPanel'
+        'Ext.ux.panel.UploadPanel',
     ],
     
     glyphFontFamily: 'FontAwesome',

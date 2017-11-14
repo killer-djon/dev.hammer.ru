@@ -5,27 +5,30 @@ Ext.define('HM.view.catalogs.CatalogViewController', {
 
     privates: {
 
-        onSelectCrossFile: function (panel, record, item, index, e){
+        onSelectCrossFile: function (panel, record, item, index, e) {
             var refs = HM.lib.ReferenceManager.getValues();
 
-            if( refs['catalogViewPanel'] )
-            {
-                refs['catalogViewPanel'].getStore().load({
-                    params: {
-                        file_id: record.get('id')
-                    }
-                });
+            if (refs['catalogViewPanel']) {
+                refs['catalogViewPanel'].getDockedItems('pagingtoolbar')[0].doRefresh();
             }
         },
 
-        onToolbarPagingClick: function () {
-            console.log(arguments)
+        onToolbarPagingClick: function (tool, pageData) {
+            var refs = HM.lib.ReferenceManager.getValues();
+            var selectedFile = refs['catalogFilesList'].getSelectionModel().getSelection()[0];
+
+            refs['catalogViewPanel'].getStore().reload({
+                params: {
+                    limit: pageData.toRecord,
+                    start: pageData.fromRecord,
+                    file_id: selectedFile.get('id')
+                }
+            });
         },
 
         onRemoveCrossDetail: function (grid, colIndex, rowIndex, item, e, record, row) {
             var refs = HM.lib.ReferenceManager.getValues();
-            if( refs['catalogViewPanel'] )
-            {
+            if (refs['catalogViewPanel']) {
                 refs['catalogViewPanel'].getStore().remove(record);
             }
         },
@@ -63,6 +66,8 @@ Ext.define('HM.view.catalogs.CatalogViewController', {
                 for (i = 0, len = selection.length; i < len; i++) {
                     selection[i].remove();
                 }
+
+                refs['catalogViewPanel'].getDockedItems('pagingtoolbar')[0].doRefresh();
             }
         },
 
@@ -74,6 +79,8 @@ Ext.define('HM.view.catalogs.CatalogViewController', {
                 tree = refs['catalogFilesList'],
                 store = tree.getStore();
 
+            tree.mask('Анализируем структуру');
+
             Ext.Ajax.request({
                 url: '/api/v1/json/crosses/fileStructure',
                 method: 'POST',
@@ -82,10 +89,12 @@ Ext.define('HM.view.catalogs.CatalogViewController', {
                 },
                 scope: this,
                 success: function (response, opts) {
+                    tree.unmask();
                 },
                 callback: this.analyzeResponseFile,
 
                 failure: function (response, opts) {
+                    tree.unmask();
                     console.log('server-side failure with status code ' + response.error);
                 }
             });
@@ -120,6 +129,7 @@ Ext.define('HM.view.catalogs.CatalogViewController', {
                                 xtype: 'combobox',
                                 columnWidth: 0.5,
                                 name: 'combo_' + index,
+                                editable: false,
                                 margin: '0 0 0 5',
                                 labelAlign: 'top',
                                 hideLabel: true,
@@ -129,6 +139,7 @@ Ext.define('HM.view.catalogs.CatalogViewController', {
                                 store: Ext.create('Ext.data.Store', {
                                     fields: ['value', 'name'],
                                     data: [
+                                        {"value": "identifier", "name": "Идентификатор группы каталога"},
                                         {"value": "article", "name": "Артикул"},
                                         {"value": "name", "name": "Наименование"},
                                         {"value": "manufacture", "name": "Производитель"},
@@ -192,14 +203,14 @@ Ext.define('HM.view.catalogs.CatalogViewController', {
             var regex = /^combo/g;
             var comboFields = function () {
                 var field = [];
-
+                win.mask('Анализируем данные файла');
                 Ext.Object.each(fieldValues, function (key, value) {
                     if (regex.test(key)) {
                         if (value) {
                             var fieldIndex = (form.findField(key).name).replace(/^combo_/g, '');
                             field.push({
                                 'id': fieldIndex,
-                                'value' : value
+                                'value': value
                             });
                         }
                     }
@@ -218,9 +229,11 @@ Ext.define('HM.view.catalogs.CatalogViewController', {
                 },
                 scope: this,
                 success: function (response, opts) {
+                    win.unmask();
                     win.close();
                 },
                 failure: function (response, opts) {
+                    win.unmask();
                     console.log('server-side failure with status code ' + response.error);
                 }
             });

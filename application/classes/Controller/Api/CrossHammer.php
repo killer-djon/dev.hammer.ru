@@ -91,26 +91,26 @@ class Controller_Api_CrossHammer extends Controller_Rest
      */
     public function action_index()
     {
-        $this->_limit = $this->_params['limit'] ?: 'all';
-        $this->_page = $this->_params['page'] ?: 1;
-        $this->_skip = $this->_params['start'] ?: 0;
+        $this->_page = $this->_params['page'] ? (int)$this->_params['page'] : 1;
+        $this->_limit = $this->_params['limit'] ? (int)$this->_params['limit'] : 25;
+        $this->_skip = $this->_params['start'] ? (int)$this->_params['start'] : 0;
+
         $file_id = !empty($this->_params['file_id']) ? $this->_params['file_id'] : null;
 
         if (empty($file_id)) {
             return;
         }
+
         try {
-
-
             $items = $this->_model
                 ->where('file_id', '=', $file_id)
                 ->limit($this->_limit)
-                ->skip($this->_skip)
-                ->find_all();
+                ->skip($this->_skip);
 
             $this->rest_output([
                 'success' => true,
-                'items'   => $items
+                'items'   => $items->find_all(),
+                'total' => $items->count()
             ]);
 
         } catch (Kohana_Database_Exception $e) {
@@ -134,7 +134,63 @@ class Controller_Api_CrossHammer extends Controller_Rest
      */
     public function action_update()
     {
-        print_r( $this->_params );
+        try{
+            $schemas = $this->_model->getSchema();
+
+            $resultValues = [];
+
+            $recordId = null; // ID записи
+            $fileId = null; // ID файла привязанного
+
+            if( isset($this->_params['id']) )
+            {
+                $recordId = $this->_params['id'];
+                unset($this->_params['id']);
+            }
+
+            if( isset($this->_params['file_id']) )
+            {
+                $fileId = $this->_params['file_id'];
+                unset($this->_params['file_id']);
+            }
+
+            foreach ($schemas as $key => $schema)
+            {
+                if( isset( $this->_params[$key] ) )
+                {
+                    $resultValues[$key] = $this->_params[$key];
+                }
+            }
+
+            $item = $this->_model
+                ->where('file_id', '=', $fileId)
+                ->where('_id', '=', new MongoId($recordId))
+                ->find();
+
+            if( $item->loaded() )
+            {
+                $item->values($resultValues);
+                $item->save();
+
+                $this->rest_output([
+                    'success' => true,
+                    'items' => $item->getSingleDocument()
+                ]);
+            }
+
+        }catch(Kohana_Database_Exception $e)
+        {
+            $this->rest_output([
+                'success' => false,
+                'code'    => $e->getMessage()
+            ]);
+        }catch(Kohana_Exception $e)
+        {
+            $this->rest_output([
+                'success' => false,
+                'code'    => $e->getMessage()
+            ]);
+        }
     }
 
     /**

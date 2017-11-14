@@ -6,6 +6,7 @@ class Model_HammerCrosses extends MongoModel
 
 
     protected $_schema = array(
+        'identifier' => 'string',
         'date_create'	=> 'date',
         'article'	=> 'string',
         'clear_article'	=> 'string',
