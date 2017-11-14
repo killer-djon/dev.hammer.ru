@@ -1,6 +1,12 @@
-<?php defined('SYSPATH') or die('No direct script access.');
+<?php
+/**
+ * Created by PhpStorm.
+ * User: eleshanu
+ * Date: 14.11.17
+ * Time: 13:33
+ */
 
-class Controller_Api_CrossHammer extends Controller_Rest
+class Controller_Api_Crossfiles extends Controller_Rest
 {
     /**
      * Set the authentication type.
