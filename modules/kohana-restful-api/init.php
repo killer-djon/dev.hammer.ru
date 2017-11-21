@@ -2,7 +2,7 @@
 
 if( !Route::cache() )
 {
-    Route::set('articles', 'api/v<version>/<format>(/<item_per_page>(/<page>))/<controller>(/<id>)',
+    Route::set('articles', 'api/v<version>/<format>(/<item_per_page>(/<page>))/<controller>(/<action>(/<id>))',
 		array(
 			'version' => '[\d+]',
 			'format'  => '(json|xml|csv|html)',

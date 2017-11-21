@@ -271,13 +271,11 @@ class Kohana_Product extends Kohana_Search
 		$rows = array_merge($rows, $clearPriceRows);
 
 		/**
-		 * Закончили склейку результата но надосделать рефакторинг
+		 * Закончили склейку результата но надо сделать рефакторинг
 		 */
 
 		if( !empty($rows) )
 		{
-
-
 			$this->clearOffsets();
 			$rows = $this->makePrice($rows);
 

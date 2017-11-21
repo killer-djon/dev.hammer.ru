@@ -136,6 +136,15 @@ class MongoModel extends ODM
 		}
 		
 	}
+
+	/**
+	 * Получаем поля схемы коллекции
+     * @return array
+     */
+	public function getSchema()
+    {
+        return $this->_schema;
+    }
 	
 	public function selectDB($dbname = '')
 	{

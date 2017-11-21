@@ -30,3 +30,8 @@ application/bootstrap.php
 **/*.log
 *.log
 /admin/*.log
+Dockerfile
+**/application/bootstrap.php
+**/application/config/database.php
+/upload/
+/admin/

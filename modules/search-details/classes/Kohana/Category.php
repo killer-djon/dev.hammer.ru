@@ -81,6 +81,7 @@ class Kohana_Category extends Kohana_Search
                 $request = Request::current()->param('path', NULL);
                 $path = explode('/', $request);
 
+
                 $current = $model
                     ->where('param', '=', 'generic')
                     ->where('parentName', '=', $path[1])
@@ -99,13 +100,15 @@ class Kohana_Category extends Kohana_Search
                         ->where('name', '=', $current->get('parentName'))
                         ->find();
 
+
+
                     if ($parent->loaded()) {
                         $parentCategory = $parent->lastDocument();
                         $currentCategory = $current->lastDocument();
 
                         $model->unload();
                         $child = $model
-                            ->where('param', '=', $param)
+                            ->where('param', '=', 'parts')
                             ->where('parentId', '=', $currentCategory['_id']['$id'])
                             ->sort('name')
                             ->find_all();
@@ -298,6 +301,7 @@ class Kohana_Category extends Kohana_Search
      */
     public function findData($name)
     {
+
         $this->createSearchIndex('categories', 'name', 'search', $name);
 
         $model = MongoModel::factory('Categories');

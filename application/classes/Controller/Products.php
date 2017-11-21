@@ -19,8 +19,6 @@ class Controller_Products extends Controller_Main
 	{
 		$this->setScript('assets/js/second.js', 'footer');
 		
-		
-		
 		$this->setStyle('assets/css/sidebar.css', 'all');
 		
 		$path = $this->request->param('path', NULL);
@@ -65,12 +63,13 @@ class Controller_Products extends Controller_Main
 		}
 	}
 	
-	
+	/**
+	 * Поиск деталей по артикулу
+     */
 	public function searchProduct( $name )
 	{
 		$product = Product::getInstance();
-		
-		
+
 		$model = MongoModel::factory('SearchIndex');
 		$model->selectDB();
 		
