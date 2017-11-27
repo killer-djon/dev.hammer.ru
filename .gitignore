@@ -35,3 +35,4 @@ Dockerfile
 **/application/config/database.php
 /upload/
 /admin/
+!/modules/**/vendor
