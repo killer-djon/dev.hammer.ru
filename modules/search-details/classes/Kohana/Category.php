@@ -301,14 +301,14 @@ class Kohana_Category extends Kohana_Search
      */
     public function findData($name)
     {
-
+        $regName = preg_replace('/[^\w]+/i', '', $name);
         $this->createSearchIndex('categories', 'name', 'search', $name);
 
         $model = MongoModel::factory('Categories');
         $model->selectDB();
 
         $rows = $model
-            ->where('clear_name', 'regex', "/$name/i")
+            ->where('clear_name', 'regex', "/$regName/i")
             ->where('param', '=', 'parts')
             ->sort('name')
             ->find_all();
@@ -359,6 +359,9 @@ class Kohana_Category extends Kohana_Search
         $url = preg_replace('/{category}/', urlencode($name), self::CATEGORY_URL);
 
         $page = $this->searchPage($url);
+
+        echo '<pre>';
+        print_r($url); die;
         
 
         if (!empty($page)) {
