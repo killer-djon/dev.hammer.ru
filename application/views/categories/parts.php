@@ -163,7 +163,7 @@
 																	</div>
 																</li>
 															</ul>
-															<a href="#" rel="nofollow" class="btn btn-info no-anchor" data-toggle="modal" data-target="#sendMessage" data-article="<?=$crossItem['name'].': '.$crossItem['article']?>">
+															<a href="#" rel="nofollow" class="btn btn-info no-anchor" data-toggle="modal" data-target="#sendMessage" data-article="<?=(!empty($crossItem['name'])?$crossItem['name']:'').': '.$crossItem['article']?>">
 																<i class="fa fa-envelope"></i>
 															</a>
 														</div>

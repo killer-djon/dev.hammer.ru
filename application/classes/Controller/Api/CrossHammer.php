@@ -98,13 +98,20 @@ class Controller_Api_CrossHammer extends Controller_Rest
         $file_id = !empty($this->_params['file_id']) ? $this->_params['file_id'] : null;
         $article = !empty($this->_params['article']) ? $this->_params['article'] : null;
 
+        $fileCheck = !empty($this->_params['fileCheck']) ? ($this->_params['fileCheck'] == 'false' ? false : true) : true;
         if (empty($file_id)) {
             return;
         }
 
         try {
-            $items = $this->_model
-                ->where('file_id', '=', $file_id);
+
+            if( $fileCheck )
+            {
+                $items = $this->_model
+                    ->where('file_id', '=', $file_id);
+            }
+
+            $items = $this->_model;
 
             if (!is_null($article)) {
                 $items->where('article', 'regex', "/$article/i");
