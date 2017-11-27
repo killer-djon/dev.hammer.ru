@@ -117,7 +117,7 @@
 													<td>
 														<a href="/products/?type=products&article=<?=$crossItem['article']?>"><?=$crossItem['article']?></a>
 													</td>
-													<td><?=strtoupper($crossItem['manufacture'])?></td>
+													<td><?=!empty($crossItem['manufacture'])?strtoupper($crossItem['manufacture']):''?></td>
 													<td class="text-right">
 														<?=($crossPrice!==0 ? $crossPrice
 															: '<span class="text-info">Под заказ</span>')?>

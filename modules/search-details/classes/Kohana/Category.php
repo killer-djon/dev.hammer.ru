@@ -360,10 +360,6 @@ class Kohana_Category extends Kohana_Search
 
         $page = $this->searchPage($url);
 
-        echo '<pre>';
-        print_r($url); die;
-        
-
         if (!empty($page)) {
             $this->createSearchIndex('categories', 'name', 'search', $name);
 
