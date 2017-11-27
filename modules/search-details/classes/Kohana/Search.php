@@ -138,13 +138,15 @@ abstract class Kohana_Search implements \ArrayAccess
                 ]);
 
                 $request = Request::factory();
+
                 $request->client($client);
+
 
                 $response = $request->execute();
 
 
             } catch (\Exception $e) {
-                //throw new \Exception($e);
+                throw new \Exception($e);
             }
 
             if (is_null($response)) {
