@@ -52,7 +52,8 @@ class Controller_Message extends Controller_Main
                 ->body(json_encode([
                     'success'   => false,
                     //'errors'    => $errors,
-                    'message'   => 'Произошла ошибка при отправки письма'
+                    'message'   => 'Произошла ошибка при отправки письма',
+                    'errors' => json_encode($errors)
                 ])));
         }
 
@@ -143,14 +144,14 @@ class Controller_Message extends Controller_Main
         $message = Swift_Message::newInstance();
 
         $message
-            ->setSubject('Поступил вопрос о наличии товара')
+            ->setSubject('Поступил на деталь под заказ')
             ->setTo($mailConfig['emailTo'])
             ->setFrom($mailConfig['emailFrom'])
             ->setBody(
                 View::factory(
                     'email/detailquestion',
                     [
-                        'title'	=> 'Поступил вопрос о детали',
+                        'title'	=> 'Поступил запрос о детали под заказ',
                         'userdata'	=> $params,
                         'base_url'	=> URL::base(),
                     ]

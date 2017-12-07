@@ -96,21 +96,34 @@ class Controller_Api_CrossHammer extends Controller_Rest
         $this->_skip = $this->_params['start'] ? (int)$this->_params['start'] : 0;
 
         $file_id = !empty($this->_params['file_id']) ? $this->_params['file_id'] : null;
+        $article = !empty($this->_params['article']) ? $this->_params['article'] : null;
 
+        $fileCheck = !empty($this->_params['fileCheck']) ? ($this->_params['fileCheck'] == 'false' ? false : true) : true;
         if (empty($file_id)) {
             return;
         }
 
         try {
-            $items = $this->_model
-                ->where('file_id', '=', $file_id)
-                ->limit($this->_limit)
-                ->skip($this->_skip);
+
+            if( $fileCheck )
+            {
+                $items = $this->_model
+                    ->where('file_id', '=', $file_id);
+            }
+
+            $items = $this->_model;
+
+            if (!is_null($article)) {
+                $items->where('article', 'regex', "/$article/i");
+            } else {
+                $items->limit($this->_limit)
+                    ->skip($this->_skip);
+            }
 
             $this->rest_output([
                 'success' => true,
                 'items'   => $items->find_all(),
-                'total' => $items->count()
+                'total'   => $items->count()
             ]);
 
         } catch (Kohana_Database_Exception $e) {
@@ -134,7 +147,7 @@ class Controller_Api_CrossHammer extends Controller_Rest
      */
     public function action_update()
     {
-        try{
+        try {
             $schemas = $this->_model->getSchema();
 
             $resultValues = [];
@@ -142,22 +155,18 @@ class Controller_Api_CrossHammer extends Controller_Rest
             $recordId = null; // ID записи
             $fileId = null; // ID файла привязанного
 
-            if( isset($this->_params['id']) )
-            {
+            if (isset($this->_params['id'])) {
                 $recordId = $this->_params['id'];
                 unset($this->_params['id']);
             }
 
-            if( isset($this->_params['file_id']) )
-            {
+            if (isset($this->_params['file_id'])) {
                 $fileId = $this->_params['file_id'];
                 unset($this->_params['file_id']);
             }
 
-            foreach ($schemas as $key => $schema)
-            {
-                if( isset( $this->_params[$key] ) )
-                {
+            foreach ($schemas as $key => $schema) {
+                if (isset($this->_params[$key])) {
                     $resultValues[$key] = $this->_params[$key];
                 }
             }
@@ -167,25 +176,22 @@ class Controller_Api_CrossHammer extends Controller_Rest
                 ->where('_id', '=', new MongoId($recordId))
                 ->find();
 
-            if( $item->loaded() )
-            {
+            if ($item->loaded()) {
                 $item->values($resultValues);
                 $item->save();
 
                 $this->rest_output([
                     'success' => true,
-                    'items' => $item->getSingleDocument()
+                    'items'   => $item->getSingleDocument()
                 ]);
             }
 
-        }catch(Kohana_Database_Exception $e)
-        {
+        } catch (Kohana_Database_Exception $e) {
             $this->rest_output([
                 'success' => false,
                 'code'    => $e->getMessage()
             ]);
-        }catch(Kohana_Exception $e)
-        {
+        } catch (Kohana_Exception $e) {
             $this->rest_output([
                 'success' => false,
                 'code'    => $e->getMessage()
@@ -198,27 +204,24 @@ class Controller_Api_CrossHammer extends Controller_Rest
      */
     public function action_delete()
     {
-        try{
+        try {
             $file_id = $this->_params['file_id'];
             $id = $this->_params['id'];
 
             $removed = $this->_model->where('_id', '=', new MongoId($id))->remove();
 
-            if( $removed )
-            {
+            if ($removed) {
                 $this->rest_output([
                     'success' => true
                 ]);
             }
 
-        }catch(Kohana_Database_Exception $e)
-        {
+        } catch (Kohana_Database_Exception $e) {
             $this->rest_output([
                 'success' => false,
                 'code'    => $e->getMessage()
             ]);
-        }catch(Kohana_Exception $e)
-        {
+        } catch (Kohana_Exception $e) {
             $this->rest_output([
                 'success' => false,
                 'code'    => $e->getMessage()

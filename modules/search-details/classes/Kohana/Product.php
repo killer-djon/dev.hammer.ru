@@ -250,6 +250,8 @@ class Kohana_Product extends Kohana_Search
 			->sort('article')
 			->find_all();
 
+
+
 		/**
 		 * Склеиваем результат с уже найденными товарами
 		 * это временное решение надо будет рефакторить
@@ -270,6 +272,8 @@ class Kohana_Product extends Kohana_Search
 
 		$rows = array_merge($rows, $clearPriceRows);
 
+
+
 		/**
 		 * Закончили склейку результата но надо сделать рефакторинг
 		 */
@@ -278,7 +282,6 @@ class Kohana_Product extends Kohana_Search
 		{
 			$this->clearOffsets();
 			$rows = $this->makePrice($rows);
-
 			foreach( $rows as $key => $item )
 			{
 				$this->offsetSet($key, $item);
