@@ -1,7 +1,7 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>[REPLACE THIS WITH YOUR TITLE]</title>
+    <title><?=$title?></title>
     <style media="all" type="text/css">
         /*!
  * Bootstrap v2.1.1
@@ -606,9 +606,9 @@
     <tr>
         <td class="navbar navbar-inverse" align="center">
             <!-- This setup makes the nav background stretch the whole width of the screen. -->
-            <table width="650px" cellspacing="0" cellpadding="3" class="container">
+            <table width="100%" cellspacing="0" cellpadding="3" class="container">
                 <tr class="navbar navbar-inverse">
-                    <td colspan="5"><a class="" href="http://hammerschmidt.ru">Интернет-магазин деталей HAMMERSCHMIDT</a></td>
+                    <td colspan="5"><a class="" href="http://www.hammerschmidt.ru">Интернет-магазин деталей HAMMERSCHMIDT</a></td>
 
                 </tr>
             </table>
@@ -616,13 +616,13 @@
     </tr>
     <tr>
         <td bgcolor="#FFFFFF" align="center">
-            <table width="650px" cellspacing="0" cellpadding="3" class="container">
+            <table width="100%" cellspacing="0" cellpadding="3" class="container">
                 <tr>
                     <td>
 
                         <div class="container-fluid" id="shopping-cart-success">
                             <div class="row">
-                                <div class="col-xs-12 col-sm-12 col-xs-12 wow fadeInRight animated">
+                                <div class="col-md-12 col-xs-12 col-sm-12 wow fadeInRight animated">
                                     <div class="panel panel-default">
                                         <div class="panel-heading">
                                             <h1><?=$title?></h1>
@@ -661,11 +661,11 @@
     </tr>
     <tr>
         <td bgcolor="#FFFFFF" align="center">
-            <table width="650px" cellspacing="0" cellpadding="3" class="container">
+            <table width="100%" cellspacing="0" cellpadding="3" class="container">
                 <tr>
                     <td>
                         <hr>
-                        <p>&copy; 2016 Все права защищены</p>
+                        <p>&copy; 2017 Все права защищены</p>
                     </td>
                 </tr>
             </table>
