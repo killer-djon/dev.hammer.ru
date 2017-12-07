@@ -22,3 +22,6 @@
 [submodule "modules/sitemap-generator"]
 	path = modules/sitemap-generator
 	url = git@github.com:vasiatka/sitemap.git
+[submodule "modules/kohana-email"]
+	path = modules/kohana-email
+	url = git@github.com:acelot/kohana-email.git
