@@ -36,3 +36,4 @@ Dockerfile
 /upload/
 /admin/
 !/modules/**/vendor
+/configs

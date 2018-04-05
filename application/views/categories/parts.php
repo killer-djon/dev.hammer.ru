@@ -50,7 +50,7 @@
 											<a href="/products/?type=products&article=<?=$detail['article']?>"><?=$detail['article']?></a>
 
 										</td>
-										<td><?=strtoupper($detail['manufacture'])?></td>
+										<td><?=!empty($detail['manufacture'])?strtoupper($detail['manufacture']):''?></td>
 										<td class="text-right">
 											<?=($price!==0 ? $price
 												: '<span class="text-info">Под заказ</span>')?>
